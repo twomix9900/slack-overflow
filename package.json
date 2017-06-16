@@ -1,0 +1,29 @@
+{
+  "name": "slack-overflow",
+  "version": "1.0.0",
+  "description": "slack-overflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slack-overflow/slack-overflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slack-overflow/slack-overflow/issues"
+  },
+  "homepage": "https://github.com/slack-overflow/slack-overflow#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.4",
+    "angular": "^1.6.4",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0",
+    "sequelize": "^4.1.0"
+  }
+}
