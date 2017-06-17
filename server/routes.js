@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const controller = require('./controllers/controllers');
 
-// do we need these or will auth0 handle these for us?
-router.get('/login', controller.getLogin); // do we need this?
-router.get('/signup', controller.getSignUp); // do we need this?
-router.post('/login', controller.logIn); // do we need this?
-router.post('/signup', controller.signUp); // do we need this?
+// // do we need these or will auth0 handle these for us?
+// router.get('/login', controller.getLogin); // do we need this?
+// router.get('/signup', controller.getSignUp); // do we need this?
+// router.post('/login', controller.logIn); // do we need this?
+// router.post('/signup', controller.signUp); // do we need this?
 
 router.get('/questions', controller.fetchQuestions);
 router.get('/questions/:id', controller.fetchQuestionAndAnswers);

@@ -15,7 +15,7 @@ const init = () => {
     .then(() => Question.sync())
     .then(() => Answer.sync())
     .then(() => Message.sync())
-    .then(() => User_Field.sync({force: true}))
+    .then(() => User_Field.sync())
 };
 
 module.exports = init;
