@@ -24,34 +24,40 @@ const Message = db.define('message', {
   text: Sequelize.TEXT
 });
 
-Question.belongsTo(User, {foreignKey: userId});
-User.hasMany(Question, {foreignKey: userId});
+const User_Field = db.define('user_field', {});
 
-Question.hasOne(Field, {foreignKey: fieldId});
-Field.belongsToMany(Question, {foreignKey: fieldId});
+User.hasMany(Question);
 
-Answer.hasOne(Question, {foreignKey: questionId});
-Question.belongsTo(Answer, {foreignKey: questionId});
+User.hasMany(Answer);
 
-Answer.hasOne(User, {foreignKey: userId});
-User.belongsTo(Answer, {foreginKey: userId});
+Question.hasMany(Answer);
+
+Question.belongsTo(Field);
+Field.hasMany(Question);
+
 
 User.belongsToMany(Field, {
-  through: [User_Field],
-  foreignKey: userId
+  through: 'User_Field',
+  // foreignKey: 'user_id'
 });
 Field.belongsToMany(User, {
-  through: [User_Field],
-  foreignKey: fieldId
+  through: 'User_Field',
+  // foreignKey: 'field_id'
 });
 
-Message.hasOne(User, {foreignKey: userIdA});
-Message.hasOne(User, {foreignKey: userIdB});
+User.sync();
+Question.sync();
+Answer.sync();
+Field.sync();
+Message.sync();
+User_Field.sync({force: true});
+
 
 module.exports = {
   User: User,
   Question: Question,
   Answer: Answer,
   Field: Field,
-  Message: Message
+  Message: Message,
+  User_Field: User_Field
 }

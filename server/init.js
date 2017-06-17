@@ -1,19 +1,21 @@
 const db = require('./db');
 const {
-  User: User,
-  Question: Question,
-  Answer: Answer,
-  Field: Field,
-  Message: Message
+  User,
+  Question,
+  Answer,
+  Field,
+  Message,
+  User_Field
 } = require('./models/tableModels');
 
 const init = () => {
   return db.authenticate()
     .then(() => User.sync())
+    .then(() => Field.sync())
     .then(() => Question.sync())
     .then(() => Answer.sync())
-    .then(() => Field.sync())
-    .then(() => Message.sync())
+    // .then(() => Message.sync())
+    .then(() => User_Field.sync({force: true}))
 };
 
 module.exports = init;
