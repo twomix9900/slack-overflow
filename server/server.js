@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const path = require('path');
 
 const router = require('./routes');
 const db = require('./db');
@@ -15,7 +16,7 @@ app.use(morgan('dev'));
 
 app.use('/', router);
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../')));
 
 init()
   .then(() => {
