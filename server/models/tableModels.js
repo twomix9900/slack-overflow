@@ -37,12 +37,10 @@ Field.hasMany(Question);
 
 
 User.belongsToMany(Field, {
-  through: 'User_Field',
-  // foreignKey: 'user_id'
+  through: User_Field,
 });
 Field.belongsToMany(User, {
-  through: 'User_Field',
-  // foreignKey: 'field_id'
+  through: User_Field,
 });
 
 User.sync();
