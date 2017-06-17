@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:": "nodemon server/server.js"
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slack-overflow/slack-overflow.git"
   },
-  "author": "",
+  "author": "slack-overflow team: Josh Bahr, Inseok Seo, Jason Shao",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/slack-overflow/slack-overflow/issues"
@@ -26,6 +26,7 @@
     "express": "^4.15.3",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
+    "pg": "^6.2.4",
     "sequelize": "^4.1.0"
   }
 }
