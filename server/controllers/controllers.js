@@ -8,7 +8,7 @@ const {
 } = require('../models/tableModels');
 
 const fetchQuestions = (req, res) => {
-
+  Question.findAll()
 }
 
 const fetchQuestionAndAnswers = (req, res) => {
