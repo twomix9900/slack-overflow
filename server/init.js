@@ -14,7 +14,7 @@ const init = () => {
     .then(() => Field.sync())
     .then(() => Question.sync())
     .then(() => Answer.sync())
-    // .then(() => Message.sync())
+    .then(() => Message.sync())
     .then(() => User_Field.sync({force: true}))
 };
 
