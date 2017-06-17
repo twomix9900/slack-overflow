@@ -8,6 +8,6 @@ angular.module('slackOverflowApp')
     controller: 'slackOverflowController',
     controllerAs: 'ctrl',
     bindToController: true,
-    templateUrl: './components/templates/slackOverflow.html'
+    templateUrl: './public/components/templates/slackOverflow.html'
   }
 })
