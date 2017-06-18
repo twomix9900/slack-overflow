@@ -4,7 +4,6 @@ angular.module('slackOverflowApp').service('QuestionsService', function($http) {
 
   var service = {
     getAllQuestions: function() {
-      console.log('service get all questions')
       return $http.get('/questions', { cache: true }).then(function(resp) {
         return resp.data;
       });
@@ -24,3 +23,4 @@ angular.module('slackOverflowApp').service('QuestionsService', function($http) {
   
   return service;
 })
+
