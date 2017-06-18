@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
-
+const cors = require('cors');
 const router = require('./routes');
 const db = require('./db');
 const init = require('./init');
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-
+app.use(cors());
 app.use('/', router);
 
 app.use(express.static(path.join(__dirname, '../')));
