@@ -28,6 +28,11 @@ angular
       domain: 'inseok-ucla.auth0.com',
       clientID: 'ku4AUn23UfSipuIY4l8e8WovJ10X5XuY'
     })
+
+    jwtInterceptorProvider.tokenGetter = function(store) {
+      return store.get('id_token');
+    }
+
     $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('home', {
@@ -39,4 +44,5 @@ angular
         templateUrl: './public/components/templates/profile.html',
         controller: 'profileController as user'
       })
+    $httpProvider.interceptors.push('jwtInterceptor');
   })

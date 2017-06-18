@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 const authCheck = jwt({
-  secret: new Buffer('czR3QSYYTY6dImCfroTZqdXvpYOOwPsOJtVISE3kWyR1Q0AiEz4rVMSw_RvU5iL3', 'base64'),
+  secret: new Buffer('czR3QSYYTY6dImCfroTZqdXvpYOOwPsOJtVISE3kWyR1Q0AiEz4rVMSw_RvU5iL3'),
   audience: 'ku4AUn23UfSipuIY4l8e8WovJ10X5XuY'
 });
 app.get('/api/public', function(req, res) {
