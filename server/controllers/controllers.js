@@ -16,9 +16,9 @@ const fetchAllQuestions = (req, res) => {
       }]
     }]
   })
-    .then((users) => {
+    .then((questions) => {
       res.json({
-        results: users
+        results: questions
       })
     })
     .catch((err) => {
@@ -27,8 +27,9 @@ const fetchAllQuestions = (req, res) => {
 }
 
 const fetchQuestionsForUser = (req, res) => {
+  let userId = req.params.id;
   User.findAll({
-    where: { id: 1 },
+    where: { id: userId },
     include: [{ 
       model: Question,
       include: [{
@@ -47,10 +48,11 @@ const fetchQuestionsForUser = (req, res) => {
 }
 
 const fetchQuestionAndAnswers = (req, res) => {
+  let questionId = req.params.id;
   User.findAll({
     include: [{ 
       model: Question,
-      where: { id: 3 },
+      where: { id: questionId },
       include: [{
         model: Answer
       }]
@@ -74,15 +76,27 @@ const postQuestion = (req, res) => {
     text: text,
     fieldId: fieldId
   })
+    .then(() => {
+      res.status(201).send('successfully posted question');
+    })
+    .catch((err) => {
+      console.error('error posting question ', err);
+    })
 }
 
 const postAnswer = (req, res) => {
-  let { questionId, userId, text } = req.body;
+  let { userId, text } = req.body;
   Answer.create({
     userId: userId,
     text: text,
-    questionId: questionId
+    questionId: req.params.id
   })
+    .then(() => {
+      res.status(201).send('successfully posted an answer ');
+    })
+    .catch((err) => {
+      console.error('error posting an answer ', err);
+    })
 }
 
 const addUser = (req, res) => {
@@ -107,7 +121,7 @@ const addUser = (req, res) => {
 }
 
 const updateUserFieldInfo = (req, res) => {
-  let userId = req.params;
+  let userId = req.params.id;
   let updateFields = req.body.fields;
   User_Field.destroy({ where: { userId: userId }})
     .then(() => {
@@ -127,21 +141,43 @@ const updateUserFieldInfo = (req, res) => {
 }
 
 const addReputation = (req, res) => {
-  let repUserId = req.params;
+  let repUserId = req.params.id;
   User.find({ where: { id: repUserId }})
     .then((user) => {
-      let newRep = user.reputation + 10;
+      let newRep = user.dataValues.reputation + 50;
       User.update({
         reputation: newRep
-      }, {
-        where: { id: repUserId }
-      });
+      }, { where: { id: repUserId }})
     })
     .then(() => {
       res.status(201).send('successfully added reputation');
     })
     .catch((err) => {
-      console.error('error adding repuation ', err);
+      console.error('error adding reputation ', err);
+    })
+}
+
+const fetchUserInfo = (req, res) => {
+  User.find({ where: { id: req.params.id }})
+    .then((user) => {
+      res.json({
+        results: user
+      })
+    })
+    .catch((err) => {
+      console.error('error getting user info ', err);
+    })
+}
+
+const closeQuestion = (req, res) => {
+  Question.update({
+    status: false
+  },{ where: { id: req.params.id }})
+    .then(() => {
+      res.status(201).send('question closed');
+    })
+    .catch((err) => {
+      console.error('error closing message ', err);
     })
 }
 
@@ -153,5 +189,7 @@ module.exports = {
   addUser: addUser,
   updateUserFieldInfo: updateUserFieldInfo,
   fetchQuestionsForUser: fetchQuestionsForUser,
-  addReputation: addReputation
+  addReputation: addReputation,
+  fetchUserInfo: fetchUserInfo,
+  closeQuestion: closeQuestion
 }

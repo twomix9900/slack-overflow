@@ -75,7 +75,11 @@ const User = db.define('user', {
 const Question = db.define('question', {
   title: Sequelize.STRING,
   text: Sequelize.TEXT,
-  status: Sequelize.BOOLEAN
+  status: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
+  }
 });
 
 const Answer = db.define('answer', {

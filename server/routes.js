@@ -11,10 +11,15 @@ router.get('/questions', controller.fetchAllQuestions);
 // router.get('/answers/:userId', controller.fetchQuestionsForUser);
 router.get('/questions/:id', controller.fetchQuestionAndAnswers);
 
-router.post('/question', controller.postQuestion);
-router.post('/answer/:id', controller.postAnswer);
+router.get('/questions/user/:id', controller.fetchQuestionsForUser);
+
+router.post('/questions', controller.postQuestion);
+router.post('/questions/:id', controller.postAnswer);
+
+router.put('/questions/close/:id', controller.closeQuestion);
 
 router.post('/users', controller.addUser);
+router.get('/users/:id', controller.fetchUserInfo);
 router.put('/users/:id', controller.updateUserFieldInfo);
 
 router.put('/reputation/:id', controller.addReputation);
