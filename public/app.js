@@ -1,1 +1,1 @@
-angular.module('slackOverflowApp', [])
+angular.module('slackOverflowApp', ['ui.router'])

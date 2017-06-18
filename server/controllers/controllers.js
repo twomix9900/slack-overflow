@@ -9,6 +9,9 @@ const {
 
 const fetchQuestions = (req, res) => {
   Question.findAll()
+  .then(questions => {
+    res.send(questions)
+  })
 }
 
 const fetchQuestionAndAnswers = (req, res) => {
