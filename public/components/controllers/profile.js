@@ -1,13 +1,25 @@
+// (function() {
+
+//   angular.module('slackOverflowApp')
+//   .controller('profileController', ['$http', function($http) {
+//     var vm = this;
+//     vm.message = 'hello';
+//   }])
+//   .directive('profile', function() {
+//     return {
+
+//     }
+//   })
+// })();
+
 (function() {
+  'use strict';
+  angular
+    .module('slackOverflowApp')
+    .controller('profileController', profileController);
 
-  angular.module('slackOverflowApp')
-  .controller('profileController', ['$http', function($http) {
+  function profileController($http) {
     var vm = this;
-    vm.message = 'hello';
-  }])
-  .directive('profile', function() {
-    return {
-
-    }
-  })
+    vm.message = 'Hello!';
+  }
 })();
