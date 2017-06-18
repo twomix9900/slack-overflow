@@ -7,13 +7,21 @@ const controller = require('./controllers/controllers');
 // router.post('/login', controller.logIn); // do we need this?
 // router.post('/signup', controller.signUp); // do we need this?
 
-router.get('/questions', controller.fetchQuestions);
+router.get('/questions', controller.fetchAllQuestions);
+// router.get('/answers/:userId', controller.fetchQuestionsForUser);
 router.get('/questions/:id', controller.fetchQuestionAndAnswers);
 
-router.post('/question', controller.postQuestion);
-router.post('/answer/:id', controller.postAnswer);
+router.get('/questions/user/:id', controller.fetchQuestionsForUser);
 
-router.post('/profile', controller.addProfileInfo);
-router.put('/profile/:id', controller.updateProfile);
+router.post('/questions', controller.postQuestion);
+router.post('/questions/:id', controller.postAnswer);
+
+router.put('/questions/close/:id', controller.closeQuestion);
+
+router.post('/users', controller.addUser);
+router.get('/users/:id', controller.fetchUserInfo);
+router.put('/users/:id', controller.updateUserFieldInfo);
+
+router.put('/reputation/:id', controller.addReputation);
 
 module.exports = router;
