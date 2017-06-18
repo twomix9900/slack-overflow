@@ -7,24 +7,32 @@ const {
   User_Field
 } = require('../models/tableModels');
 
+
 const fetchAllQuestions = (req, res) => {
-  User.findAll({
-    include: [{ 
-      model: Question,
-      include: [{
-        model: Field
-      }]
-    }]
+  Question.findAll()
+  .then(questions => {
+    res.send(questions)
   })
-    .then((questions) => {
-      res.json({
-        results: questions
-      })
-    })
-    .catch((err) => {
-      console.error('error fetching users ', err);
-    })
 }
+
+// const fetchAllQuestions = (req, res) => {
+//   User.findAll({
+//     include: [{ 
+//       model: Question,
+//       include: [{
+//         model: Field
+//       }]
+//     }]
+//   })
+//   .then((questions) => {
+//     res.json({
+//       results: questions
+//     })
+//   })
+//   .catch((err) => {
+//     console.error('error fetching users ', err);
+//   })
+// }
 
 const fetchQuestionsForUser = (req, res) => {
   let userId = req.params.id;
