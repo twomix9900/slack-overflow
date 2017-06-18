@@ -1,4 +1,4 @@
-angular.module('slackOverflowApp').component('question', {
+angular.module('slackOverflowApp').component('questionAskedEntry', {
   bindings: { question: '<' },
   template: 
   '<h3>A Question!</h3>' +

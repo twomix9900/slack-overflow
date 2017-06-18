@@ -21,16 +21,16 @@ const fieldDummy = [
 ];
 
 const questionDummy = [
-  { title: "title1", body: "text1", status: true, userId: 4, fieldId: 9 },
-  { title: "title2", body: "text2", status: true, userId: 7, fieldId: 1 },
-  { title: "title3", body: "text3", status: true, userId: 1, fieldId: 2 },
-  { title: "title4", body: "text4", status: true, userId: 2, fieldId: 5 },
-  { title: "title5", body: "text5", status: true, userId: 4, fieldId: 4 },
-  { title: "title6", body: "text6", status: true, userId: 7, fieldId: 3 },
-  { title: "title7", body: "text7", status: true, userId: 3, fieldId: 8 },
-  { title: "title8", body: "text8", status: true, userId: 2, fieldId: 7 },
-  { title: "title9", body: "text9", status: true, userId: 1, fieldId: 6 },
-  { title: "title10", body: "text10", status: true, userId: 4, fieldId: 1 }
+  { title: "title1", text: "text1", status: true, userId: 4, fieldId: 9 },
+  { title: "title2", text: "text2", status: true, userId: 7, fieldId: 1 },
+  { title: "title3", text: "text3", status: true, userId: 1, fieldId: 2 },
+  { title: "title4", text: "text4", status: true, userId: 2, fieldId: 5 },
+  { title: "title5", text: "text5", status: true, userId: 4, fieldId: 4 },
+  { title: "title6", text: "text6", status: true, userId: 7, fieldId: 3 },
+  { title: "title7", text: "text7", status: true, userId: 3, fieldId: 8 },
+  { title: "title8", text: "text8", status: true, userId: 2, fieldId: 7 },
+  { title: "title9", text: "text9", status: true, userId: 1, fieldId: 6 },
+  { title: "title10", text: "text10", status: true, userId: 4, fieldId: 1 }
 ];
 
 const answerDummy = [
