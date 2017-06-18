@@ -17,9 +17,15 @@
   <script src="https://cdn.auth0.com/js/lock/10.17/lock.min.js"></script>
   <script src="./public/app.js"></script>
   <script src="./public/components/controllers/slackoverFlow.js"></script>
+  <script src="./public/components/controllers/profile.js"></script>
+  <script src="./public/components/controllers/toolbar.js"></script>
 </head>
-<body>
-  <slack-overflow ng-app="slackOverflowApp">
-    If you see this, angular is not working
+<body ng-app="slackOverflowApp">
+  <toolbar></toolbar>
+  <slack-overflow></slack-overflow>
+  <div layout-padding>
+    <ui-view></ui-view>
+  </div>
+
 </body>
 </html>
