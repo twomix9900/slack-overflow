@@ -1,0 +1,28 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <h2>
+      <span>Slack Overflow</span>
+    </h2>
+      <span flex></span>
+      <md-button
+        aria-label="Login"
+        ng-click="ctrl.login()"
+        ng-if="!ctrl.auth.isAuthenticated">
+        Login
+      </md-button>
+
+      <md-button
+        aria-label="Profile"
+        ui-sref="profile"
+        ng-if="ctrl.auth.isAuthenticated">
+        Profile
+      </md-button>
+
+      <md-button
+        aria-label="Logout"
+        ng-click="ctrl.logout()"
+        ng-if="ctrl.auth.isAuthenticated">
+        Logout
+      </md-button>
+  </div>
+</md-toolbar>

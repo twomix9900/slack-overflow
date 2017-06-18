@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const controller = require('./controllers/controllers');
+const jwt = require('express-jwt');
 
 // // do we need these or will auth0 handle these for us?
 // router.get('/login', controller.getLogin); // do we need this?
@@ -7,21 +8,33 @@ const controller = require('./controllers/controllers');
 // router.post('/login', controller.logIn); // do we need this?
 // router.post('/signup', controller.signUp); // do we need this?
 
-router.get('/questions', controller.fetchAllQuestions);
+const authCheck = jwt({
+  secret: new Buffer('czR3QSYYTY6dImCfroTZqdXvpYOOwPsOJtVISE3kWyR1Q0AiEz4rVMSw_RvU5iL3'),
+  audience: 'ku4AUn23UfSipuIY4l8e8WovJ10X5XuY'
+});
+router.get('/api/public', function(req, res) {
+  res.json({message: 'hello from public endpoint, you dont need to be authenticated'})
+});
+router.get('/api/private', authCheck, function(req, res) {
+  res.json({message: 'hello from private endpoint, you are authenticated'})
+});
+
+router.get('/questions', authCheck, controller.fetchAllQuestions);
 // router.get('/answers/:userId', controller.fetchQuestionsForUser);
-router.get('/questions/:id', controller.fetchQuestionAndAnswers);
 
-router.get('/questions/user/:id', controller.fetchQuestionsForUser);
+router.get('/questions/:id', authCheck, controller.fetchQuestionAndAnswers);
 
-router.post('/questions', controller.postQuestion);
-router.post('/questions/:id', controller.postAnswer);
+router.get('/questions/user/:id', authCheck, controller.fetchQuestionsForUser);
 
-router.put('/questions/close/:id', controller.closeQuestion);
+router.post('/questions', authCheck, controller.postQuestion);
+router.post('/questions/:id', authCheck, controller.postAnswer);
 
-router.post('/users', controller.addUser);
-router.get('/users/:id', controller.fetchUserInfo);
-router.put('/users/:id', controller.updateUserFieldInfo);
+router.put('/questions/close/:id', authCheck, controller.closeQuestion);
 
-router.put('/reputation/:id', controller.addReputation);
+router.post('/users', authCheck, controller.addUser);
+router.get('/users/:id', authCheck, controller.fetchUserInfo);
+router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
+
+router.put('/reputation/:id', authCheck, controller.addReputation);
 
 module.exports = router;
