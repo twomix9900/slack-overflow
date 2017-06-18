@@ -10,7 +10,7 @@ const userDummy = [
 
 const fieldDummy = [
   { name: "JavaScript" },
-  { name: "Backbon" },
+  { name: "Backbone" },
   { name: "CSS" },
   { name: "HTML" },
   { name: "React" },
@@ -74,8 +74,12 @@ const User = db.define('user', {
 
 const Question = db.define('question', {
   title: Sequelize.STRING,
-  body: Sequelize.TEXT,
-  status: Sequelize.BOOLEAN
+  text: Sequelize.TEXT,
+  status: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
+  }
 });
 
 const Answer = db.define('answer', {
@@ -99,10 +103,13 @@ const User_Field = db.define('user_field', {
 });
 
 User.hasMany(Question);
+Question.belongsTo(User);
 
 User.hasMany(Answer);
+Answer.belongsTo(User);
 
 Question.hasMany(Answer);
+Answer.belongsTo(User);
 
 Question.belongsTo(Field);
 Field.hasMany(Question);
