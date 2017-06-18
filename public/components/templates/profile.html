@@ -1,24 +1,20 @@
-<!--<h1>
-  {{vm.message}}
-</h1>-->
-
 <md-content class="md-padding" layout="column">
   <md-card>
     <md-card-title>
       <md-card-title-media>
         <div class="md-media-lg card-media" layout-padding>
-          <img ng-src="{{user.profile.picture}}" alt="profile-picture">
+          <img ng-src="{{ctrl.profile.picture}}" alt="profile-picture">
 
         </div>
         <md-card-actions layout="column"  layout-align="end center">
-          <md-button ng-click="user.getMessage()">Get Message</md-button>
-          <md-button ng-click="user.getSecretMessage()">Get Secret Message</md-button>
+          <md-button ng-click="ctrl.getMessage()">Get Message</md-button>
+          <md-button ng-click="ctrl.getSecretMessage()">Get Secret Message</md-button>
         </md-card-actions>
       </md-card-title-media>
       <md-card-title-text>
-        <span class="md-headline">{{user.profile.nickname}}</span>
-        <span class="subhead">{{user.profile.email}}</span>
-        <h3>{{user.message}}</h3>
+        <span class="md-headline">{{ctrl.profile.nickname}}</span>
+        <span class="subhead">{{ctrl.profile.email}}</span>
+        <h3>{{ctrl.message}}</h3>
       </md-card-title-text>
     </md-card-title>
   </md-card>
