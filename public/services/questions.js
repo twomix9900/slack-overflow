@@ -1,6 +1,7 @@
 angular.module('slackOverflowApp').service('QuestionsService', function($http, _) {
   
   var questionsArray = [];
+  var fieldArray = [];
 
   var service = {
     getAllQuestions: function() {
@@ -9,6 +10,13 @@ angular.module('slackOverflowApp').service('QuestionsService', function($http, _
       })
         .then(() => {
 
+        })
+    },
+
+    getUserFields: function () {
+      return $http.get('/users/1', { cache: true })
+        .then((user) => {
+          
         })
     },
     
