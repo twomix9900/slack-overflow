@@ -4,9 +4,15 @@
     .module('slackOverflowApp')
     .controller('toolbarController', ['auth', 'store', '$location', function(auth, store, $location) {
       var vm = this;
+      vm.redirectHome = redirectHome;
       vm.login = login;
       vm.logout = logout;
       vm.auth = auth;
+
+      function redirectHome() {
+        $location.path('/home');
+        console.log('ha');
+      }
 
       function login() {
         auth.signin({}, function(profile, token) {
