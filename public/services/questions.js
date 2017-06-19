@@ -1,12 +1,15 @@
-angular.module('slackOverflowApp').service('QuestionsService', function($http) {
+angular.module('slackOverflowApp').service('QuestionsService', function($http, _) {
   
-  //var questionsArray = [];
+  var questionsArray = [];
 
   var service = {
     getAllQuestions: function() {
       return $http.get('/questions', { cache: true }).then(function(resp) {
-        return resp.data;
-      });
+        questionsArray = resp.data;
+      })
+        .then(() => {
+
+        })
     },
     
     getQuestion: function(id) {

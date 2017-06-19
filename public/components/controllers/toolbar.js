@@ -36,7 +36,7 @@
     .directive('toolbar', function() {
       return {
         controller: 'toolbarController',
-        controllerAs: 'ctrl',
+        controllerAs: 'toolbarCtrl',
         bindToController: true,
         templateUrl: '/public/components/templates/toolbar.html'
       }

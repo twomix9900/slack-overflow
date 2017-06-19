@@ -2,7 +2,7 @@
   angular
     .module('slackOverflowApp')
     .component('questionAskedEntry', {
-    bindings: { question: '<' },
-    templateUrl: '/public/components/templates/questionAskedEntry.html'
-  });
+      bindings: { question: '<' },
+      templateUrl: '/public/components/templates/questionAskedEntry.html'
+    });
 })();
