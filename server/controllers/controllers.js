@@ -169,7 +169,12 @@ const addReputation = (req, res) => {
 }
 
 const fetchUserInfo = (req, res) => {
-  User.find({ where: { id: req.params.id }})
+  User.find({ 
+    where: { id: req.params.id },
+    include: [{
+      model: Field
+    }]
+  })
     .then((user) => {
       res.json({
         results: user
