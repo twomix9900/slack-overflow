@@ -19,7 +19,7 @@
         vm.fields.push('c++');
       };
       function addField() {
-        console.log('userINFO FROM ADDFIELD', vm.profile.userInfo.fields);
+        console.log('profile FROM ADDFIELD', vm.profile);
       };
       function getSecretMessage() {
         $http.get('http://localhost:3456/api/private')
