@@ -9,12 +9,12 @@
         };
         console.log('this is email from registerUser', user);
         return $http.post('/users', user)
-        .then((success) => {
-          return console.log('registerUser in authService success', success);
-        })
-        .catch((error) => {
-          return console.log('registerUser in authService fail', error);
-        })
+          .then((success) => {
+            return console.log('registerUser in authService success', success);
+          })
+          .catch((error) => {
+            return console.log('registerUser in authService fail', error);
+          });
       };
 
 
