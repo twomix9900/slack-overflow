@@ -20,7 +20,13 @@
       function addField(data) {
         console.log('profile FROM ADDFIELD', vm.profile);
         console.log('data', data);
-        vm.profile.userInfo.fields.push(data);
+        let isUnique = true;
+        for (let i = 0; i < vm.profile.userInfo.fields.length; i++) {
+          if (vm.profile.userInfo.fields[i] === data) {
+            isUnique = false;
+          }
+        }
+        isUnique ? vm.profile.userInfo.fields.push(data) : console.log('not unique');
         vm.getFields();
       };
       
