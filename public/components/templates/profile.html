@@ -14,7 +14,7 @@
       <md-card-title-text>
         <span class="md-headline">{{ctrl.profile.nickname}}</span>
         <span class="subhead">{{ctrl.profile.email}}</span>
-        <h3>{{ctrl.message}}</h3>
+        <div ng-repeat="field in ctrl.fields">{{ctrl.field}}</div>
       </md-card-title-text>
     </md-card-title>
   </md-card>
