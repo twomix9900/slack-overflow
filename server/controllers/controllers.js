@@ -169,7 +169,12 @@ const addReputation = (req, res) => {
 }
 
 const fetchUserInfo = (req, res) => {
-  User.find({ where: { id: req.params.id }})
+  User.find({ 
+    where: { id: req.params.id },
+    include: [{
+      model: Field
+    }]
+  })
     .then((user) => {
       res.json({
         results: user
@@ -179,6 +184,24 @@ const fetchUserInfo = (req, res) => {
       console.error('error getting user info ', err);
     })
 }
+
+const fetchUserByName = (req, res) => {
+  User.find({ 
+    where: { name: req.params.name },
+    include: [{
+      model: Field
+    }]
+  })
+    .then((user) => {
+      res.json({
+        results: user
+      })
+    })
+    .catch((err) => {
+      console.error('error getting user info ', err);
+    })
+}
+
 
 const closeQuestion = (req, res) => {
   Question.update({
@@ -202,5 +225,6 @@ module.exports = {
   fetchQuestionsForUser: fetchQuestionsForUser,
   addReputation: addReputation,
   fetchUserInfo: fetchUserInfo,
-  closeQuestion: closeQuestion
+  closeQuestion: closeQuestion,
+  fetchUserByName: fetchUserByName
 }

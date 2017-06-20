@@ -33,6 +33,8 @@ router.put('/questions/close/:id', authCheck, controller.closeQuestion);
 
 router.post('/users', authCheck, controller.addUser);
 router.get('/users/:id', authCheck, controller.fetchUserInfo);
+router.get('/users/name/:name', authCheck, controller.fetchUserByName);
+
 router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
 
 router.put('/reputation/:id', authCheck, controller.addReputation);

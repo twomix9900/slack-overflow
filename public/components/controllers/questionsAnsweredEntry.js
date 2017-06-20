@@ -1,7 +1,7 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .component('questionAskedEntry', {
+    .component('questionsAnsweredEntry', {
       bindings: { question: '<' },
       templateUrl: '/public/components/templates/questionAskedEntry.html'
     });

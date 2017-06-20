@@ -1,27 +1,41 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <h2>
-      <span ng-click="ctrl.redirectHome()">Slack Overflow</span>
+      <span ng-click="toolbarCtrl.redirectHome()">Slack Overflow</span>
     </h2>
       <span flex></span>
       <md-button
         aria-label="Login"
-        ng-click="ctrl.login()"
-        ng-if="!ctrl.auth.isAuthenticated">
+        ng-click="toolbarCtrl.login()"
+        ng-if="!toolbarCtrl.auth.isAuthenticated">
         Login
+      </md-button>
+
+      <md-button
+        aria-label="QuestionsAskedList"
+        ui-sref="questionsAskedList"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
+        Questions Asked
+      </md-button>
+
+      <md-button
+        aria-label="QuestionsAnsweredList"
+        ui-sref="questionsAnsweredList"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
+        Questions Answered
       </md-button>
 
       <md-button
         aria-label="Profile"
         ui-sref="profile"
-        ng-if="ctrl.auth.isAuthenticated">
+        ng-if="toolbarCtrl.auth.isAuthenticated">
         Profile
       </md-button>
 
       <md-button
         aria-label="Logout"
-        ng-click="ctrl.logout()"
-        ng-if="ctrl.auth.isAuthenticated">
+        ng-click="toolbarCtrl.logout()"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
         Logout
       </md-button>
   </div>
