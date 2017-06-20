@@ -27,8 +27,14 @@
         if (isUnique) {
           vm.profile.userInfo.fields.push(field);
           store.set('profile', vm.profile);
-          userService.addField(field);
-          vm.getFields();
+          return userService.addField(field)
+          .then((response) => {
+            vm.getFields();
+            console.log('addField in profile success', response);
+          })
+          .catch((error) => {
+            console.log('addField in profile fail', error);
+          });
         }
       };
 

@@ -5,6 +5,8 @@
     .service('userService', ['$http', 'store', function($http, store) {
       const vm = this;
       vm.profile;
+      // instead of trying to reach for the server to get field ID everytime field is added,
+      // just hardcoding a field data with proper numbers seems reasonable
       vm.fields = {
         javascript: 1,
         backbone: 2,
@@ -29,24 +31,31 @@
           return vm.profile
         })
         .catch((error) => {
-          console.log('getUserInfo in userService fail', error);
+          return console.log('getUserInfo in userService fail', error);
         });
       };
 
       this.addField = (field) => {
         vm.profile = store.get('profile');
         let userId = vm.profile.userInfo.id;
-        console.log('this is field', field);
-        let fieldId = vm.fields[field];
-        console.log('this is fieldId', fieldId);
-        console.log('userId', userId);
-        console.log('profile', vm.profile);
-        let data = {
-          userId: userId,
-          fieldId: fieldId
+        let fieldsByName = vm.profile.userInfo.fields;
+        let fieldIds = [];
+        for (let i = 0; i < fieldsByName.length; i++) {
+          fieldIds.push(vm.fields[fieldsByName[i]]);
         }
-
-      }
+        console.log('this is fieldIds', fieldIds);
+        let data = {
+          id: userId,
+          fields: fieldIds
+        };
+        return $http.put(`/users/${userId}`, data)
+        .then((response) => {
+          return console.log('addField in userService success', response);
+        })
+        .catch((error) => {
+          return console.log('addField in userService fail', error);
+        });
+      };
 
 
     }]);
