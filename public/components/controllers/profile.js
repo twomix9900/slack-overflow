@@ -4,29 +4,45 @@
     .module('slackOverflowApp')
     .controller('profileController', ['$http', 'store', 'userService', function($http, store, userService) {
       const vm = this;
-      vm.getSecretMessage = getSecretMessage;
+      vm.profile = store.get('profile');
       vm.getFields = getFields;
       vm.addField = addField;
+      vm.removeField = removeField;
+      
       vm.message;
-      vm.fields;
-      vm.profile = store.get('profile');
+      vm.fields = vm.profile.userInfo.fields
 
       function getFields() {
-        console.log('vm.profile in getFields in profile.js', vm.profile);
+        vm.profile = store.get('profile');
         vm.fields = vm.profile.userInfo.fields;
-        console.log('this is fields of a user', vm.fields);
-        vm.fields.push('javascript');
-        vm.fields.push('c++');
       };
-      function addField() {
-        console.log('profile FROM ADDFIELD', vm.profile);
+      vm.getFields();
+      
+      function addField(field) {
+        let isUnique = true;
+        for (let i = 0; i < vm.profile.userInfo.fields.length; i++) {
+          if (vm.profile.userInfo.fields[i] === field) {
+            isUnique = false;
+          }
+        }
+        if (isUnique) {
+          vm.profile.userInfo.fields.push(field);
+          store.set('profile', vm.profile);
+          return userService.addField(field)
+          .then((response) => {
+            vm.getFields();
+            console.log('addField in profile success', response);
+          })
+          .catch((error) => {
+            console.log('addField in profile fail', error);
+          });
+        }
       };
-      function getSecretMessage() {
-        $http.get('http://localhost:3456/api/private')
-        .then(function(response) {
-          vm.message = response.data.message;
-        })
-      };
+
+      function removeField() {
+        console.log('remove field');
+
+      }
       
     }]);
 })();
