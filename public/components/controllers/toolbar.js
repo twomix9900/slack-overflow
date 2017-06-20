@@ -2,12 +2,13 @@
   'use strict';
   angular
     .module('slackOverflowApp')
-    .controller('toolbarController', ['auth', 'store', '$location', function(auth, store, $location) {
+    .controller('toolbarController', ['auth', 'store', '$location', 'authService', function(auth, store, $location, authService) {
       var vm = this;
       vm.redirectHome = redirectHome;
       vm.login = login;
       vm.logout = logout;
       vm.auth = auth;
+      vm.registerUser = authService.registerUser;
 
       function redirectHome() {
         $location.path('/home');
@@ -19,6 +20,8 @@
           store.set('profile', profile);
           store.set('id_token', token);
           $location.path('/home');
+          console.log('this is profile upon login', profile);
+          vm.registerUser(profile);
         }, function(error) {
           console.log('login error', error);
         });

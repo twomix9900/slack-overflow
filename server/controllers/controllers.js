@@ -111,18 +111,21 @@ const postAnswer = (req, res) => {
 }
 
 const addUser = (req, res) => {
-  let name = req.body.name;
-  let fields = req.body.fields;
+  let name = req.body.user;
+  // let fields = req.body.fields;
   let userId;
   User.findOrCreate({ where: { name: name }, defaults: { reputation: 0 }})
-    .spread((user, created) => {
-      for (let i = 0; i < fields.length; i++) {
-        User_Field.create({
-          userId: user.id,
-          fieldId: fields[i]
-        })
-      }
-    })
+  // since only useful data returned upon login is EMAIL,
+  // and fields can't be added upon signup and need to be added in profile section after login,
+  // this field is commented out
+    // .spread((user, created) => {
+    //   for (let i = 0; i < fields.length; i++) {
+    //     User_Field.create({
+    //       userId: user.id,
+    //       fieldId: fields[i]
+    //     })
+    //   }
+    // })
     .then(() => {
       res.status(201).send('success adding new user to database');
     })
