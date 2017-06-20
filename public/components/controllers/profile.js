@@ -15,7 +15,11 @@
       function getFields() {
         vm.profile = store.get('profile');
         vm.fields = vm.profile.userInfo.fields;
+        console.log('GETTTTTTTPROFILEEEE', vm.profile);
+        console.log('GETFIELDDDDDDDDDS', vm.fields);
+        
       };
+      vm.getFields();
       
       function addField(field) {
         let isUnique = true;
@@ -45,3 +49,5 @@
       
     }]);
 })();
+
+//check check

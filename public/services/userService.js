@@ -8,15 +8,15 @@
       // instead of trying to reach for the server to get field ID everytime field is added,
       // just hardcoding a field data with proper numbers seems reasonable
       vm.fields = {
-        javascript: 1,
-        backbone: 2,
-        css: 3,
-        html: 4,
-        react: 5,
-        angular: 6,
-        nodejs: 7,
-        sql: 8,
-        nosql: 9
+        JavaScript: 1,
+        Backbone: 2,
+        CSS: 3,
+        HTML: 4,
+        React: 5,
+        Angular: 6,
+        'Node.Js': 7,
+        SQL: 8,
+        noSQL: 9
       };
 
       this.getUserInfo = (data) => {
@@ -27,6 +27,14 @@
           console.log('getUserInfo in userService success', response);
           vm.profile = store.get('profile');
           vm.profile.userInfo = response.data.results;
+          // convert field object into array
+          vm.fieldObjects = vm.profile.userInfo.fields;
+          console.log('FIELD OBJECTS', vm.fieldObjects);
+          for (let i = 0; i < vm.fieldObjects.length; i++) {
+            let fieldName = vm.fieldObjects[i].name;
+            vm.fieldObjects[i] = fieldName;
+          }
+          vm.profile.userInfo.fields = vm.fieldObjects;
           store.set('profile', vm.profile);
           return vm.profile
         })
