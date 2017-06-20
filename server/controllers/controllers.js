@@ -185,6 +185,24 @@ const fetchUserInfo = (req, res) => {
     })
 }
 
+const fetchUserByName = (req, res) => {
+  User.find({ 
+    where: { name: req.params.name },
+    include: [{
+      model: Field
+    }]
+  })
+    .then((user) => {
+      res.json({
+        results: user
+      })
+    })
+    .catch((err) => {
+      console.error('error getting user info ', err);
+    })
+}
+
+
 const closeQuestion = (req, res) => {
   Question.update({
     status: false
@@ -207,5 +225,6 @@ module.exports = {
   fetchQuestionsForUser: fetchQuestionsForUser,
   addReputation: addReputation,
   fetchUserInfo: fetchUserInfo,
-  closeQuestion: closeQuestion
+  closeQuestion: closeQuestion,
+  fetchUserByName: fetchUserByName
 }

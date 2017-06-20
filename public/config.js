@@ -20,16 +20,21 @@
           name: 'questionAskedEntry', 
           url: '/questions/{questionId}', 
           component: 'questionAskedEntry',
-          resolve: {
-            question: function(QuestionsService, $transition$) {
-              console.log($transition$.params().questionId)
-              return QuestionsService.getQuestion($transition$.params().questionId);
-            }
-          }
+          
           //name of the state is the ui-sref
           //url is what the browser will go to
           //component matches the component in public/components
           //resolve function runs before component gets loaded, and return value is set to question
+        },
+        {
+          name: 'questionsAnsweredList',
+          url: '/answers',
+          component: 'questionsAnsweredList',
+          resolve: {
+            questions: function(QuestionsService) {
+              return QuestionsService.getQuestionsForUser();
+            }
+          }
         }
       
       ]
@@ -53,7 +58,12 @@
       $stateProvider
         .state('home', {
           url: '/home',
-          templateUrl: './public/components/templates/slackOverflow.html'
+          templateUrl: './public/components/templates/slackOverflow.html',
+          resolve: {
+            fieldArray: function(QuestionsService) {
+              QuestionsService.getUserFields();
+            }
+          }
         })
         .state('profile', {
           url: '/profile',
