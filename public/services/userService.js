@@ -14,7 +14,7 @@
         HTML: 4,
         React: 5,
         Angular: 6,
-        'Node.Js': 7,
+        'Node.js': 7,
         SQL: 8,
         noSQL: 9
       };
