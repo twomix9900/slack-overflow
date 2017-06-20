@@ -14,7 +14,7 @@
       <md-card-title-text>
         <span class="md-headline">{{ctrl.profile.nickname}}</span>
         <span class="subhead">{{ctrl.profile.email}}</span>
-        <div ng-repeat="field in ctrl.fields track by $index" field="field">{{field}}</div>
+        <div ng-click="ctrl.removeField()" ng-repeat="field in ctrl.fields track by $index" field="field">{{field}}</div>
       </md-card-title-text>
     </md-card-title>
    
