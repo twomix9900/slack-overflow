@@ -6,25 +6,30 @@
       const vm = this;
       vm.getSecretMessage = getSecretMessage;
       vm.getFields = getFields;
+      vm.addField = addField;
       vm.message;
       vm.profile = store.get('profile');
 
       function getFields() {
-        // $http.get('http://localhost:3456/users/:id', {
-        //   skipAuthorization: true
-        // })
-        // .then(function(response) {
-        //   vm.message = response.data.message;
-        // })
-        userService.getUserInfo(vm.profile);
-      }
-
+        userService.getUserInfo(vm.profile)
+        .then((response) => {
+          console.log('response is this', response);
+          vm.profile = store.get('profile');
+          console.log(vm.profile);
+        }) 
+        .catch((error) => {
+          console.log('userService.getUserInfo fail', error);
+        });
+      };
+      function addField() {
+        console.log('userINFO FROM ADDFIELD', vm.profile.userInfo.fields);
+      };
       function getSecretMessage() {
         $http.get('http://localhost:3456/api/private')
         .then(function(response) {
           vm.message = response.data.message;
         })
-      }
+      };
       
     }]);
 })();
