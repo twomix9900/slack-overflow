@@ -1,46 +1,44 @@
-angular.module('slackOverflowApp').service('QuestionsService', function($http) {
+angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', function($http, store) {
   
   var questionsObj;
   var answersObj;
-  var fieldArray = [];
-  var currentUser;
+  var fieldArray = store.get('profile').userInfo.fields;
+  var currentUser = store.get('profile').userInfo;
   var questionsList = [];
   var currentQuestionAndAnswer = [];
-  var userId;
+  var userId = store.get('profile').userInfo.id;
 
   // hardcoded - going to have to grab user name from whatever auth0 returns 
-  var username = 'jason';
+  var currentUsername = store.get('profile').userInfo.name;
 
   // hardcoding question id, going to have to grab it from the question list
-  var questionId = 1;
+  // var questionId = 1;
 
   var service = {
     getAllQuestions: function() {
+      console.log('user fields ', currentUser);
       return $http.get('/questions', { cache: true })
         .then(function(resp) {
           questionsObj = resp.data;
         })
         .then(() => {
-          if (questionsList.length === 0) {
-            for (var i = 0; i < questionsObj.results.length; i++) {
-              var username;
-              username = questionsObj.results[i].name;
-              for (var j = 0; j < questionsObj.results[i].questions.length; j++) {
-                if (questionsObj.results[i].questions[j].status === true) {
-                  if (fieldArray.indexOf(questionsObj.results[i].questions[j].fieldId) !== -1) {
-                    var output = {};
-                    output.name = username;
-                    output.questionId = questionsObj.results[i].questions[j].id;
-                    output.title = questionsObj.results[i].questions[j].title;
-                    output.text = questionsObj.results[i].questions[j].text;
-                    output.field = questionsObj.results[i].questions[j].field.name;
-                    questionsList.push(output);
-                  }
+          questionsList = [];
+          for (var i = 0; i < questionsObj.results.length; i++) {
+            var questionUsername;
+            questionUsername = questionsObj.results[i].name;
+            for (var j = 0; j < questionsObj.results[i].questions.length; j++) {
+              if (questionsObj.results[i].questions[j].status === true && questionUsername !== currentUsername) {
+                if (fieldArray.indexOf(questionsObj.results[i].questions[j].field.name ) !== -1) {
+                  var output = {};
+                  output.name = questionUsername;
+                  output.questionId = questionsObj.results[i].questions[j].id;
+                  output.title = questionsObj.results[i].questions[j].title;
+                  output.text = questionsObj.results[i].questions[j].text;
+                  output.field = questionsObj.results[i].questions[j].field.name;
+                  questionsList.push(output);
                 }
               }
             }
-          } else {
-            return questionsList;
           }
           // var sortedOutput = _.sortBy(questionsList, 'questionId');  
           return questionsList;
@@ -133,5 +131,5 @@ angular.module('slackOverflowApp').service('QuestionsService', function($http) {
   }
   
   return service;
-})
+}])
 
