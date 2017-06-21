@@ -58,11 +58,7 @@
         .state('home', {
           url: '/home',
           templateUrl: './public/components/templates/slackOverflow.html',
-          resolve: {
-            fieldArray: function(QuestionsService) {
-              QuestionsService.getUserFields();
-            }
-          }
+          
         })
         .state('profile', {
           url: '/profile',
