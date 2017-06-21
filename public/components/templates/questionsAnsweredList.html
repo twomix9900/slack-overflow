@@ -1,11 +1,19 @@
-  <h3>RENDER QUESTIONS YOU ASKED LIST:</h3>
-  <ul>
-    <li ng-repeat="question in $ctrl.questions" ng-click="">
-      
-        {{question.name}}
-        {{question.title}}
-        {{question.field}}
-      
-    </li>
-  </ul>
-  
+<div class="container">
+  <div class="table-responsive">          
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Questions Asked By You:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="question in $ctrl.questions">
+          <td><a ui-sref="questionAskedEntry({questionId: question.id})">
+          <h3>{{question.title}}<h3></a>
+          <h5>{{question.field}}<h5>
+      </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
