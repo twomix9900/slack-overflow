@@ -1,10 +1,11 @@
   <h3>RENDER QUESTIONS YOU ASKED LIST:</h3>
   <ul>
-    <li ng-repeat="question in $ctrl.questions" ng-click="">
+    <li ng-repeat="question in ctrl.questionsList" ui-sref='questionAskedEntry({id: question.id})'>
       
         {{question.name}}
         {{question.title}}
         {{question.field}}
+        {{question.id}}
       
     </li>
   </ul>
