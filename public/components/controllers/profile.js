@@ -46,7 +46,7 @@
         vm.profile.userInfo.fields.splice(index, 1);
         console.log('vm.profile after remove', vm.profile);
         store.set('profile', vm.profile);
-        
+        userService.removeField();
       }
       
     }]);
