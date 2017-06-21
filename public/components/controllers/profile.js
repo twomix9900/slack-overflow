@@ -39,10 +39,12 @@
         }
       };
 
-      function removeField() {
-        console.log('remove field');
-
-      }
+      function removeField(field) {
+        const index = vm.profile.userInfo.fields.indexOf(field);
+        vm.profile.userInfo.fields.splice(index, 1);
+        store.set('profile', vm.profile);
+        userService.removeField();
+      };
       
     }]);
 })();

@@ -51,7 +51,6 @@
         for (let i = 0; i < fieldsByName.length; i++) {
           fieldIds.push(vm.fields[fieldsByName[i]]);
         }
-        console.log('this is fieldIds', fieldIds);
         let data = {
           id: userId,
           fields: fieldIds
@@ -63,6 +62,28 @@
         .catch((error) => {
           return console.log('addField in userService fail', error);
         });
+      };
+
+      this.removeField = () => {
+        vm.profile = store.get('profile');
+        let userId = vm.profile.userInfo.id;
+        let fieldsByName = vm.profile.userInfo.fields;
+        let fieldIds = [];
+        for (let i = 0; i < fieldsByName.length; i++) {
+          fieldIds.push(vm.fields[fieldsByName[i]]);
+        }
+        let data = {
+          id: userId,
+          fields: fieldIds
+        };
+        return $http.put(`/users/${userId}`, data)
+        .then((response) => {
+          return console.log('removeField in userService success', response);
+        })
+        .catch((error) => {
+          return console.log('removeField in userService fail', error);
+        });
+
       };
 
 
