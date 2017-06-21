@@ -1,4 +1,5 @@
-angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', function($http, store) {
+angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', '$stateParams', 
+  function($http, store, $stateParams) {
   
   var questionsObj;
   var answersObj;
@@ -17,35 +18,36 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
   var service = {
     getAllQuestions: function() {
       console.log('user fields ', currentUser);
-      return $http.get('/questions', { cache: true })
-        .then(function(resp) {
-          questionsObj = resp.data;
-        })
-        .then(() => {
-          questionsList = [];
-          for (var i = 0; i < questionsObj.results.length; i++) {
-            var questionUsername;
-            questionUsername = questionsObj.results[i].name;
-            for (var j = 0; j < questionsObj.results[i].questions.length; j++) {
-              if (questionsObj.results[i].questions[j].status === true && questionUsername !== currentUsername) {
-                if (fieldArray.indexOf(questionsObj.results[i].questions[j].field.name ) !== -1) {
-                  var output = {};
-                  output.name = questionUsername;
-                  output.questionId = questionsObj.results[i].questions[j].id;
-                  output.title = questionsObj.results[i].questions[j].title;
-                  output.text = questionsObj.results[i].questions[j].text;
-                  output.field = questionsObj.results[i].questions[j].field.name;
-                  questionsList.push(output);
-                }
-              }
-            }
-          }
-          // var sortedOutput = _.sortBy(questionsList, 'questionId');  
-          return questionsList;
-        })
-        .catch((err) => {
-          console.error('error fetching questions ', err);
-        })
+      return $http.get('/questions')
+        // .then(function(resp) {
+        //   questionsObj = resp.data;
+        // })
+        // .then(() => {
+        //   questionsList = [];
+        //   for (var i = 0; i < questionsObj.results.length; i++) {
+        //     var questionUsername;
+        //     questionUsername = questionsObj.results[i].name;
+        //     for (var j = 0; j < questionsObj.results[i].questions.length; j++) {
+        //       if (questionsObj.results[i].questions[j].status === true && questionUsername !== currentUsername) {
+        //         if (fieldArray.indexOf(questionsObj.results[i].questions[j].field.name ) !== -1) {
+        //           var output = {};
+        //           output.name = questionUsername;
+        //           output.questionId = questionsObj.results[i].questions[j].id;
+        //           output.title = questionsObj.results[i].questions[j].title;
+        //           output.text = questionsObj.results[i].questions[j].text;
+        //           output.field = questionsObj.results[i].questions[j].field.name;
+        //           questionsList.push(output);
+        //         }
+        //       }
+        //     }
+        //   }
+        //   // var sortedOutput = _.sortBy(questionsList, 'questionId');  
+        //   console.log('is this running ', questionsList);
+        //   return questionsList;
+        // })
+        // .catch((err) => {
+        //   console.error('error fetching questions ', err);
+        // })
     },
     
 
@@ -66,30 +68,33 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
     },
     
     getQuestion: function() {
-      return $http.get('/questions/' + userId, { cache: true })
-        .then((question) => {
-          currentQuestionAndAnswer = question.data;
-        })
-        .then(() => {
-          var output = [];
-          var question = {};
-          question.name = obj.results[0].name;
-          question.reputation = obj.results[0].reputation;
-          question.title = obj.results[0].questions[0].title;
-          question.text = obj.results[0].questions[0].text;
-          output.push(question);
-          for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
-            var answer = {};
-            answer.name = obj.results[0].questions[0].answers[i].user.name;
-            answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
-            answer.text = obj.results[0].questions[0].answers[i].text;
-            output.push(answer);
-          }
-          return output;
-        })
-        .catch((err) => {
-          console.error('error fetching question and answers ', err);
-        })
+      return $http.get('/questions/' + $stateParams.id)
+        // .then((question) => {
+        //   currentQuestionAndAnswer = question.data;
+        // })
+        // .then(() => {
+        //   var output = {
+        //     question: [],
+        //     answer: []
+        //   };
+        //   var question = {};
+        //   question.name = obj.results[0].name;
+        //   question.reputation = obj.results[0].reputation;
+        //   question.title = obj.results[0].questions[0].title;
+        //   question.text = obj.results[0].questions[0].text;
+        //   output.question.push(question);
+        //   for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
+        //     var answer = {};
+        //     answer.name = obj.results[0].questions[0].answers[i].user.name;
+        //     answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
+        //     answer.text = obj.results[0].questions[0].answers[i].text;
+        //     output.answer.push(answer);
+        //   }
+        //   return output;
+        // })
+        // .catch((err) => {
+        //   console.error('error fetching question and answers ', err);
+        // })
 
       // function questionMatchesParam(question) {
       //   return question.id === parseInt(id);
@@ -103,29 +108,29 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     getQuestionsForUser: function () {
       console.log('questions for user !!!!');
-      return $http.get('/questions/user/' + userId, { cache: true })
-        .then((resp) => {
-          answersObj = resp.data;
-        })
-        .then(() => {
-          var output = [];
-          var name = answersObj.results[0].name;
-          for (var i = 0; i < answersObj.results[0].questions.length; i++) {
-            var question = {};
-            question.name = name;
-            question.id = answersObj.results[0].questions[i].id;
-            question.title = answersObj.results[0].questions[i].title;
-            question.text = answersObj.results[0].questions[i].text;
-            question.field = answersObj.results[0].questions[i].field.name;
-            output.push(question);
-          }
-          // var sortedOutput = _.sortBy(output, 'id');
-          console.log(output);
-          return output;
-        })
-        .catch((err) => {
-          console.error('error fetching questions for user ', err);
-        })
+      return $http.get('/questions/user/' + userId)
+        // .then((resp) => {
+        //   answersObj = resp.data;
+        // })
+        // .then(() => {
+        //   var output = [];
+        //   var name = answersObj.results[0].name;
+        //   for (var i = 0; i < answersObj.results[0].questions.length; i++) {
+        //     var question = {};
+        //     question.name = name;
+        //     question.id = answersObj.results[0].questions[i].id;
+        //     question.title = answersObj.results[0].questions[i].title;
+        //     question.text = answersObj.results[0].questions[i].text;
+        //     question.field = answersObj.results[0].questions[i].field.name;
+        //     output.push(question);
+        //   }
+        //   // var sortedOutput = _.sortBy(output, 'id');
+        //   console.log(output);
+        //   return output;
+        // })
+        // .catch((err) => {
+        //   console.error('error fetching questions for user ', err);
+        // })
     }
     
   }

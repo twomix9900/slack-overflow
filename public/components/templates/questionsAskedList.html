@@ -7,8 +7,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="question in $ctrl.questions">
-          <td><a ui-sref="questionAskedEntry({questionId: question.id})">
+        <tr ng-repeat="question in ctrl.questionsList">
+          <td><a ui-sref="questionAskedEntry({id: question.questionId})">
           <h3>{{question.title}}<h3></a>
           <h5>Field: {{question.field}}<h5>
           <h5>Asked By: {{question.name}}</h5>
