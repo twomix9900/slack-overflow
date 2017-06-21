@@ -40,14 +40,11 @@
       };
 
       function removeField(field) {
-        console.log('vm.profile before remove', vm.profile);
         const index = vm.profile.userInfo.fields.indexOf(field);
-        console.log('index of clicked', index);
         vm.profile.userInfo.fields.splice(index, 1);
-        console.log('vm.profile after remove', vm.profile);
         store.set('profile', vm.profile);
         userService.removeField();
-      }
+      };
       
     }]);
 })();
