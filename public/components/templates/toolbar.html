@@ -12,6 +12,13 @@
       </md-button>
 
       <md-button
+        aria-label="postQuestion"
+        ui-sref="postQuestion"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
+        Ask a Question
+      </md-button>
+
+      <md-button
         aria-label="QuestionsAskedList"
         ui-sref="questionsAskedList"
         ng-if="toolbarCtrl.auth.isAuthenticated">

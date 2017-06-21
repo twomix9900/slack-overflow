@@ -1,0 +1,43 @@
+.black-background {
+  background-color: black;
+}
+
+table.table td {
+  font-size: 18px;
+}
+
+.table>tbody>tr>td {
+  padding:20px;
+}
+
+.table>thead>tr>th {
+  font-size: 23px;
+  padding-bottom: 25px;
+}
+
+.titlePadding {
+  padding-bottom:25px;
+}
+
+.textPadding {
+  padding-bottom:50px;
+  font-size:18px;
+}
+
+table.table.tableEntry td {
+  padding: 20px;
+}
+
+.container {
+  padding-right:100px;
+  padding-left:100px;
+}
+
+.acceptAnswer {
+  display:block;
+  margin-top:15px;
+}
+
+.floatRight {
+  float:right;
+}
