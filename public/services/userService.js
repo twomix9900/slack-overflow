@@ -80,6 +80,13 @@
           fields: fieldIds
         };
         console.log('THIS IS DATA', data);
+        return $http.put(`/users/${userId}`, data)
+        .then((response) => {
+          return console.log('removeField in userService success', response);
+        })
+        .catch((error) => {
+          return console.log('removeField in userService fail', error);
+        });
 
       };
 
