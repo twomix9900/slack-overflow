@@ -8,18 +8,18 @@
       var states = [
         { 
           name: 'questionsAskedList', 
-          url: '/questions', 
-          component: 'questionsAskedList',
-          resolve: {
-            questions: function(QuestionsService) {
-              return QuestionsService.getAllQuestions();
-            }
-          }
+          url: '/questions',
+          templateUrl: 'public/components/templates/questionsAskedList.html',
+          controller: 'questionsAskedListCtrl',
+          controllerAs: 'ctrl'
         },
         { 
           name: 'questionAskedEntry', 
-          url: '/questions/{questionId}', 
-          component: 'questionAskedEntry',
+          url: '/questions/:id', 
+          templateUrl: 'public/components/templates/questionAskedEntry.html',
+          controller: 'questionEntryCtrl',
+          controllerAs: 'ctrl'
+     
           
           //name of the state is the ui-sref
           //url is what the browser will go to
@@ -29,12 +29,10 @@
         {
           name: 'questionsAnsweredList',
           url: '/answers',
-          component: 'questionsAnsweredList',
-          resolve: {
-            questions: function(QuestionsService) {
-              return QuestionsService.getQuestionsForUser();
-            }
-          }
+          templateUrl: 'public/components/templates/questionsAnsweredList.html',
+          controller: 'questionsAnsweredListCtrl',
+          controllerAs: 'ctrl'
+     
         },
       ]
       
