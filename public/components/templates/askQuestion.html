@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="titlePadding">
+  <label for="title"><h3>Title:</h3></label>
+    <input type="text" class="form-control" placeholder="Enter question title" ng-model="questionTitle">
+  <div>
+  <hr>
+  <div class="form-group">
+    <label for="question"><h3>Your Question:</h3></label>
+    <textarea class="form-control" rows="10" placeholder="Enter question here" ng-model="questionBody"></textarea>
+  </div>
+
+<label for="field"><h3>Pick Related Field:</h3></label>
+<br>
+<md-button ng-click="fieldId=1" class="md-raised md-primary">Javascript</md-button>
+<md-button ng-click="fieldId=2" class="md-raised md-primary">Backbone</md-button>
+<md-button ng-click="fieldId=3" class="md-raised md-primary">CSS</md-button>
+<md-button ng-click="fieldId=4" class="md-raised md-primary">HTML</md-button>
+<md-button ng-click="fieldId=5" class="md-raised md-primary">React</md-button>
+<md-button ng-click="fieldId=6" class="md-raised md-primary">Angular</md-button>
+<md-button ng-click="fieldId=7" class="md-raised md-primary">Node.js</md-button>
+<md-button ng-click="fieldId=8" class="md-raised md-primary">SQL</md-button>
+<md-button ng-click="fieldId=9" class="md-raised md-primary">noSQL</md-button>
+<br><hr><br>
+  <md-button class="md-raised" ui-sref="questionsAnsweredList">Back</md-button>
+
+  <md-button class="md-raised floatRight" ng-click="submitQuestion(questionTitle, questionBody)">Submit Question</md-button>
+</div>
+

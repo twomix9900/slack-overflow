@@ -129,7 +129,7 @@ angular.module('slackOverflowApp').service('QuestionsService', function($http) {
           console.error('error fetching questions for user ', err);
         })
     }
-
+    
   }
   
   return service;

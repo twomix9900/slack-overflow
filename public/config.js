@@ -35,8 +35,7 @@
               return QuestionsService.getQuestionsForUser();
             }
           }
-        }
-      
+        },
       ]
       
       states.forEach(function(state) {
@@ -69,6 +68,13 @@
           url: '/profile',
           templateUrl: './public/components/templates/profile.html',
           controller: 'profileController',
+          controllerAs: 'ctrl',
+          bindToController: true
+        })
+        .state('postQuestion', {
+          url: '/postQuestion',
+          templateUrl: './public/components/templates/askQuestion.html',
+          controller: 'postQuestionController',
           controllerAs: 'ctrl',
           bindToController: true
         });
