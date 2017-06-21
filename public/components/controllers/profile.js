@@ -39,9 +39,10 @@
         }
       };
 
-      function removeField() {
-        console.log('remove field');
-
+      function removeField(field) {
+        console.log(vm.profile);
+        const index = vm.profile.userInfo.fields.indexOf(field);
+        console.log(index);
       }
       
     }]);
