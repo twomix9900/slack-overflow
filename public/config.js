@@ -73,7 +73,14 @@
           controller: 'postQuestionController',
           controllerAs: 'ctrl',
           bindToController: true
-        });
+        })
+        //  .state('profilePage', {
+        //   url: '/profilePage',
+        //   templateUrl: './public/components/templates/askQuestion.html',
+        //   controller: 'postQuestionController',
+        //   controllerAs: 'ctrl',
+        //   bindToController: true
+        // });
 
 
       function redirect($q, $injector, $timeout, store, $location) {
