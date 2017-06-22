@@ -89,6 +89,14 @@ const init = () => {
     .then(() => Answer.sync())
     .then(() => Message.sync())
     .then(() => User_Field.sync())
+    .then(() => Field.bulkCreate(fieldDummy)
+      .then(() => {
+        console.log('success creating field data');
+      })
+      .catch((error) => {
+        console.log('fail creating field data', error);
+      })
+    )
 };
 
 module.exports = init;

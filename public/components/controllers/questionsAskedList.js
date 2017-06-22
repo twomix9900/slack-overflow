@@ -12,6 +12,8 @@
       QuestionsService.getAllQuestions()
         .then(function(resp) {
           vm.questionsObj = resp.data;
+          console.log('RESP', resp);
+          console.log('Vm.QUESTIONOBJ', vm.questionObj);
         })
         .then(() => {
           console.log('vm.fieldArray ', vm.fieldArray);

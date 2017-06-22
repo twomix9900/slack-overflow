@@ -81,6 +81,12 @@ const fetchQuestionAndAnswers = (req, res) => {
 
 const postQuestion = (req, res) => {
   let { userId, title, text, fieldId } = req.body;
+
+  console.log('THIS IS REQ.BODY', req.body);
+  console.log('USERID', userId);
+  console.log('TITLE', title);
+  console.log('TEXT', text);
+  console.log('fieldId', fieldId);
   Question.create({
     userId: userId,
     title: title,

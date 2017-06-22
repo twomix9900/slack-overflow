@@ -11,6 +11,7 @@
       QuestionsService.getQuestionsForUser()
         .then((resp) => {
           answersObj = resp.data;
+          console.log('resp.data', resp.data);
           console.log('clicked', answersObj);
         })
         .then(() => {
