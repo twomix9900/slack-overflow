@@ -1,5 +1,6 @@
+<profile-page></profile-page>
 <div class="container">
-  <div class="titlePadding">
+  <div class="titlePadding marginPostQuestion">
   <label for="title"><h3>Title:</h3></label>
     <input type="text" class="form-control" placeholder="Enter question title" ng-model="questionTitle">
   <div>
@@ -23,6 +24,6 @@
 <br><hr><br>
   <md-button class="md-raised" ui-sref="questionsAnsweredList">Back</md-button>
 
-  <md-button class="md-raised floatRight" ng-click="submitQuestion(questionTitle, questionBody)">Submit Question</md-button>
+  <md-button class="md-raised floatRight" ng-click="submitQuestion(questionTitle, questionBody)" ui-sref="questionsAnsweredList">Submit Question</md-button>
 </div>
 

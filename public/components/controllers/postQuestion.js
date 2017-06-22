@@ -20,8 +20,7 @@
 
         $http(req)
         .then((resp) => {
-          var questionObj = resp.data
-          console.log(questionObj)
+          console.log('insert error handing or success here')
         })
       }
       

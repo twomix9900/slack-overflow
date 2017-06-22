@@ -1,19 +1,17 @@
 angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', '$stateParams', 
   function($http, store, $stateParams) {
   
-  var questionsObj;
-  var answersObj;
-  var fieldArray = store.get('profile').userInfo.fields;
-  var currentUser = store.get('profile').userInfo;
-  var questionsList = [];
-  var currentQuestionAndAnswer = [];
-  var userId = store.get('profile').userInfo.id;
+  if(store.get('profile') !== null) {
+    var fieldArray = store.get('profile').userInfo.fields;
+    var currentUser = store.get('profile').userInfo;
+    var userId = store.get('profile').userInfo.id;
+    var currentUsername = store.get('profile').userInfo.name;
+    var questionsObj;
+    var answersObj;
+    var questionsList = [];
+    var currentQuestionAndAnswer = [];
+  }
 
-  // hardcoded - going to have to grab user name from whatever auth0 returns 
-  var currentUsername = store.get('profile').userInfo.name;
-
-  // hardcoding question id, going to have to grab it from the question list
-  // var questionId = 1;
 
   var service = {
     getAllQuestions: function() {

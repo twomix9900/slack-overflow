@@ -19,12 +19,6 @@
           templateUrl: 'public/components/templates/questionAskedEntry.html',
           controller: 'questionEntryCtrl',
           controllerAs: 'ctrl'
-     
-          
-          //name of the state is the ui-sref
-          //url is what the browser will go to
-          //component matches the component in public/components
-          //resolve function runs before component gets loaded, and return value is set to question
         },
         {
           name: 'questionsAnsweredList',
@@ -32,7 +26,6 @@
           templateUrl: 'public/components/templates/questionsAnsweredList.html',
           controller: 'questionsAnsweredListCtrl',
           controllerAs: 'ctrl'
-     
         },
       ]
       
@@ -67,12 +60,11 @@
         })
         .state('postQuestion', {
           url: '/postQuestion',
-          templateUrl: './public/components/templates/askQuestion.html',
+          templateUrl: './public/components/templates/postQuestion.html',
           controller: 'postQuestionController',
           controllerAs: 'ctrl',
           bindToController: true
-        });
-
+        })
 
       function redirect($q, $injector, $timeout, store, $location) {
         var auth;

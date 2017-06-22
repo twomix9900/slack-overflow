@@ -1,0 +1,51 @@
+<div ng-controller="profilePageController" layout="column" style="width: 300px;" ng-cloak>
+
+  <section layout="row" flex>
+
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+                md-disable-backdrop md-whiteframe="4">
+
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Your Profile</h1>
+      </md-toolbar>
+
+      <md-content layout-margin>
+        
+        <md-list>
+          <md-list-item class="md-3-line">
+            <div class="md-list-item-text profileText">
+              <md-button ng-click="toggleLeft()" class="md-accent">
+          Hide Profile
+        </md-button>
+              <h1>{{nickname}}</h1>
+              <h3><img class="photoSize" ng-src="{{picture}}" alt="profilePhoto" /></h3>
+              <br>
+              <h3>Email: {{email}}</h3>
+              <h3>Email Verified: {{emailVerified}}</h3>
+              <h3>Created At: {{createdAt | date}}</h3>
+              <h3>Reputation: {{reputation}}</h3>
+              <h3>Expertise:</h3>
+              <div ng-repeat="field in fields">{{field}}</div>
+
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </md-list>
+  
+        
+      </md-content>
+    </md-sidenav>
+
+    <md-content flex layout-padding>
+      <div layout="column" layout-align="top center">
+        <div>
+          <md-button ng-click="toggleLeft()" class="md-raised">
+            Show Profile
+          </md-button>
+        </div>
+      </div>
+    </md-content>
+
+  </section>
+
+</div>
