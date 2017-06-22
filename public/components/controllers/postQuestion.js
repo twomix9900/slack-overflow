@@ -7,7 +7,6 @@
       $scope.submitQuestion = function(title, body) {
         console.log(title, ' ', body, ' ', $scope.fieldId, ' ', store.get('profile').userInfo.id)
         if ($scope.fieldId) {
-          console.log('THIS IS INSICE IF STATEMENT')
           var req = {
             method: 'POST',
             url: '/questions',
@@ -18,7 +17,7 @@
               fieldId: $scope.fieldId
             }
           };
-          console.log(req);
+
           $http(req)
           .then((resp) => {
             console.log('insert error handing or success here', resp)

@@ -25,7 +25,7 @@
           store.set('id_token', token);
           $location.path('/home');
           authService.registerUser(profile);
-          userService.getUserInfo(profile);
+          // userService.getUserInfo(profile);
           console.log('this is profile upon login', store.get('profile'));
         }, function(error) {
           console.log('login error', error);
