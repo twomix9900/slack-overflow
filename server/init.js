@@ -84,7 +84,7 @@ the init function that you DON'T want to use depending on the situation!!!
 const init = () => {
   return db.authenticate()
     .then(() => User.sync())
-    .then(() => Field.sync())
+    .then(() => Field.sync({force: true}))
     .then(() => Question.sync())
     .then(() => Answer.sync())
     .then(() => Message.sync())
