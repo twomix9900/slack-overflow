@@ -1,15 +1,35 @@
+<div class="container">
+  <div class="questionEntry">
+    <h3 class="titlePadding">{{ctrl.questionAndAnswers.question[0].title}}</h3>
+    <hr>
+    <div class="textPadding">{{ctrl.questionAndAnswers.question[0].text}}</div>
 
-  <h3>A Question!</h3>
-  <div>Username: {{ctrl.questionAndAnswers.question[0].name}}</div>
-  <div>Title: {{ctrl.questionAndAnswers.question[0].title}}</div>
-  <div>Text: {{ctrl.questionAndAnswers.question[0].text}}</div>
-  <div>Reputation: {{ctrl.questionAndAnswers.question[0].reputation}}</div>
-
-  <div ng-repeat="answer in ctrl.questionAndAnswers.answer">
-    <div>Username: {{answer.name}}</div>
-    <div>Text: {{answer.text}}</div>
-    <div>Reputation: {{answer.reputation}}</div>
-
+    <div class="floatRight">
+      <div>Status: {{ctrl.questionAndAnswers.question[0].status}}</div>
+      <div>Asked By: {{ctrl.questionAndAnswers.question[0].name}}</div>
+      <div>Reputation: {{ctrl.questionAndAnswers.question[0].reputation}}</div>
+    </div>
   </div>
 
-  <button ui-sref="questionsAskedList">Close</button>
+
+  <div class="Answers">
+    <h3>1 Answer</h3>
+    <div ng-repeat="answer in ctrl.questionAndAnswers.answer">
+    <hr>
+    <div class="textPadding">{{answer.text}}</div>
+      <div class="floatRight">
+        <div>Status: {{ctrl.questionAndAnswers.question[0].status}}</div>
+        <div>Answered By: {{answer.name}}</div>
+        <div>Reputation: {{answer.reputation}}</div>
+      </div>
+    </div>
+
+
+  <div class="form-group paddingForm">
+    <label for="answer"><h3>Your Answer:</h3></label>
+    <textarea class="form-control" rows="10" id="answer"></textarea>
+  </div>
+  <button class="btn btn-primary" ui-sref="questionsAskedList">Back</button>
+  <button class="btn btn-success" ui-sref="">Submit Answer</button>
+
+</div>
