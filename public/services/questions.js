@@ -1,21 +1,21 @@
 angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', '$stateParams', 
   function($http, store, $stateParams) {
   
-  if(store.get('profile') !== null) {
-    var fieldArray = store.get('profile').userInfo.fields;
-    var currentUser = store.get('profile').userInfo;
-    var userId = store.get('profile').userInfo.id;
-    var currentUsername = store.get('profile').userInfo.name;
-    var questionsObj;
-    var answersObj;
-    var questionsList = [];
-    var currentQuestionAndAnswer = [];
-  }
+  // if(store.get('profile') !== null) {
+  //   var fieldArray = store.get('profile').userInfo.fields;
+  //   var currentUser = store.get('profile').userInfo;
+  //   var userId = store.get('profile').userInfo.id;
+  //   var currentUsername = store.get('profile').userInfo.name;
+  //   var questionsObj;
+  //   var answersObj;
+  //   var questionsList = [];
+  //   var currentQuestionAndAnswer = [];
+  // }
 
 
   var service = {
     getAllQuestions: function() {
-      console.log('user fields ', currentUser);
+      // console.log('user fields ', currentUser);
       return $http.get('/questions')
         // .then(function(resp) {
         //   questionsObj = resp.data;
@@ -50,6 +50,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
     
 
     getUserFields: function () {
+      var username = store.get('profile').email;
       return $http.get('/users/name/' + username, { cache: true })
         .then((user) => {
           currentUser = user.data;
@@ -105,6 +106,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
     },
 
     getQuestionsForUser: function () {
+      var userId = store.get('profile').userInfo.id;
       console.log('questions for user !!!!');
       return $http.get('/questions/user/' + userId)
         // .then((resp) => {
