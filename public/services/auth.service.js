@@ -5,7 +5,8 @@
 
       this.registerUser = (data) => {
         const user = {
-          user: data.email
+          user: data.email,
+          image: data.picture
         };
         console.log('this is email from registerUser', user);
         return $http.post('/users', user)

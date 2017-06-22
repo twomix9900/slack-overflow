@@ -1,11 +1,11 @@
 const userDummy = [
-  { name: "josh", reputation: 400 },
-  { name: "jason", reputation: 450 },
-  { name: "inseok", reputation: 550 },
-  { name: "regina", reputation: 400 },
-  { name: "kan", reputation: 350 },
-  { name: "ricky", reputation: 550 },
-  { name: "heather", reputation: 700 }
+  { name: "josh", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
+  { name: "jason", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 450 },
+  { name: "inseok", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
+  { name: "regina", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
+  { name: "kan", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 350 },
+  { name: "ricky", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
+  { name: "heather", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 700 }
 ];
 
 const fieldDummy = [
@@ -69,7 +69,8 @@ const db = require('../db');
 
 const User = db.define('user', {
   name: Sequelize.STRING(40),
-  reputation: Sequelize.INTEGER
+  reputation: Sequelize.INTEGER,
+  image: Sequelize.STRING
 });
 
 const Question = db.define('question', {

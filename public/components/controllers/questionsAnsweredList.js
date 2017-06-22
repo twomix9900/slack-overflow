@@ -5,7 +5,7 @@
       var vm = this;
       vm.questionsList = [];
       vm.userId = store.get('profile').userInfo.id;
-      // vm.currentUsername = store.get('profile').userInfo.name;
+      vm.profile = store.get('profile');
       // vm.fieldArray = store.get('profile').userInfo.fields;
 
       QuestionsService.getQuestionsForUser(vm.userId)
@@ -25,7 +25,7 @@
             question.field = answersObj.results[0].questions[i].field.name;
             vm.questionsList.push(question);
           }
-          // console.log(vm.questionsList);
+          console.log(vm.profile);
         })
         .catch((err) => {
           console.error('error fetching questions for user ', err);

@@ -19,6 +19,7 @@
           };
           var question = {};
           question.name = obj.results[0].name;
+          question.image = obj.results[0].image;
           question.reputation = obj.results[0].reputation;
           question.title = obj.results[0].questions[0].title;
           question.text = obj.results[0].questions[0].text;
@@ -26,6 +27,7 @@
           for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
             var answer = {};
             answer.name = obj.results[0].questions[0].answers[i].user.name;
+            answer.image = obj.results[0].questions[0].answers[i].user.image;
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
             answer.text = obj.results[0].questions[0].answers[i].text;
             output.answer.push(answer);

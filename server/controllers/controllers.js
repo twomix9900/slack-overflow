@@ -118,9 +118,10 @@ const postAnswer = (req, res) => {
 
 const addUser = (req, res) => {
   let name = req.body.user;
+  let image = req.body.image;
   // let fields = req.body.fields;
   let userId;
-  User.findOrCreate({ where: { name: name }, defaults: { reputation: 0 }})
+  User.findOrCreate({ where: { name: name }, defaults: { reputation: 0, image: image }})
   // since only useful data returned upon login is EMAIL,
   // and fields can't be added upon signup and need to be added in profile section after login,
   // this field is commented out
