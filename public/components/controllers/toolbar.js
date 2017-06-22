@@ -11,7 +11,7 @@
       vm.login = login;
       vm.logout = logout;
       vm.auth = auth;
-      vm.registerUser = authService.registerUser;
+      // vm.registerUser = authService.registerUser;
 
 
       function redirectHome() {
@@ -24,9 +24,9 @@
           store.set('profile', profile);
           store.set('id_token', token);
           $location.path('/home');
+          authService.registerUser(profile);
           userService.getUserInfo(profile);
           console.log('this is profile upon login', store.get('profile'));
-          vm.registerUser(profile);
         }, function(error) {
           console.log('login error', error);
         });
