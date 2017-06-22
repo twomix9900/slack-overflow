@@ -49,22 +49,22 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
     },
     
 
-    getUserFields: function () {
-      var username = store.get('profile').email;
-      return $http.get('/users/name/' + username, { cache: true })
-        .then((user) => {
-          currentUser = user.data;
-          userId = user.data.results.id;
-        })
-        .then(() => {
-          for (var i = 0; i < currentUser.results.fields.length; i++) {
-            fieldArray.push(currentUser.results.fields[i].id);
-          }
-        })
-        .catch((err) => {
-          console.error('error getting user fields ', err);
-        })
-    },
+    // getUserFields: function () {
+    //   var username = store.get('profile').email;
+    //   return $http.get('/users/name/' + username, { cache: true })
+    //     .then((user) => {
+    //       currentUser = user.data;
+    //       userId = user.data.results.id;
+    //     })
+    //     .then(() => {
+    //       for (var i = 0; i < currentUser.results.fields.length; i++) {
+    //         fieldArray.push(currentUser.results.fields[i].id);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.error('error getting user fields ', err);
+    //     })
+    // },
     
     getQuestion: function() {
       return $http.get('/questions/' + $stateParams.id)
@@ -105,10 +105,10 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     },
 
-    getQuestionsForUser: function () {
-      var userId = store.get('profile').userInfo.id;
-      console.log('questions for user !!!!');
-      return $http.get('/questions/user/' + userId)
+    getQuestionsForUser: function (currentUserId) {
+      // var userId = store.get('profile').userInfo.id;
+      console.log('questions for user !!!! ', currentUserId);
+      return $http.get('/questions/user/' + currentUserId)
         // .then((resp) => {
         //   answersObj = resp.data;
         // })
@@ -131,6 +131,10 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
         // .catch((err) => {
         //   console.error('error fetching questions for user ', err);
         // })
+    },
+
+    postAnswer: function (body, questionId) {
+      return $http.post('/questions/' + questionId);
     }
     
   }

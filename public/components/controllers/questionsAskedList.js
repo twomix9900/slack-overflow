@@ -12,11 +12,11 @@
       QuestionsService.getAllQuestions()
         .then(function(resp) {
           vm.questionsObj = resp.data;
-          console.log('RESP', resp);
-          console.log('Vm.QUESTIONOBJ', vm.questionObj);
+          // console.log('RESP', resp);
+          // console.log('Vm.QUESTIONOBJ', vm.questionObj);
         })
         .then(() => {
-          console.log('vm.fieldArray ', vm.fieldArray);
+          // console.log('vm.fieldArray ', vm.fieldArray);
           vm.questionsList = [];
           for (var i = 0; i < vm.questionsObj.results.length; i++) {
             var questionUsername;
@@ -26,7 +26,7 @@
                 if (vm.fieldArray.indexOf(vm.questionsObj.results[i].questions[j].field.name ) !== -1) {
                   var output = {};
                   output.name = questionUsername;
-                  output.questionId = vm.questionsObj.results[i].questions[j].id;
+                  output.id = vm.questionsObj.results[i].questions[j].id;
                   output.title = vm.questionsObj.results[i].questions[j].title;
                   output.text = vm.questionsObj.results[i].questions[j].text;
                   output.field = vm.questionsObj.results[i].questions[j].field.name;
@@ -35,8 +35,7 @@
               }
             }
           }
-          // var sortedOutput = _.sortBy(questionsList, 'questionId');  
-          console.log('is this running ', vm.questionsList);
+          // console.log('is this running ', vm.questionsList);
         })
         .catch((err) => {
           console.error('error fetching questions ', err);
