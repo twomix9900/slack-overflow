@@ -2,7 +2,8 @@
   <h1>Welcome to the Slack Overflow App!</h1>
   <h3> Login from the toolbar above to access your profile.</h3>
 </md-content>
-<h3 ng-if="toolbarCtrl.auth.isAuthenticated">
-  <a ui-sref="questionsAskedList" ui-sref-active="active">Questions Asked:</a>
-</h3>
+<div ng-if="toolbarCtrl.auth.isAuthenticated">
+<profile-page></profile-page>
+</div>
+
 

@@ -7,15 +7,15 @@
     $scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
 
-    $scope.email = store.get('profile').email;
-    $scope.emailVerified = store.get('profile').email_verified;
-    $scope.createdAt = store.get('profile').created_at;
-    $scope.nickname = store.get('profile').nickname;
-    $scope.picture = store.get('profile').picture;
-    $scope.reputation = store.get('profile').userInfo.reputation;
-    $scope.fields = store.get('profile').userInfo.fields;
-
-    console.log(store.get('profile'))
+    setTimeout(function(){
+      $scope.email = store.get('profile').email;
+      $scope.emailVerified = store.get('profile').email_verified;
+      $scope.createdAt = store.get('profile').created_at;
+      $scope.nickname = store.get('profile').nickname;
+      $scope.picture = store.get('profile').picture;
+      $scope.reputation = store.get('profile').userInfo.reputation;
+      $scope.fields = store.get('profile').userInfo.fields;
+    }, 1000);
 
     function buildToggler(componentId) {
       return function() {

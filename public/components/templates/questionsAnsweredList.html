@@ -1,13 +1,14 @@
+<profile-page></profile-page>
 <div class="container">
   <div class="table-responsive">          
-    <table class="table">
+    <table class="table marginTop">
       <thead>
         <tr>
           <th>Questions Asked By You:</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="question in ctrl.questionsList">
+        <tr ng-repeat="question in ctrl.questionsList | orderBy: '-id'">
           <td><a ui-sref="questionAskedEntry({id: question.id})">
           <h3>{{question.title}}<h3></a>
           <h5>{{question.field}}<h5>
