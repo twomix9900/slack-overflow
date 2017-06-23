@@ -139,7 +139,11 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     closeQuestion: function (questionId) {
       return $http.put('/questions/close/' + questionId);
-    } 
+    },
+
+    addRep: function (userId) {
+      return $http.put('/reputation/' + userId);
+    }
     
   }
   

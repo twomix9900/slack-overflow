@@ -11,6 +11,7 @@
       QuestionsService.getQuestion()
         .then((question) => {
           obj = question.data;
+          console.log(obj);
         })
         .then(() => {
           var output = {
@@ -23,9 +24,11 @@
           question.reputation = obj.results[0].reputation;
           question.title = obj.results[0].questions[0].title;
           question.text = obj.results[0].questions[0].text;
+          question.status = obj.results[0].questions[0].status;
           output.question.push(question);
           for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
             var answer = {};
+            answer.userId = obj.results[0].questions[0].answers[i].userId;
             answer.name = obj.results[0].questions[0].answers[i].user.name;
             answer.image = obj.results[0].questions[0].answers[i].user.image;
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;

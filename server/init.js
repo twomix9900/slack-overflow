@@ -80,6 +80,7 @@ the init function that you DON'T want to use depending on the situation!!!
 //     })
 // };
 
+const testAnswerDummy = {text: "test rep", questionId: 18, userId: 1};
 
 const init = () => {
   return db.authenticate()
@@ -89,14 +90,13 @@ const init = () => {
     .then(() => Answer.sync())
     .then(() => Message.sync())
     .then(() => User_Field.sync())
-    .then(() => Field.bulkCreate(fieldDummy)
+    .then(() => Field.bulkCreate(fieldDummy))
       .then(() => {
         console.log('success creating field data');
       })
       .catch((error) => {
         console.log('fail creating field data', error);
       })
-    )
 };
 
 module.exports = init;
