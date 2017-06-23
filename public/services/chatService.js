@@ -3,14 +3,32 @@
   angular
     .module('slackOverflowApp')
     .service('chatService', ['$rootScope', function($rootScope) {
-      this.socket = window.io('localhost:3456/');
+      const vm = this;
+      vm.socket = window.io('localhost:3456/');
+      vm.users = [];
 
-      this.joinChatServer = (email) => {
-        this.socket.emit("join", email);
+
+      vm.joinChatServer = (email) => {
+        vm.socket.emit("join", email);
+        vm.updateUsers();
       };
 
-      this.exitChatServer = (email) => {
-        this.socket.emit("exit", email)
-      }
+      vm.exitChatServer = (email) => {
+        vm.socket.emit("exit", email);
+        vm.updateUsers();
+      };
+
+      vm.updateUsers = () => {
+        vm.socket.on('users', function(data) {
+          for (var i = 0; i < data.length; i++) {
+            console.log('vm is users on list', data[i]);
+            vm.users.push(data[i]);
+            console.log('USERSSSSSSSS', vm.users);
+          }
+        });
+      };
+
+
+
     }])
 })(window, window.angular);

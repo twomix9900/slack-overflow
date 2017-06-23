@@ -40,6 +40,13 @@
       </md-button>
 
       <md-button
+        aria-label="Profile"
+        ui-sref="chatPage"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
+        Chat
+      </md-button>
+
+      <md-button
         aria-label="Logout"
         ng-click="toolbarCtrl.logout()"
         ng-if="toolbarCtrl.auth.isAuthenticated">
