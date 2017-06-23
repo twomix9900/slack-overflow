@@ -23,7 +23,6 @@ app.use(express.static(path.join(__dirname, '../')));
 const users = {};
 io.on('connection', function(socket) {
   console.log('CONNNNNNNNNNNNECTED');
-  var sendTo;
   socket.on('join', function(email, callback) {
     console.log('THIS IS DATAAAAAA', email);
     socket.email = email;
@@ -39,9 +38,12 @@ io.on('connection', function(socket) {
     updateUsers();
   });
 
-  socket.on(sendTo, function(message, callback) {
-    console.log('SEND TO ', sendTo);
-    socket.emit(sendTo, message);
+  socket.on('newMessage', function(messageBody, callback) {
+    var sendTo = messageBody.email;
+    var message = messageBody.message;
+    console.log('SEND TO ', sendTo, 'MESSAGE: ', message);
+    io.emit(sendTo, messageBody);
+    // socket.emit(sendTo, message);
   });
 
   function updateUsers() {

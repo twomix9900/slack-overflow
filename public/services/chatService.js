@@ -6,11 +6,18 @@
       const vm = this;
       vm.socket = window.io('localhost:3456/');
       vm.users = [];
+      vm.email;
+      
+      vm.socket.on('inseok.ucla@gmail.com', function(messageBody) {
+        console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
+        console.log('MEESSSAGE BODY', messageBody);
+      })
 
 
       vm.joinChatServer = (email) => {
         vm.socket.emit("join", email);
         vm.updateUsers();
+        vm.email = email;
       };
 
       vm.exitChatServer = (email) => {
@@ -23,7 +30,7 @@
         vm.email = messageBody.email;
         vm.message = messageBody.message;
         console.log('SEND TO ', vm.email, 'THE MESSAGE IS ', vm.message);
-        // vm.socket.emit(`${vm.email}`, messageBody);
+        vm.socket.emit('newMessage', messageBody);
       }
 
       vm.updateUsers = () => {
