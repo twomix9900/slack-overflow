@@ -43,7 +43,8 @@ const answerDummy = [
   { text: "answer7", questionId: 7, userId: 2 },
   { text: "answer8", questionId: 8, userId: 4 },
   { text: "answer9", questionId: 9, userId: 3 },
-  { text: "answer10", questionId: 10, userId: 6 }
+  { text: "answer10", questionId: 10, userId: 6 },
+  { text: "test rep", questionId: 18, userId: 1}
 ];
 
 const user_fieldDummy = [
