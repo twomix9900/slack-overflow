@@ -1,3 +1,8 @@
+html {
+  background-color:white;
+}
+
+
 .black-background {
   background-color: black;
 }
@@ -17,10 +22,11 @@ table.table td {
 
 .titlePadding {
   padding-bottom:15px;
+  margin-top: -45px;
 }
 
 .textPadding {
-  padding-bottom:100px;
+  padding-bottom:20px;
   font-size:18px;
 
 }
@@ -58,6 +64,10 @@ padding-bottom:10px;
   max-width:170px;
 }
 
+.smallPhotoSize {
+  max-width:65px;
+}
+
 .questionEntry {
   padding-bottom:50px;
 }
@@ -75,7 +85,7 @@ padding-bottom:10px;
 }
 
 .paddingForm {
-  padding-top:75px;
+  padding-top:140px;
 }
 
 .marginTop {
