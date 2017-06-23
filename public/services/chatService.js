@@ -18,6 +18,14 @@
         vm.updateUsers();
       };
 
+      vm.sendMessage = (messageBody) => {
+        console.log('SEND MESSAGE IN SERVICE', messageBody);
+        vm.email = messageBody.email;
+        vm.message = messageBody.message;
+        console.log('SEND TO ', vm.email, 'THE MESSAGE IS ', vm.message);
+        // vm.socket.emit(`${vm.email}`, messageBody);
+      }
+
       vm.updateUsers = () => {
         vm.socket.on('users', function(data) {
           for (var i = 0; i < data.length; i++) {

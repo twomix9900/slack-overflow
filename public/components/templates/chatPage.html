@@ -25,7 +25,7 @@
               <h3>Created At: {{createdAt | date}}</h3>
               <h3>Reputation: {{reputation}}</h3>
               <h3>users:</h3>
-              <div ng-repeat="user in ctrl.users track by $index">{{user}}</div>
+              <div ng-repeat="user in ctrl.users track by $index" user="user" ng-click="ctrl.clickUser(user)">{{user}}</div>
 
             </div>
             <md-divider ng-if="!$last"></md-divider>
