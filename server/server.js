@@ -22,10 +22,10 @@ app.use(express.static(path.join(__dirname, '../')));
 
 
 io.on('connection', function(socket) {
-  socket.on('new-message', function(data) {
-    console.log('THIS IS DATAAAAAA');
+  console.log('CONNNNNNNNNNNNECTED');
+  socket.on('test', function(data) {
+    console.log('THIS IS DATAAAAAA', data);
   });
-  socket.emit('update-message', data);
 });
 
 init()
