@@ -5,7 +5,7 @@
       var vm = this;
       vm.questionsList = [];
       vm.userId = store.get('profile').userInfo.Id;
-      // vm.currentUsername = store.get('profile').userInfo.name;
+      vm.currentUsername = store.get('profile').userInfo.name;
       vm.fieldArray = store.get('profile').userInfo.fields;
       vm.questionsObj;
 

@@ -17,7 +17,7 @@
           name: 'questionAskedEntry', 
           url: '/questions/:id', 
           templateUrl: 'public/components/templates/questionAskedEntry.html',
-          controller: 'questionEntryCtrl',
+          controller: 'questionAskedEntryCtrl',
           controllerAs: 'ctrl'
         },
         {
@@ -27,6 +27,13 @@
           controller: 'questionsAnsweredListCtrl',
           controllerAs: 'ctrl'
         },
+        {
+          name: 'questionAnsweredEntry',
+          url: '/answers/:id',
+          templateUrl: 'public/components/templates/questionAnsweredEntry.html',
+          controller: 'questionAnsweredEntryCtrl',
+          controllerAs: 'ctrl'
+        }
       ]
       
       states.forEach(function(state) {

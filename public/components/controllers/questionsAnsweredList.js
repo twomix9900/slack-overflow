@@ -11,6 +11,7 @@
       QuestionsService.getQuestionsForUser(vm.userId)
         .then((resp) => {
           answersObj = resp.data;
+          console.log(answersObj);
           // console.log('resp.data', resp.data);
           // console.log('clicked', answersObj);
         })
@@ -25,7 +26,7 @@
             question.field = answersObj.results[0].questions[i].field.name;
             vm.questionsList.push(question);
           }
-          console.log(vm.profile);
+          // console.log(vm.profile);
         })
         .catch((err) => {
           console.error('error fetching questions for user ', err);
