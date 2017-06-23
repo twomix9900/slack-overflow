@@ -16,7 +16,7 @@
 
   <div class="Answers">
     <h3>1 Answer</h3>
-    <div ng-repeat="answer in ctrl.questionAndAnswers.answer">
+    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'id'">
     <hr>
     <div class="textPadding">{{answer.text}}</div>
       <div class="floatRight">
@@ -30,9 +30,9 @@
 
   <div class="form-group paddingForm">
     <label for="answer"><h3>Your Answer:</h3></label>
-    <textarea class="form-control" rows="10" id="answer" ng-model="answer.text"></textarea>
+    <textarea class="form-control" rows="10" id="answer" ng-model="answerBody"></textarea>
   </div>
   <button class="btn btn-primary" ui-sref="questionsAskedList">Back</button>
-  <button class="btn btn-success"  ui-sref="questionAskedEntry({ id: ctrl.questionId })">Submit Answer</button>
+  <button class="btn btn-success"  ng-click="postAnswer()" ui-sref="questionAskedEntry({ id: ctrl.questionId })">Submit Answer</button>
 
 </div>

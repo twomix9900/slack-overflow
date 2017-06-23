@@ -1,8 +1,8 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .controller('questionAskedEntryCtrl', ['QuestionsService', 'store', '$stateParams', 
-      function(QuestionsService, store, $stateParams) {
+    .controller('questionAskedEntryCtrl', ['QuestionsService', 'store', '$stateParams', '$scope', 
+      function(QuestionsService, store, $stateParams, $scope) {
       
       var vm = this;
       vm.questionId = $stateParams.id;
@@ -30,6 +30,7 @@
             answer.image = obj.results[0].questions[0].answers[i].user.image;
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
             answer.text = obj.results[0].questions[0].answers[i].text;
+            answer.id = obj.results[0].questions[0].answers[i].id;
             output.answer.push(answer);
           }
           vm.questionAndAnswers = output;
@@ -38,6 +39,20 @@
         .catch((err) => {
           console.error('error fetching question and answers ', err);
         })
+
+
+      $scope.postAnswer = function () {
+        var body = {
+          userId: store.get('profile').userInfo.id,
+          text: $scope.answerBody
+        }
+
+        QuestionsService.postAnswer(body, vm.questionId)
+        .then((answer) => {
+          
+        })
+      }
+      
 
     }])
 })();
