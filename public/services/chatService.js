@@ -8,16 +8,16 @@
       vm.users = [];
       vm.email;
       
-      vm.socket.on('inseok.ucla@gmail.com', function(messageBody) {
-        console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
-        console.log('MEESSSAGE BODY', messageBody);
-      })
 
 
       vm.joinChatServer = (email) => {
         vm.socket.emit("join", email);
         vm.updateUsers();
         vm.email = email;
+        vm.socket.on(vm.email, function(messageBody) {
+          console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
+          console.log('MEESSSAGE BODY', messageBody);
+        });
       };
 
       vm.exitChatServer = (email) => {
