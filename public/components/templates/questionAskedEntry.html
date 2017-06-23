@@ -8,7 +8,7 @@
     <div class="floatRight">
       <div>Status: {{ctrl.questionAndAnswers.question[0].status}}</div>
       <div>Asked By: {{ctrl.questionAndAnswers.question[0].name}}</div>
-      <div><img class="photoSize" ng-src="{{ctrl.questionAndAnswers.question[0].image}}"></img></div>
+      <div><img class="smallPhotoSize" ng-src="{{ctrl.questionAndAnswers.question[0].image}}"></img></div>
       <div>Reputation: {{ctrl.questionAndAnswers.question[0].reputation}}</div>
     </div>
   </div>
@@ -16,12 +16,12 @@
 
   <div class="Answers">
     <h3>1 Answer</h3>
-    <div ng-repeat="answer in ctrl.questionAndAnswers.answer">
+    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'id'">
     <hr>
     <div class="textPadding">{{answer.text}}</div>
       <div class="floatRight">
         <div>Answered By: {{answer.name}}</div>
-        <div><img class="photoSize" ng-src="{{answer.image}}"></img></div>
+        <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
       </div>
     </div>
@@ -29,9 +29,9 @@
 
   <div class="form-group paddingForm">
     <label for="answer"><h3>Your Answer:</h3></label>
-    <textarea class="form-control" rows="10" id="answer" ng-model="answer.text"></textarea>
+    <textarea class="form-control" rows="10" id="answer" ng-model="ctrl.answerBody"></textarea>
   </div>
   <button class="btn btn-primary" ui-sref="questionsAskedList">Back</button>
-  <button class="btn btn-success"  ui-sref="questionAskedEntry({ id: ctrl.questionId })">Submit Answer</button>
+  <button class="btn btn-success"  ng-click="ctrl.postAnswer()">Submit Answer</button>
 
 </div>
