@@ -7,6 +7,9 @@
       var vm = this;
       vm.questionId = $stateParams.id;
       vm.questionAndAnswers;
+      vm.notClicked = true;
+      vm.repAdded = false;
+
       vm.closeQuestion = () => {
         QuestionsService.closeQuestion(vm.questionId) 
           .then(() => {
@@ -16,6 +19,16 @@
             console.error('error closing question ', err);
           })
       }
+
+      vm.addRep = (userId) => {
+        vm.repAdded = true;
+        QuestionsService.addRep(userId)
+          .then(() => {
+            vm.notClicked = false;
+            console.log('successfully added reputation');
+          })
+      }
+
       QuestionsService.getQuestion()
         .then((question) => {
           obj = question.data;
@@ -36,6 +49,7 @@
           output.question.push(question);
           for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
             var answer = {};
+            answer.userId = obj.results[0].questions[0].answers[i].userId;
             answer.name = obj.results[0].questions[0].answers[i].user.name;
             answer.image = obj.results[0].questions[0].answers[i].user.image;
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
