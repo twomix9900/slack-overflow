@@ -135,7 +135,11 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     postAnswer: function (body, questionId) {
       return $http.post('/questions/' + questionId);
-    }
+    },
+
+    closeQuestion: function (questionId) {
+      return $http.put('/questions/close/' + questionId);
+    } 
     
   }
   
