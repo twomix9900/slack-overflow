@@ -1,8 +1,8 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .controller('questionAskedEntryCtrl', ['QuestionsService', 'store', '$stateParams', '$scope', 
-      function(QuestionsService, store, $stateParams, $scope) {
+    .controller('questionAskedEntryCtrl', ['QuestionsService', 'store', '$stateParams', '$scope', '$window', 
+      function(QuestionsService, store, $stateParams, $scope, $window) {
       
       var vm = this;
       vm.questionId = $stateParams.id;
@@ -44,15 +44,17 @@
         })
 
 
-      $scope.postAnswer = function () {
+      vm.postAnswer = function () {
         var body = {
           userId: store.get('profile').userInfo.id,
-          text: $scope.answerBody
+          text: vm.answerBody
         }
 
         QuestionsService.postAnswer(body, vm.questionId)
         .then((answer) => {
-          
+          console.log('answer: ' , answer)
+          console.log(vm.questionAndAnswers.answer)
+          //get this to auto update ng-repeat
         })
       }
       
