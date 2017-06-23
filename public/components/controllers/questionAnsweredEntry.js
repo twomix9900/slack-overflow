@@ -1,16 +1,25 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .controller('questionAskedEntryCtrl', ['QuestionsService', 'store', '$stateParams', 
+    .controller('questionAnsweredEntryCtrl', ['QuestionsService', 'store', '$stateParams', 
       function(QuestionsService, store, $stateParams) {
       
       var vm = this;
       vm.questionId = $stateParams.id;
       vm.questionAndAnswers;
-      
+      vm.closeQuestion = () => {
+        QuestionsService.closeQuestion(vm.questionId) 
+          .then(() => {
+            console.log('successfully closed the question');
+          })
+          .catch((err) => {
+            console.error('error closing question ', err);
+          })
+      }
       QuestionsService.getQuestion()
         .then((question) => {
           obj = question.data;
+          console.log(obj);
         })
         .then(() => {
           var output = {
@@ -23,6 +32,7 @@
           question.reputation = obj.results[0].reputation;
           question.title = obj.results[0].questions[0].title;
           question.text = obj.results[0].questions[0].text;
+          question.status = obj.results[0].questions[0].status;
           output.question.push(question);
           for (var i = 0; i < obj.results[0].questions[0].answers.length; i++) {
             var answer = {};

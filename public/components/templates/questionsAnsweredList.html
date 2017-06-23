@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="question in ctrl.questionsList | orderBy: '-id'">
-          <td><a ui-sref="questionAskedEntry({id: question.id})">
+          <td><a ui-sref="questionAnsweredEntry({id: question.id})">
           <h3>{{question.title}}<h3></a>
           <h5>{{question.field}}<h5>
       </td>
