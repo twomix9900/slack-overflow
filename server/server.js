@@ -20,12 +20,23 @@ app.use('/', router);
 
 app.use(express.static(path.join(__dirname, '../')));
 
-
+const users = {};
 io.on('connection', function(socket) {
   console.log('CONNNNNNNNNNNNECTED');
-  socket.on('test', function(data) {
-    console.log('THIS IS DATAAAAAA', data);
+
+  socket.on('join', function(email, callback) {
+    console.log('THIS IS DATAAAAAA', email);
+    socket.email = email;
+    users[socket.email] = socket;
+    console.log('socket.email', socket.email);
   });
+
+  scoket.on(sendTo, function(message, callback) {
+    console.log('SEND TO ', sendTo);
+    socket.emit(sendTo, message);
+    
+  })
+
 });
 
 init()
