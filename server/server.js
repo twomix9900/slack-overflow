@@ -22,19 +22,21 @@ app.use(express.static(path.join(__dirname, '../')));
 
 const users = {};
 io.on('connection', function(socket) {
-  console.log('CONNNNNNNNNNNNECTED');
+  console.log('CHAT SERVER CONNECTION SUCCESSFUL');
+
   socket.on('join', function(email, callback) {
-    console.log('THIS IS DATAAAAAA', email);
+    console.log('USER JOINED, email: ', email);
     socket.email = email;
     users[socket.email] = socket;
-    console.log('socket.email', socket.email);
+    console.log('socket.email: ', socket.email);
+    console.log('CURRENT USER LIST, users: ', users);
     updateUsers();
   });
 
-  socket.on('exit', function(email, callback) {
+  socket.on('exitChatServer', function(email, callback) {
     console.log('THIS IS EXIT, EMAIL : ', email);
     delete users[email];
-    console.log('DELETE USERS', users);
+    console.log('DELETE USERS', Object.keys(users));
     updateUsers();
   });
 
@@ -47,7 +49,7 @@ io.on('connection', function(socket) {
   });
 
   function updateUsers() {
-    console.log('let me update the users', Object.keys(users));
+    console.log('UPDATING USER LIST: ', Object.keys(users));
     io.sockets.emit('users', Object.keys(users));
   }
 

@@ -13,19 +13,36 @@
 
       vm.joinChatServer = (email) => {
         vm.socket.emit("join", email);
-        vm.updateUsers();
+        
+        vm.socket.on('users', function(data) {
+          console.log('updating users', vm.users);
+          if (vm.users.length === 0) {
+            vm.users.push(data[0]);
+          }
+          for (let i = 0; i < data.length; i++) {
+            let newUser = true;
+            for (let j = 0; j < vm.users.length; j++) {
+              if (data[i] === vm.users[j]) {
+                newUser = false;
+              }
+            }
+            if (newUser) {
+              vm.users.push(data[i]);
+            }
+          }
+          console.log('updated users', vm.users)
+        });
+
         vm.email = email;
         vm.socket.on(vm.email, function(messageBody) {
           console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
           console.log('MEESSSAGE BODY', messageBody);
           $rootScope.$emit(vm.email, messageBody);
-
         });
       };
 
       vm.exitChatServer = (email) => {
-        vm.socket.emit("exit", email);
-        vm.updateUsers();
+        vm.socket.emit('exitChatServer', email);
       };
 
       vm.sendMessage = (messageBody) => {
@@ -36,20 +53,20 @@
         vm.socket.emit('newMessage', messageBody);
       }
 
-      vm.updateUsers = () => {
-        vm.socket.on('users', function(data) {
-          if (vm.users.length === 0) {
-            vm.users.push(data[0]);
-          }
-          for (var i = 0; i < data.length; i++) {
-            for (var j = 0; j < vm.users.length; j++) {
-              if (data[i] !== vm.users[j]) {
-                vm.users.push(data[i]);
-              }
-            }
-          }
-        });
-      };
+      // vm.updateUsers = () => {
+      //   vm.socket.on('users', function(data) {
+      //     if (vm.users.length === 0) {
+      //       vm.users.push(data[0]);
+      //     }
+      //     for (var i = 0; i < data.length; i++) {
+      //       for (var j = 0; j < vm.users.length; j++) {
+      //         if (data[i] !== vm.users[j]) {
+      //           vm.users.push(data[i]);
+      //         }
+      //       }
+      //     }
+      //   });
+      // };
 
 
 
