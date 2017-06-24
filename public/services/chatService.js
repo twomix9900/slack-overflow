@@ -7,6 +7,7 @@
       vm.socket = window.io('localhost:3456/');
       vm.users = [];
       vm.email;
+      vm.messages = [];
       
 
 
@@ -17,6 +18,8 @@
         vm.socket.on(vm.email, function(messageBody) {
           console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
           console.log('MEESSSAGE BODY', messageBody);
+          $rootScope.$emit(vm.email, messageBody);
+
         });
       };
 

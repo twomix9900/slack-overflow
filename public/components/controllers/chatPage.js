@@ -3,7 +3,7 @@
   angular
   .module('slackOverflowApp')
 
-  .controller('chatPageController', ['store', '$scope', '$timeout', '$mdSidenav', 'chatService', function (store, $scope, $timeout, $mdSidenav, chatService) {
+  .controller('chatPageController', ['store', '$scope', '$timeout', '$mdSidenav', 'chatService', '$rootScope', function (store, $scope, $timeout, $mdSidenav, chatService, $rootScope) {
     $scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
     const vm = this;
@@ -11,6 +11,7 @@
     vm.messages = [{email: 'inseok', message: 'hello'}, {email: 'lois', message: 'hi!'}];
     vm.newMessage = undefined;
     vm.newMessageBody = undefined;
+    vm.email = store.get('profile').email;
 
     vm.sendMessage = function() {
       console.log('SENDING');
@@ -27,7 +28,16 @@
       console.log('CLICKED USER', user);
       vm.clickedUser = user;
       console.log('IS IT SET CORRECTLY', vm.clickedUser);
-    }
+    };
+
+    $rootScope.$on(vm.email, function(event, data) {
+      console.log('AM I RECEIVING THIS', data);
+      $scope.$apply(function() {
+        vm.messages.push(data);
+      })
+    });
+
+
 
 
     function buildToggler(componentId) {
