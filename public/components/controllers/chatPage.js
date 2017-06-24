@@ -8,7 +8,7 @@
     $scope.toggleRight = buildToggler('right');
     const vm = this;
     vm.users = chatService.users;
-    vm.messages = [{email: 'inseok', message: 'hello'}, {email: 'lois', message: 'hi!'}];
+    vm.messages = [];
     vm.newMessage = undefined;
     vm.newMessageBody = undefined;
     vm.email = store.get('profile').email;
