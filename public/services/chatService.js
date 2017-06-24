@@ -38,10 +38,15 @@
 
       vm.updateUsers = () => {
         vm.socket.on('users', function(data) {
+          if (vm.users.length === 0) {
+            vm.users.push(data[0]);
+          }
           for (var i = 0; i < data.length; i++) {
-            console.log('vm is users on list', data[i]);
-            vm.users.push(data[i]);
-            console.log('USERSSSSSSSS', vm.users);
+            for (var j = 0; j < vm.users.length; j++) {
+              if (data[i] !== vm.users[j]) {
+                vm.users.push(data[i]);
+              }
+            }
           }
         });
       };
