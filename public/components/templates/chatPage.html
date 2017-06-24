@@ -1,0 +1,61 @@
+<div ng-controller="chatPageController" layout="column" style="width: 300px;" ng-cloak>
+
+  <section layout="row" flex>
+
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+                md-disable-backdrop md-whiteframe="4">
+
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Chat</h1>
+      </md-toolbar>
+
+      <md-content layout-margin>
+        
+        <md-list>
+          <md-list-item class="md-3-line">
+            <div class="md-list-item-text profileText">
+              <md-button ng-click="toggleLeft()" class="md-accent">
+          Hide Chat
+        </md-button>
+              <!--<h1>{{nickname}}</h1>
+              <h3><img class="photoSize" ng-src="{{picture}}" alt="profilePhoto" /></h3>
+              <br>
+              <h3>Email: {{email}}</h3>
+              <h3>Email Verified: {{emailVerified}}</h3>
+              <h3>Created At: {{createdAt | date}}</h3>
+              <h3>Reputation: {{reputation}}</h3>-->
+              <h3>users online:</h3>
+              <div ng-repeat="user in ctrl.users track by $index" user="user" ng-click="ctrl.clickUser(user)">{{user}}</div>
+
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </md-list>
+  
+        
+      </md-content>
+    </md-sidenav>
+
+    <md-content flex layout-padding>
+      <div layout="column" layout-align="top center">
+        <div>
+          <md-button ng-click="toggleLeft()" class="md-raised">
+            Show Chat
+          </md-button>
+        </div>
+      </div>
+    </md-content>
+
+  </section>
+
+
+  <md-content> CHATTTTT </md-content>
+  <ui>
+    <li ng-repeat="message in ctrl.messages track by $index">
+      <strong>{{message.from}}: </strong> <span> {{message.message}} </span>
+    </li>
+  </ui>
+  <input ng-model="ctrl.newMessage" type="text"> <button ng-click="ctrl.sendMessage()">send</button>
+
+
+</div>

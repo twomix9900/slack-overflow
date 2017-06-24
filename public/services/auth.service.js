@@ -1,7 +1,7 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .service('authService', ['$http', 'userService', function($http, userService) {
+    .service('authService', ['$http', 'userService', 'chatService', function($http, userService, chatService) {
 
       this.registerUser = (data) => {
         const user = {
@@ -12,6 +12,7 @@
         return $http.post('/users', user)
           .then((success) => {
             userService.getUserInfo(data);
+            chatService.joinChatServer(data.email);
             return console.log('registerUser in authService success', success);
           })
           .catch((error) => {

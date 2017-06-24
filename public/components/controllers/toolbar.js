@@ -2,8 +2,8 @@
   'use strict';
   angular
     .module('slackOverflowApp')
-    .controller('toolbarController', ['auth', 'store', '$location', 'authService', 'userService', 'QuestionsService',
-       function(auth, store, $location, authService, userService, QuestionsService) {
+    .controller('toolbarController', ['auth', 'store', '$location', 'authService', 'userService', 'QuestionsService', 'chatService',
+       function(auth, store, $location, authService, userService, QuestionsService, chatService) {
       console.log('hi')
 
       var vm = this;
@@ -33,6 +33,7 @@
       };
       
       function logout() {
+        chatService.exitChatServer(store.get('profile').email);
         store.remove('profile');
         store.remove('id_token');
         auth.signout();

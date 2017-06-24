@@ -72,6 +72,13 @@
           controllerAs: 'ctrl',
           bindToController: true
         })
+        .state('chatPage', {
+          url: '/chatPage',
+          templateUrl: './public/components/templates/chatPage.html',
+          controller: 'chatPageController',
+          controllerAs: 'ctrl',
+          bindToController: true
+        })
 
       function redirect($q, $injector, $timeout, store, $location) {
         var auth;
