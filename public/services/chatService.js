@@ -12,6 +12,7 @@
 
 
       vm.joinChatServer = (email) => {
+        vm.email = email;
         vm.socket.emit("join", email);
         
         vm.socket.on('users', function(data) {
@@ -34,10 +35,8 @@
           console.log('updated users', vm.users)
         });
 
-        vm.email = email;
         vm.socket.on(vm.email, function(messageBody) {
-          console.log('IS THIS TRIGGEREDDDDDDD, ROOTSCOPE');
-          console.log('MEESSSAGE BODY', messageBody);
+          console.log('(chatService) Received Message to: ', vm.email, ' The Message: ', messageBody);
           $rootScope.$emit(vm.email, messageBody);
         });
       };
@@ -47,10 +46,10 @@
       };
 
       vm.sendMessage = (messageBody) => {
-        console.log('SEND MESSAGE IN SERVICE', messageBody);
+        console.log('(chatService) Sending Message, messageBody: ', messageBody);
         vm.email = messageBody.email;
         vm.message = messageBody.message;
-        console.log('SEND TO ', vm.email, 'THE MESSAGE IS ', vm.message);
+        console.log('(chatService) SEND TO: ', vm.email, ' THE MESSAGE IS ', vm.message);
         vm.socket.emit('newMessage', messageBody);
       }
 

@@ -43,15 +43,15 @@ io.on('connection', function(socket) {
   socket.on('newMessage', function(messageBody, callback) {
     var sendTo = messageBody.email;
     var message = messageBody.message;
-    console.log('SEND TO ', sendTo, 'MESSAGE: ', message);
+    console.log('SEND TO: ', sendTo, ' MESSAGE: ', message);
     io.emit(sendTo, messageBody);
     // socket.emit(sendTo, message);
   });
 
-  // function updateUsers() {
-  //   console.log('UPDATING USER LIST: ', Object.keys(users));
-  //   io.sockets.emit('users', Object.keys(users));
-  // }
+  function updateUsers() {
+    console.log('UPDATING USER LIST: ', Object.keys(users));
+    io.sockets.emit('users', Object.keys(users));
+  }
 
   // function updateExitUsers() {
   //   console.log('UPDATING USER LIST AFTER EXIT: ', Object.keys(users));
