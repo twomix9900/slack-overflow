@@ -36,8 +36,9 @@
         });
 
         vm.socket.on(vm.email, function(messageBody) {
-          console.log('(chatService) Received Message to: ', vm.email, ' The Message: ', messageBody);
+          console.log('(chatService) Received Message to: ', messageBody.email, ' The Message: ', messageBody.message, ' From: ', messageBody.from);
           $rootScope.$emit(vm.email, messageBody);
+          console.log('(chatService) Is $rootScope.$emit working?')
         });
       };
 

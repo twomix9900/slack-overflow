@@ -43,7 +43,9 @@ io.on('connection', function(socket) {
   socket.on('newMessage', function(messageBody, callback) {
     var sendTo = messageBody.email;
     var message = messageBody.message;
-    console.log('SEND TO: ', sendTo, ' MESSAGE: ', message);
+    messageBody.from = socket.email
+    console.log('SEND TO: ', sendTo, ' MESSAGE: ', message, ' FROM: ', socket.email);
+    console.log('MESSAGE BODY', messageBody);
     io.emit(sendTo, messageBody);
     // socket.emit(sendTo, message);
   });

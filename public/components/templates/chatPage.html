@@ -52,7 +52,7 @@
   <md-content> CHATTTTT </md-content>
   <ui>
     <li ng-repeat="message in ctrl.messages track by $index">
-      <strong>{{message.email}}: </strong> <span> {{message.message}} </span>
+      <strong>{{message.from}}: </strong> <span> {{message.message}} </span>
     </li>
   </ui>
   <input ng-model="ctrl.newMessage" type="text"> <button ng-click="ctrl.sendMessage()">send</button>

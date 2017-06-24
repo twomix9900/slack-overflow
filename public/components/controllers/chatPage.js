@@ -29,11 +29,11 @@
       $scope.toggleLeft();
     };
 
-    $rootScope.$on(vm.email, function(event, data) {
-      console.log('(chatPage) Receiving Message', data);
+    $rootScope.$on(vm.email, function(event, messageBody) {
+      console.log('(chatPage) Receiving Message, messageBody: ', messageBody);
       $scope.$apply(function() {
         console.log('(chatPage) updating vm.messages: ', vm.messages);
-        vm.messages.push(data);
+        vm.messages.push(messageBody);
         console.log('(chatPage) updated vm.messages: ', vm.messages)
       })
     });
