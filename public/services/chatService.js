@@ -48,8 +48,6 @@
 
       vm.sendMessage = (messageBody) => {
         console.log('(chatService) Sending Message, messageBody: ', messageBody);
-        vm.email = messageBody.email;
-        vm.message = messageBody.message;
         console.log('(chatService) SEND TO: ', vm.email, ' THE MESSAGE IS ', vm.message);
         vm.socket.emit('newMessage', messageBody);
       }
