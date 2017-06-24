@@ -17,22 +17,9 @@
         
         vm.socket.on('users', function(data) {
           console.log('updating users', vm.users);
-          // if (vm.users.length === 0) {
-          //   vm.users.push(data[0]);
-          // }
-          // for (let i = 0; i < data.length; i++) {
-          //   let newUser = true;
-          //   for (let j = 0; j < vm.users.length; j++) {
-          //     if (data[i] === vm.users[j]) {
-          //       newUser = false;
-          //     }
-          //   }
-          //   if (newUser) {
-          //     vm.users.push(data[i]);
-          //   }
-          // }
           vm.users = data;
-          console.log('updated users', vm.users)
+          console.log('updated users', vm.users);
+          $rootScope.$emit('updateUsers', vm.users);
         });
 
         vm.socket.on(vm.email, function(messageBody) {

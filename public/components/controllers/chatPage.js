@@ -37,7 +37,20 @@
         console.log('(chatPage) updated vm.messages: ', vm.messages)
       })
     });
+    $rootScope.$on('updateUsers', function(event, users) {
+      console.log('(chatPage) Received userinformation: ', users);
+      $scope.$apply(function() {
+        vm.users = users;
+      });
+    })
 
+    // $scope.$watch(function() {
+    //   return vm.users;
+    // }, function() {
+    //   if (vm.users) {
+    //     console.log('This is vm.users on WATCH', vm.users);
+    //   }
+    // });
 
 
 
