@@ -15,7 +15,7 @@
 
 
   <div class="Answers">
-    <h3>1 Answer</h3>
+    <h3>{{ctrl.questionAndAnswers.answer.length}} Answer(s)</h3>
     <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'id'">
     <hr>
     <div class="textPadding">{{answer.text}}</div>

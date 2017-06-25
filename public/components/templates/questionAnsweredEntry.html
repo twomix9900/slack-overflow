@@ -15,7 +15,7 @@
 
 
   <div class="Answers">
-    <h3>1 Answer</h3>
+    <h3>{{ctrl.questionAndAnswers.answer.length}} Answer(s)</h3>
     <div ng-repeat="answer in ctrl.questionAndAnswers.answer">
     <hr>
     <div class="textPadding">{{answer.text}}</div>
@@ -33,10 +33,10 @@
 
 
   <div class="form-group paddingForm">
-    <label for="answer"><h3>Your Answer:</h3></label>
+    <label for="answer"><h3>Comment:</h3></label>
     <textarea class="form-control" rows="10" id="answer" ng-model="answer.text"></textarea>
   </div>
   <button class="btn btn-primary" ui-sref="questionsAnsweredList">Back</button>
-  <button class="btn btn-success"  ui-sref="questionAskedEntry({ id: ctrl.questionId })">Submit Answer</button>
+  <button class="btn btn-success"  ui-sref="questionAskedEntry({ id: ctrl.questionId })">Submit Comment</button>
   <button class="btn btn-danger" ng-click="ctrl.closeQuestion()" ui-sref="questionsAnsweredList">Close Question</button>
 </div>
