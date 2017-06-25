@@ -60,6 +60,12 @@
           controllerAs: 'ctrl'
           
         })
+        .state('home1', {
+          url: '/home1',
+          templateUrl: './public/components/templates/home1.html',
+          controller: 'home1Controller',
+          controllerAs: 'ctrl'
+        })
         .state('profile', {
           url: '/profile',
           templateUrl: './public/components/templates/profile.html',
