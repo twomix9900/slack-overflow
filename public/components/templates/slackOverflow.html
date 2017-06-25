@@ -1,9 +1,16 @@
 <md-content ng-if="!toolbarCtrl.auth.isAuthenticated" class="signin">
-  <h1>Welcome to the Slack Overflow App!</h1>
-  <h3> Login from the toolbar above to access your profile.</h3>
-  <img src="/public/learning_image.jpg"></img>
+  <div class="bg"></div>
+  <div class="homeText">
+    <h1><strong>JOIN THE SLACK OVERFLOW COMMUNITY</strong></h1>
+    <br>
+    <h3 class="introDesc"><strong>Slack Overflow</strong> brings together programmers of all coding backgrounds from around the world to discuss, ask, and answer code. It combines the fundamental features of <strong>Stack Overflow</strong> and the instant direct messaging system of <strong>Slack</strong> to bring you the best of both worlds.</h3>
+    <br>
+    <h3><strong>Sign Up</strong> or <strong>Log In</strong> from the toolbar above to start exploring.</h3>
+  </div>
 </md-content>
+
 <div ng-if="toolbarCtrl.auth.isAuthenticated">
+  <div layout-padding>
   <h1>Welcome {{ctrl.username}}!</h1>
   <h3>You currently have {{ctrl.reputation}} rep!</h3>
 
