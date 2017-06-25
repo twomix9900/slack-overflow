@@ -1,0 +1,13 @@
+
+<div ng-if="toolbarCtrl.auth.isAuthenticated">
+  <div class="bg-authenticated"></div>
+  <div class="homeText">
+  <h1>Welcome {{ctrl.username}}!</h1>
+  <h3>You currently have {{ctrl.reputation}} rep.</h3>
+  <h3>Gain more by answering questions!</h3>
+  <h3>Currently Listed Expertise:</h3>
+  <h4><li ng-repeat="field in ctrl.fields">{{field}}</li></h4>
+  </div>
+</div>
+
+
