@@ -1,8 +1,11 @@
-<md-content ng-if="!toolbarCtrl.auth.isAuthenticated">
+<md-content ng-if="!toolbarCtrl.auth.isAuthenticated" class="signin">
   <h1>Welcome to the Slack Overflow App!</h1>
   <h3> Login from the toolbar above to access your profile.</h3>
+  <img src="/public/learning_image.jpg"></img>
 </md-content>
 <div ng-if="toolbarCtrl.auth.isAuthenticated">
+  <h1>Welcome {{ctrl.username}}!</h1>
+  <h3>You currently have {{ctrl.reputation}} rep!</h3>
 
 <profile-page></profile-page>
 </div>

@@ -56,6 +56,8 @@
         .state('home', {
           url: '/home',
           templateUrl: './public/components/templates/slackOverflow.html',
+          controller: 'homeController',
+          controllerAs: 'ctrl'
           
         })
         .state('profile', {
