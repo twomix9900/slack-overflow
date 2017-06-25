@@ -6,7 +6,7 @@
                 md-disable-backdrop md-whiteframe="4">
 
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Chat</h1>
+        <h1 class="md-toolbar-tools">Prototype Chat</h1>
       </md-toolbar>
 
       <md-content layout-margin>
@@ -39,7 +39,7 @@
     <md-content flex layout-padding>
       <div layout="column" layout-align="top center">
         <div>
-          <md-button ng-click="toggleLeft()" class="md-raised">
+          <md-button ng-click="toggleLeft()" class="md-raised md-primary">
             Show Chat
           </md-button>
         </div>
@@ -49,7 +49,7 @@
   </section>
 
 
-  <md-content> CHATTTTT </md-content>
+  <md-content> beta v0.0.01 </md-content>
   <ui>
     <li ng-repeat="message in ctrl.messages track by $index">
       <strong>{{message.from}}: </strong> <span> {{message.message}} </span>

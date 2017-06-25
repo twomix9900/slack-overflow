@@ -15,8 +15,7 @@
 
 
       function redirectHome() {
-        $location.path('/home');
-        console.log('ha');
+        $location.path('/home1');
       }
 
       function login() {
