@@ -15,6 +15,9 @@
 
 
       function redirectHome() {
+        if (store.get('profile')) {
+          userService.getUserInfo(store.get('profile'));
+        }
         $location.path('/home1');
       }
 
