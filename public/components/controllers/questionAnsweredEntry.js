@@ -1,8 +1,8 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .controller('questionAnsweredEntryCtrl', ['QuestionsService', 'store', '$stateParams', 
-      function(QuestionsService, store, $stateParams) {
+    .controller('questionAnsweredEntryCtrl', ['QuestionsService', 'store', '$stateParams', 'userService', 
+      function(QuestionsService, store, $stateParams, userService) {
       
       var vm = this;
       vm.questionId = $stateParams.id;
@@ -26,6 +26,7 @@
           .then(() => {
             vm.notClicked = false;
             console.log('successfully added reputation');
+            userService.getUserInfo(store.get('profile'));
           })
       }
 
