@@ -1,12 +1,23 @@
-<div ng-controller="chatPageController" layout="column" style="width: 300px;" ng-cloak>
+<div class="chat" ng-controller="chatPageController" layout="column" ng-cloak>
 
+
+    <md-content flex layout-padding>
+      <div layout="column" layout-align="top center">
+        <div>
+          <md-button ng-click="toggleLeft()" class="md-raised md-primary">
+            Show Chat
+          </md-button>
+        </div>
+      </div>
+    </md-content>
+    
   <section layout="row" flex>
 
     <md-sidenav class="md-sidenav-left" md-component-id="left"
                 md-disable-backdrop md-whiteframe="4">
 
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Prototype Chat</h1>
+        <h1 class="md-toolbar-tools">Slack Overflow Chat</h1>
       </md-toolbar>
 
       <md-content layout-margin>
@@ -36,25 +47,20 @@
       </md-content>
     </md-sidenav>
 
-    <md-content flex layout-padding>
-      <div layout="column" layout-align="top center">
-        <div>
-          <md-button ng-click="toggleLeft()" class="md-raised md-primary">
-            Show Chat
-          </md-button>
-        </div>
-      </div>
-    </md-content>
-
   </section>
 
 
-  <md-content> beta v0.0.01 </md-content>
-  <ui>
+  <md-content> 
+  <span>beta v0.0.01</span>
+    <ui>
     <li ng-repeat="message in ctrl.messages track by $index">
       <strong>{{message.from}}: </strong> <span> {{message.message}} </span>
     </li>
   </ui>
+
+
+  </md-content>
+  
   <input ng-model="ctrl.newMessage" type="text"> <button ng-click="ctrl.sendMessage()">send</button>
 
 

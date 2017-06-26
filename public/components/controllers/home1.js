@@ -10,6 +10,6 @@
         vm.reputation = store.get('profile').userInfo.reputation;
         vm.fields = store.get('profile').userInfo.fields;
         
-      }, 500);
+      }, 1000);
     }]);
 })();
