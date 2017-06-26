@@ -47,6 +47,7 @@ io.on('connection', function(socket) {
     console.log('SEND TO: ', sendTo, ' MESSAGE: ', message, ' FROM: ', socket.email);
     console.log('MESSAGE BODY', messageBody);
     io.emit(sendTo, messageBody);
+    io.emit(messageBody.from, messageBody);
     // socket.emit(sendTo, message);
   });
 
