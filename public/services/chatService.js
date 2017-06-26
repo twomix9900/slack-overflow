@@ -7,13 +7,14 @@
       vm.socket = window.io('localhost:3456/');
       vm.users = [];
       vm.email;
-      vm.messages = [];
+      vm.messages = {};
       
 
 
       vm.joinChatServer = (email) => {
         vm.email = email;
         vm.socket.emit("join", email);
+        vm.messages[vm.email] = [];
         
         vm.socket.on('users', function(data) {
           console.log('updating users', vm.users);
@@ -24,8 +25,10 @@
 
         vm.socket.on(vm.email, function(messageBody) {
           console.log('(chatService) Received Message to: ', messageBody.email, ' The Message: ', messageBody.message, ' From: ', messageBody.from);
+          console.log('(chatService) Is $rootScope.$emit working?');
+          vm.messages[vm.email].push(messageBody);
+          console.log('VM MESSAGEEEEEEEEE IN CHAT SERVICE', vm.messages);
           $rootScope.$emit(vm.email, messageBody);
-          console.log('(chatService) Is $rootScope.$emit working?')
         });
       };
 
