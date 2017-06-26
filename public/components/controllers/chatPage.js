@@ -8,10 +8,10 @@
     $scope.toggleRight = buildToggler('right');
     const vm = this;
     vm.users = chatService.users;
-    vm.messages = [];
     vm.newMessage = undefined;
     vm.newMessageBody = undefined;
     vm.email = store.get('profile').email;
+    vm.messages = chatService.messages[vm.email];
 
     vm.sendMessage = function() {
       console.log('THE MESSAGE: ', vm.newMessage, ' IS BEING SENT TO: ', vm.clickedUser);
@@ -33,7 +33,7 @@
       console.log('(chatPage) Receiving Message, messageBody: ', messageBody);
       $scope.$apply(function() {
         console.log('(chatPage) updating vm.messages: ', vm.messages);
-        vm.messages.push(messageBody);
+        vm.messages = chatService.messages[vm.email];
         console.log('(chatPage) updated vm.messages: ', vm.messages)
       })
     });

@@ -77,10 +77,6 @@ padding-bottom:10px;
     overflow-x:inherit;
 }
 
-.answerEntry {
-  padding-bottom:30px;
-}
-
 .Answers {
   padding-top:50px;
 }
@@ -98,7 +94,7 @@ padding-bottom:10px;
 }
 
 .answerEntry {
-  padding-bottom:115px;
+  padding-bottom:135px;
 }
 
 .bg { 
