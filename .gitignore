@@ -4,5 +4,4 @@ bower_components
 node_modules
 *.env
 
-/config.js
-auth.config.js
+
