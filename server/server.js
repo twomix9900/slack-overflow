@@ -56,11 +56,6 @@ io.on('connection', function(socket) {
     io.sockets.emit('users', Object.keys(users));
   }
 
-  // function updateExitUsers() {
-  //   console.log('UPDATING USER LIST AFTER EXIT: ', Object.keys(users));
-  //   io.sockets.emit('exitUsers', Object.keys(users));
-  // }
-
 });
 
 init()
