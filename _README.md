@@ -32,6 +32,8 @@ var dbUrl
 
 secret and audience are values specific to your auth0 account. dbUrl should store your elephantSQL database URL. Use module.export and require to share these variables with their associated files. 
 
+Also in auth.config.js, create a config module to initialize auth0.
+
 The server is set up in server.js. The database connection occurs within db/index.js. Pass your database url from your config file to this function.
 
 The auth0 variables are passed to routes.js.
