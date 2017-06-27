@@ -7,14 +7,6 @@ const {
   User_Field
 } = require('../models/tableModels');
 
-
-// const fetchAllQuestions = (req, res) => {
-//   Question.findAll()
-//   .then(questions => {
-//     res.send(questions)
-//   })
-// }
-
 const fetchAllQuestions = (req, res) => {
   User.findAll({
     include: [{ 
@@ -81,12 +73,6 @@ const fetchQuestionAndAnswers = (req, res) => {
 
 const postQuestion = (req, res) => {
   let { userId, title, text, fieldId } = req.body;
-
-  console.log('THIS IS REQ.BODY', req.body);
-  console.log('USERID', userId);
-  console.log('TITLE', title);
-  console.log('TEXT', text);
-  console.log('fieldId', fieldId);
   Question.create({
     userId: userId,
     title: title,
