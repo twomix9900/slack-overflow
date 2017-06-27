@@ -1,6 +1,9 @@
 angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store', '$stateParams', 
   function($http, store, $stateParams) {
   
+  // commented out functions have been moved to their appropriate controllers!
+
+
   // if(store.get('profile') !== null) {
   //   var fieldArray = store.get('profile').userInfo.fields;
   //   var currentUser = store.get('profile').userInfo;
