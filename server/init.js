@@ -25,7 +25,7 @@ the init function that you DON'T want to use depending on the situation!!!
 
 */ 
 
-const init = () => {
+/*const init = () => {
   return db.authenticate()
     .then(() => User.sync({force: true}))
     .then(() => Field.sync({force: true}))
@@ -78,25 +78,25 @@ const init = () => {
           console.error('error creating answer data ', err);
         }); 
     })
+}; */
+
+const testAnswerDummy = {text: "test rep", questionId: 18, userId: 1};
+
+const init = () => {
+  return db.authenticate()
+    .then(() => User.sync())
+    .then(() => Field.sync({force: true}))
+    .then(() => Question.sync())
+    .then(() => Answer.sync())
+    .then(() => Message.sync())
+    .then(() => User_Field.sync())
+    .then(() => Field.bulkCreate(fieldDummy))
+      .then(() => {
+        console.log('success creating field data');
+      })
+      .catch((error) => {
+        console.log('fail creating field data', error);
+      })
 };
-
-// const testAnswerDummy = {text: "test rep", questionId: 18, userId: 1};
-
-// const init = () => {
-//   return db.authenticate()
-//     .then(() => User.sync())
-//     .then(() => Field.sync({force: true}))
-//     .then(() => Question.sync())
-//     .then(() => Answer.sync())
-//     .then(() => Message.sync())
-//     .then(() => User_Field.sync())
-//     .then(() => Field.bulkCreate(fieldDummy))
-//       .then(() => {
-//         console.log('success creating field data');
-//       })
-//       .catch((error) => {
-//         console.log('fail creating field data', error);
-//       })
-// };
 
 module.exports = init;

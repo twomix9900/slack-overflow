@@ -110,7 +110,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     getQuestionsForUser: function (currentUserId) {
       // var userId = store.get('profile').userInfo.id;
-      console.log('questions for user !!!! ', currentUserId);
+      console.log('questions for user id: ', currentUserId);
       return $http.get('/questions/user/' + currentUserId)
         // .then((resp) => {
         //   answersObj = resp.data;
