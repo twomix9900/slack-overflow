@@ -31,6 +31,6 @@ router.get('/users/name/:name', authCheck, controller.fetchUserByName);
 
 router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
 
-router.put('/reputation/:id', authCheck, controller.addReputation);
+router.put('/reputation', authCheck, controller.addReputation);
 
 module.exports = router;

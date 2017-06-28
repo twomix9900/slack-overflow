@@ -144,8 +144,9 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
       return $http.put('/questions/close/' + questionId);
     },
 
-    addRep: function (userId) {
-      return $http.put('/reputation/' + userId);
+    addRep: function (userId, repPts) {
+      console.log('attempting put request with ', userId, repPts);
+      return $http.put('/reputation', { id: userId, rep: repPts });
     }
     
   }

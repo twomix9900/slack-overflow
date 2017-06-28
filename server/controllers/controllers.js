@@ -148,10 +148,14 @@ const updateUserFieldInfo = (req, res) => {
 }
 
 const addReputation = (req, res) => {
-  let repUserId = req.params.id;
+  
+  console.log('*** requested parameter data ***', req.params)
+  console.log('*** request body data ***', req.body);
+  let repUserId = req.body.id;
+  let repAdd = req.body.rep;
   User.find({ where: { id: repUserId }})
     .then((user) => {
-      let newRep = user.dataValues.reputation + 50;
+      let newRep = user.dataValues.reputation + repAdd;
       User.update({
         reputation: newRep
       }, { where: { id: repUserId }})

@@ -20,9 +20,10 @@
           })
       }
 
-      vm.addRep = (userId) => {
+      vm.addRep = (userId, repPts) => {
         vm.repAdded = true;
-        QuestionsService.addRep(userId)
+        console.log('attempting to add ', repPts, ' to #', userId, ' reputation');
+        QuestionsService.addRep(userId, repPts)
           .then(() => {
             vm.notClicked = false;
             console.log('successfully added reputation');

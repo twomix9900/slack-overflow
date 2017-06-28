@@ -23,10 +23,20 @@
         <div>Answered By: {{answer.name}}</div>
         <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
-        <button class="btn btn-success" 
+        <nav class="helpfulRating">
+          <ul class="hRating">
+            <li class="hRating" ng-class="eh" ng-click="ctrl.addRep(answer.userId, 20)" ng-mouseenter="eh = 'highlight'" ng-mouseleave="eh = 'normal'">Extremely helpful</ul>
+            <li class="hRating" ng-class="vh" ng-click="ctrl.addRep(answer.userId, 15)" ng-mouseenter="vh = 'highlight'" ng-mouseleave="vh = 'normal'">Very helpful</ul>
+            <li class="hRating" ng-class="sh" ng-click="ctrl.addRep(answer.userId, 10)" ng-mouseenter="sh = 'highlight'" ng-mouseleave="sh = 'normal'">Somewhat helpful</ul>
+            <li class="hRating" ng-class="sl" ng-click="ctrl.addRep(answer.userId, 5)" ng-mouseenter="sl = 'highlight'" ng-mouseleave="sl = 'normal'">Slighltly helpful</ul>
+            <li class="hRating" ng-class="nh" ng-click="ctrl.addRep(answer.userId, 0)" ng-mouseenter="nh = 'highlight'" ng-mouseleave="nh = 'normal'">I lost braincells</ul>
+          </ul>
+        </nav>
+        <!--button class="btn btn-success" 
                 ng-if="ctrl.notClicked"
                 ng-click="ctrl.addRep(answer.userId)"
-                ui-sref="questionAnsweredEntry({ id: ctrl.questionId })">Add Rep</button>
+                ui-sref="questionAnsweredEntry({ id: ctrl.questionId })">Add Rep</button-->
+        <br>        
         <div ng-show="ctrl.repAdded">You gave {{answer.name}} reputation</div>
       </div>
     </div>
