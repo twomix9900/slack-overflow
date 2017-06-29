@@ -175,7 +175,7 @@ const addReputation = (req, res) => {
 }
 
 const updatePhoneNumber = (req, res) => {
-  // console.log('updatePhoneNumber invoked from  controllers.js');
+  // console.log('updatePhoneNumber invok ed from  controllers.js');
   console.log('req.body.phoneNumber = ', req.body.phoneNumber);
   
   let repUserId = req.params.id;

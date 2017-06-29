@@ -14,20 +14,20 @@ router.get('/api/private', authCheck, function(req, res) {
   res.json({message: 'hello from private endpoint, you are authenticated'})
 });
 
-// router.get('/questions', authCheck, controller.fetchAllQuestions);
+router.get('/questions', authCheck, controller.fetchAllQuestions);
 
-// router.get('/questions/:id', authCheck, controller.fetchQuestionAndAnswers);
+router.get('/questions/:id', authCheck, controller.fetchQuestionAndAnswers);
 
-// router.get('/questions/user/:id', authCheck, controller.fetchQuestionsForUser);
+router.get('/questions/user/:id', authCheck, controller.fetchQuestionsForUser);
 
-// router.post('/questions', authCheck, controller.postQuestion);
-// router.post('/questions/:id', authCheck, controller.postAnswer);
+router.post('/questions', authCheck, controller.postQuestion);
+router.post('/questions/:id', authCheck, controller.postAnswer);
 
-// router.put('/questions/close/:id', authCheck, controller.closeQuestion);
+router.put('/questions/close/:id', authCheck, controller.closeQuestion);
 
-// router.post('/users', authCheck, controller.addUser);
-// router.get('/users/:id', authCheck, controller.fetchUserInfo);
-// router.get('/users/name/:name', authCheck, controller.fetchUserByName);
+router.post('/users', authCheck, controller.addUser);
+router.get('/users/:id', authCheck, controller.fetchUserInfo);
+router.get('/users/name/:name', authCheck, controller.fetchUserByName);
 
 router.put('/phone/:id', authCheck, controller.updatePhoneNumber);
 router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
