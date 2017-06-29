@@ -148,3 +148,8 @@ li.hRating.highlight {
   background-color: #55626c; 
   color: white;
 }
+
+li.hRating.selected {
+  background-color: green;
+  color: white;
+}

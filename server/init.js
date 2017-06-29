@@ -10,7 +10,9 @@ const {
   questionDummy,
   answerDummy,
   user_fieldDummy,
-  fieldDummy
+  fieldDummy,
+  Ans_Ratings,
+  dummyRating
 } = require('./models/tableModels');
 
 
@@ -91,6 +93,7 @@ const init = () => {
     .then(() => Message.sync())
     .then(() => User_Field.sync())
     .then(() => Field.bulkCreate(fieldDummy))
+    .then(() => Ans_Ratings.bulkCreate(dummyRating))
       .then(() => {
         console.log('success creating field data');
       })
