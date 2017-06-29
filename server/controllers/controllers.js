@@ -129,10 +129,12 @@ const addUser = (req, res) => {
 }
 
 const updateUserFieldInfo = (req, res) => {
+  console.log('req.body = ', req.body);
   let userId = req.params.id;
   let updateFields = req.body.fields;
   User_Field.destroy({ where: { userId: userId }})
     .then(() => {
+      console.log('updatefields = ', updateFields)
       for (let j = 0; j < updateFields.length; j++) {
         User_Field.create({
           userId: userId,
@@ -171,6 +173,27 @@ const addReputation = (req, res) => {
 
 
 }
+
+const updatePhoneNumber = (req, res) => {
+  // console.log('updatePhoneNumber invoked from  controllers.js');
+  console.log('req.body.phoneNumber = ', req.body.phoneNumber);
+  
+  let repUserId = req.params.id;
+  User.find({ where: { id: repUserId }})
+    .then((user) => {
+      let newPhoneNumber = user.dataValues.phoneNumber;
+      User.update({
+        phoneNumber: req.body.phoneNumber
+      }, { where: { id: repUserId }})
+    })
+    .then(() => {
+      res.status(201).send('successfully updated phone number');
+    })
+    .catch((err) => {
+      console.error('error updating phone number', err);
+    })
+}
+
 
 const fetchUserInfo = (req, res) => {
   User.find({ 
@@ -276,7 +299,5 @@ module.exports = {
   fetchUserInfo: fetchUserInfo,
   closeQuestion: closeQuestion,
   fetchUserByName: fetchUserByName,
-  getAllAnswerRating: getAllAnswerRating,
-  updateAnswerRating: updateAnswerRating,
-  postAnswerRating: postAnswerRating
+  updatePhoneNumber: updatePhoneNumber
 }
