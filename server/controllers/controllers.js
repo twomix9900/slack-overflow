@@ -4,7 +4,8 @@ const {
   Answer,
   Field,
   Message,
-  User_Field
+  User_Field,
+  Ans_Ratings
 } = require('../models/tableModels');
 
 const fetchAllQuestions = (req, res) => {
@@ -148,10 +149,14 @@ const updateUserFieldInfo = (req, res) => {
 }
 
 const addReputation = (req, res) => {
-  let repUserId = req.params.id;
+  
+  console.log('*** requested parameter data ***', req.params)
+  console.log('*** request body data ***', req.body);
+  let repUserId = req.body.id;
+  let repAdd = req.body.rep;
   User.find({ where: { id: repUserId }})
     .then((user) => {
-      let newRep = user.dataValues.reputation + 50;
+      let newRep = user.dataValues.reputation + repAdd;
       User.update({
         reputation: newRep
       }, { where: { id: repUserId }})
@@ -162,6 +167,9 @@ const addReputation = (req, res) => {
     .catch((err) => {
       console.error('error adding reputation ', err);
     })
+
+
+
 }
 
 const fetchUserInfo = (req, res) => {
@@ -211,6 +219,51 @@ const closeQuestion = (req, res) => {
     })
 }
 
+const getAllAnswerRating = (req, res) => {
+  console.log('*** trying to get all rating ***');
+  Ans_Ratings.findAll({
+    where: { answerId: req.body.answerId }
+  })
+    .then((data) => {
+      res.json({ data: data })
+    })
+    .catch((err) => {
+      console.error('error getting answer ratings', err);
+    })
+}
+
+const updateAnswerRating = (req, res) => {
+  let repAdd = req.body.rep
+  Ans_Ratings.find({
+    where: { 
+      userId: req.body.userId,
+      answerId: req.body.answerId
+     }
+  }).then((answerRating) => {
+    let newRating = answerRating.datavalue.rating + repAdd;
+    Ans_Ratings.update({
+      rating: newRating
+    }, { where: { 
+      userId: req.body.userId,
+      answerId: req.body.answerId 
+    }})
+    .then(() => {
+      res.status(201).send('successfully added rating');
+    })
+    .catch((err) => {
+      console.error('error adding rating ', err);
+    })
+  })
+}
+
+const postAnswerRating = (req, res) => {
+
+}
+
+
+
+
+
 module.exports = {
   fetchAllQuestions: fetchAllQuestions,
   fetchQuestionAndAnswers: fetchQuestionAndAnswers,
@@ -222,5 +275,8 @@ module.exports = {
   addReputation: addReputation,
   fetchUserInfo: fetchUserInfo,
   closeQuestion: closeQuestion,
-  fetchUserByName: fetchUserByName
+  fetchUserByName: fetchUserByName,
+  getAllAnswerRating: getAllAnswerRating,
+  updateAnswerRating: updateAnswerRating,
+  postAnswerRating: postAnswerRating
 }

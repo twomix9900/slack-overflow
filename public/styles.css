@@ -128,3 +128,28 @@ padding-bottom:10px;
   padding-top:20px;
 }
 
+/* message rating styling */
+ul.hRating {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.hRating {
+  float: left;
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  width: 52px;
+  background-color: #bed8ec;
+}
+
+li.hRating.highlight {
+  background-color: #55626c; 
+  color: white;
+}
+
+li.hRating.selected {
+  background-color: green;
+  color: white;
+}

@@ -65,6 +65,12 @@ const user_fieldDummy = [
   { userId: 5, fieldId: 1 }
 ];
 
+const dummyRating = [
+  { userId: 3, answerId: 12, rating: 15 },
+  { userId: 4, answerId: 12, rating: 10 },
+  { userId: 8, answerId: 12, rating: 20 }
+];
+
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -104,6 +110,10 @@ const User_Field = db.define('user_field', {
   } 
 });
 
+const Ans_Ratings = db.define('answer_ratings', {
+  rating: Sequelize.INTEGER
+});
+
 User.hasMany(Question);
 Question.belongsTo(User);
 
@@ -120,15 +130,24 @@ Field.hasMany(Question);
 User.belongsToMany(Field, {
   through: User_Field,
 });
+
 Field.belongsToMany(User, {
   through: User_Field,
 });
 
+User.belongsToMany(Answer, {
+  through: Ans_Ratings,
+});
+
+Answer.belongsToMany(User, {
+  through: Ans_Ratings,
+});
 
 module.exports = {
   User: User,
   Question: Question,
   Answer: Answer,
+  Ans_Ratings: Ans_Ratings,
   Field: Field,
   Message: Message,
   User_Field: User_Field,
@@ -136,5 +155,6 @@ module.exports = {
   questionDummy: questionDummy,
   answerDummy: answerDummy,
   fieldDummy: fieldDummy,
-  user_fieldDummy: user_fieldDummy
+  user_fieldDummy: user_fieldDummy,
+  dummyRating: dummyRating
 }
