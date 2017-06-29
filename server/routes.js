@@ -29,31 +29,10 @@ router.get('/api/private', authCheck, function(req, res) {
 // router.get('/users/:id', authCheck, controller.fetchUserInfo);
 // router.get('/users/name/:name', authCheck, controller.fetchUserByName);
 
-// router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
+router.put('/phone/:id', authCheck, controller.updatePhoneNumber);
+router.put('/users/:id', authCheck, controller.updateUserFieldInfo);
 
-// router.put('/reputation', authCheck, controller.addReputation);
 
-/* */
-
-router.get('/questions', controller.fetchAllQuestions);
-
-router.get('/questions/:id', controller.fetchQuestionAndAnswers);
-
-router.get('/questions/user/:id', controller.fetchQuestionsForUser);
-
-router.post('/questions', controller.postQuestion);
-router.post('/questions/:id', controller.postAnswer);
-
-router.put('/questions/close/:id', controller.closeQuestion);
-
-router.post('/users', controller.addUser);
-router.get('/users/:id', controller.fetchUserInfo);
-router.get('/users/name/:name', controller.fetchUserByName);
-
-router.put('/users/:id', controller.updateUserFieldInfo);
-
-router.put('/reputation', controller.addReputation);
-
-router.get('/ratings', controller.getAllAnswerRating);
+router.put('/reputation/:id', authCheck, controller.addReputation);
 
 module.exports = router;

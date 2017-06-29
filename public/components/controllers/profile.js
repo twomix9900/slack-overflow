@@ -1,23 +1,25 @@
-(function() {
+(function () {
   'use strict';
   angular
     .module('slackOverflowApp')
-    .controller('profileController', ['$http', 'store', 'userService', function($http, store, userService) {
+    .controller('profileController', ['$http', 'store', 'userService', function ($http, store, userService) {
       const vm = this;
       vm.profile = store.get('profile');
       vm.getFields = getFields;
       vm.addField = addField;
       vm.removeField = removeField;
-      
+      vm.updatePhoneNumber = updatePhoneNumber;
+
       vm.message;
-      vm.fields = vm.profile.userInfo.fields
+      vm.fields = vm.profile.userInfo.fields;
 
       function getFields() {
         vm.profile = store.get('profile');
         vm.fields = vm.profile.userInfo.fields;
+        vm.phoneNumber = vm.profile.userInfo.phoneNumber;
       };
       vm.getFields();
-      
+
       function addField(field) {
         let isUnique = true;
         for (let i = 0; i < vm.profile.userInfo.fields.length; i++) {
@@ -29,13 +31,13 @@
           vm.profile.userInfo.fields.push(field);
           store.set('profile', vm.profile);
           return userService.addField(field)
-          .then((response) => {
-            vm.getFields();
-            console.log('addField in profile success', response);
-          })
-          .catch((error) => {
-            console.log('addField in profile fail', error);
-          });
+            .then((response) => {
+              vm.getFields();
+              console.log('addField in profile success', response);
+            })
+            .catch((error) => {
+              console.log('addField in profile fail', error);
+            });
         }
       };
 
@@ -45,6 +47,18 @@
         store.set('profile', vm.profile);
         userService.removeField();
       };
-      
+
+      function updatePhoneNumber() {
+        // console.log('updatePhoneNumber invoked from profile ctrl');
+        store.set('profile', vm.profile);
+
+        userService.updatePhoneNumber(vm.profile.phoneNumber)
+        .then((response) => {
+            return console.log('updatePhoneNumber in profile.js success', response);
+          })
+          .catch((error) => {
+            return console.log('updatePhoneNumber in profile.js fail', error);
+          });
+      }
     }]);
 })();
