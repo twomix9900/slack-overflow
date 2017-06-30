@@ -129,32 +129,16 @@ const postAnswer = (req, res) => {
 
               console.log('formatted phone number after formatting = ', formattedPhoneNumber)
               console.log('formattedPhoneNumber.length = ', formattedPhoneNumber.length)
-              // if (formattedPhoneNumber.length === 10) {
-              //   client.messages.create({
-              //     to: '+1' + formattedPhoneNumber,
-              //     from: "+12132635333",
-              //     body: 'HAI'
-              //   })
-              // };
+              if (formattedPhoneNumber.length === 10) {
+                client.messages.create({
+                  to: '+1' + formattedPhoneNumber,
+                  from: "+12132635333",
+                  body: 'Someone posted an answer to one of your questions!'
+                })
+              };
               res.status(201).send('successfully posted an answer');
             })
         })
-
-      // User.find({
-      //     where: {
-      //       id: repUserId
-      //     }
-      //   })
-      //   .then((user) => {
-      //     let newRep = user.dataValues.reputation + repAdd;
-      //     User.update({
-      //       reputation: newRep
-      //     }, {
-      //       where: {
-      //         id: repUserId
-      //       }
-      //     })
-
     })
     .catch((err) => {
       console.error('error posting an answer ', err);
