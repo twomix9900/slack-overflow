@@ -9,6 +9,7 @@
       vm.questionAndAnswers;
       vm.notClicked = true;
       vm.repAdded = false;
+      vm.currentUser = store.get('profile').userInfo.id;
 
       vm.closeQuestion = () => {
         QuestionsService.closeQuestion(vm.questionId) 
@@ -24,14 +25,34 @@
         vm.repAdded = true;
         console.log('attempting to add ', repPts, ' to #', userId, ' reputation');
         QuestionsService.addRep(userId, repPts)
+        .then(() => {
+          vm.notClicked = false;
+          
+          console.log('data to be passed', userId, answerId, repPts);
+
+          QuestionsService.createRatingToAnswer(vm.currentUser, answerId, repPts)
           .then(() => {
-            console.log('data to be passed', userId, answerId, repPts);
-            QuestionsService.addRatingToAnswer(userId, answerId, repPts);
-            vm.notClicked = false;
             console.log('successfully added reputation');
-            userService.getUserInfo(store.get('profile'));
+            QuestionsService.getRatingsToAnswer(answerId)
+            .then((ratings) => {
+              console.log('attempting to update ratings');
+              var AnswerRatings = ratings.data.data
+              var total_rating = AnswerRatings.reduce((acc, cur) => {
+                return acc + Number(cur.rating);
+              }, 0);
+              console.log('total rating', total_rating);
+              QuestionsService.updateAnswerTotalRating(answerId, total_rating)
+              .then(() => {
+                userService.getUserInfo(store.get('profile'));
+              })
+            });
           })
+          .catch((err) => {
+            console.error('error', err)
+          })
+        })
       }
+      
 
       QuestionsService.getQuestion()
         .then((question) => {
@@ -59,14 +80,15 @@
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
             answer.text = obj.results[0].questions[0].answers[i].text;
             answer.id = obj.results[0].questions[0].answers[i].id;
-            QuestionsService.getRatingsToAnswer(answer.id)
-             .then((ratings) => {
-                var AnswerRatings = ratings.data.data
-                answer.rating = AnswerRatings.reduce((acc, cur) => {
-                  return acc + Number(cur.rating);
-                }, 0);
-               console.log('array', answer.rating);
-             });
+            answer.rating = obj.results[0].questions[0].answers[i].totalRating;
+            // QuestionsService.getRatingsToAnswer(answer.id)
+            //  .then((ratings) => {
+            //     var AnswerRatings = ratings.data.data
+            //     answer.rating = AnswerRatings.reduce((acc, cur) => {
+            //       return acc + Number(cur.rating);
+            //     }, 0);
+            //    console.log('array', answer.rating);
+            //  });
             output.answer.push(answer);
           }
           vm.questionAndAnswers = output;

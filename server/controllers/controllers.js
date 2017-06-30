@@ -158,10 +158,18 @@ const postAnswer = (req, res) => {
   } = req.body;
 
   Answer.create({
+<<<<<<< 31b97c848e4f6f11ef983e9a4c076d7a3a8f3b3a
     userId: userId,
     text: text,
     questionId: req.params.id
   })
+=======
+      userId: userId,
+      text: text,
+      questionId: req.params.id,
+      totalRating: 0
+    })
+>>>>>>> (fixes) rating (adds) styling
     .then(() => {
       Question.find({
         where: {
@@ -190,6 +198,20 @@ const postAnswer = (req, res) => {
     })
     .catch((err) => {
       console.error('error posting an answer ', err);
+    })
+}
+
+const updateAnswerTotalRating = (req, res) => {
+  console.log('*** req.body info ', req.body);
+  Answer.update({ totalRating: req.body.rating },
+    { where: {
+      id: req.body.answerId     
+    }})
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      console.error('error updating ratings', err)
     })
 }
 
@@ -421,15 +443,45 @@ const updateAnswerRating = (req, res) => {
 
 
 const postAnswerRating = (req, res) => {
-  Ans_Ratings.create({
+  console.log('*** attempting to create ***')
+  // Ans_Ratings.create({
+  //   userId: req.body.userId,
+  //   answerId: req.body.answerId,
+  //   rating: req.body.rating
+  // }).then(() => {
+  //   console.log('*** successful creating rating ***')
+  //   res.sendStatus(201);
+  // })
+  // .catch((err) => {
+  //   console.log('error rating answer', err);
+  // })
+  Ans_Ratings.findOne({ where: {
     userId: req.body.userId,
-    answerId: req.body.answerId,
-    rating: req.body.rating
-  }).then(() => {
-    res.sendStatus(201);
-  })
-  .catch((err) => {
-    console.log('error rating answer', err);
+    answerId: req.body.answerId
+  }}).then((obj) => {
+    if (obj) {
+      console.log('*** i already exist ***')
+      Ans_Ratings.update({
+        rating: req.body.rating
+      }, { where: {
+        userId: req.body.userId,
+        answerId: req.body.answerId
+      }}).then(() => {
+        console.log('*** successful updating rating ***')
+        res.sendStatus(201);
+      })
+    } else {
+      Ans_Ratings.create({
+      userId: req.body.userId,
+      answerId: req.body.answerId,
+      rating: req.body.rating
+      }).then(() => {
+        console.log('*** successful creating rating ***')
+        res.sendStatus(201);
+      }).catch((err) => {
+        console.log('error rating answer', err);
+      })
+    }  
   })
 }
 
@@ -450,5 +502,6 @@ module.exports = {
   update_host: update_host,
   getAllAnswerRating: getAllAnswerRating,
   updateAnswerRating: updateAnswerRating,
-  postAnswerRating: postAnswerRating
+  postAnswerRating: postAnswerRating,
+  updateAnswerTotalRating: updateAnswerTotalRating
 }

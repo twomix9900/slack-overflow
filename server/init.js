@@ -35,6 +35,7 @@ the init function that you DON'T want to use depending on the situation!!!
 //     .then(() => Answer.sync({force: true}))
 //     .then(() => Message.sync({force: true}))
 //     .then(() => User_Field.sync({force: true}))
+//     .then(() => Ans_Ratings.sync({force: true}))
 //     .then(() => {
 //       User.bulkCreate(userDummy)
 //       .then(() => {
@@ -94,7 +95,7 @@ const init = () => {
     .then(() => User_Field.sync())
     .then(() => Field.bulkCreate(fieldDummy))
     .then(() => Ans_Ratings.sync())
-//    .then(() => Ans_Ratings.bulkCreate(dummyRating))
+    .then(() => Ans_Ratings.bulkCreate(dummyRating))
       .then(() => {
         console.log('success creating field data');
       })

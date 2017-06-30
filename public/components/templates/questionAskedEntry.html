@@ -16,18 +16,30 @@
 
   <div class="Answers">
     <h3>{{ctrl.questionAndAnswers.answer.length}} Answer(s)</h3>
-    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'rating'">
+    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: '-rating'">
     <hr>
-    <div>poor man's console log {{answer}}</div>
+    <!--div>poor man's console log {{answer}}</div-->
     <div class="textPadding">{{answer.text}}</div>
       <div class="floatRight">
         <div>Answered By: {{answer.name}}</div>
         <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
-
+          
       </div>
+      <div>
+            <nav class="helpfulRating">
+              <ul class="hRating">
+                <li class="hRating" ng-class="eh" ng-click="eh = 'selected'; prev = eh; ctrl.addRating(answer.userId, answer.id, 20)" 
+                  ng-mouseenter="prev = eh; eh = 'highlight'" ng-mouseleave="eh = prev">Extremely helpful</ul>
+                <li class="hRating" ng-class="vh" ng-click="vh = 'selected'; ctrl.addRating(answer.userId, answer.id, 15)" ng-mouseenter="vh = 'highlight'" ng-mouseleave="vh = 'normal'">Very helpful</ul>
+                <li class="hRating" ng-class="sh" ng-click="sh = 'selected'; ctrl.addRating(answer.userId, answer.id, 10)" ng-mouseenter="sh = 'highlight'" ng-mouseleave="sh = 'normal'">Somewhat helpful</ul>
+                <li class="hRating" ng-class="sl" ng-click="sl = 'selected'; ctrl.addRating(answer.userId, answer.id, 5)" ng-mouseenter="sl = 'highlight'" ng-mouseleave="sl = 'normal'">Slighltly helpful</ul>
+                <li class="hRating" ng-class="nh" ng-click="nh = 'selected'; ctrl.addRating(answer.userId, answer.id, 0)" ng-mouseenter="nh = 'highlight'" ng-mouseleave="nh = 'normal'">I lost braincells</ul>
+              </ul>
+            </nav>
+          </div>
     </div>
-
+    
 
   <div class="form-group paddingForm">
     <label for="answer"><h3>Your Answer:</h3></label>

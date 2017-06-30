@@ -59,7 +59,7 @@ router.put('/users/:id', controller.updateUserFieldInfo);
 router.put('/reputation', controller.addReputation);
 
 router.get('/ratings/:id', controller.getAllAnswerRating);
-router.post('/ratings', controller.postAnswerRating);
-router.put('/ratings', controller.updateAnswerRating);
+router.put('/answerRatings', controller.postAnswerRating);
+router.put('/ratings', controller.updateAnswerTotalRating);
 
 module.exports = router;
