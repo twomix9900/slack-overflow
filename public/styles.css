@@ -41,13 +41,6 @@ table.table.tableEntry td {
   padding-left:100px;
 }
 
-@media only screen and (max-width: 480px) {
-    .container {
-      padding-right: 40px;
-      padding-left: 40px;
-    }
-}
-
 .acceptAnswer {
   display:block;
   margin-top:15px;
@@ -183,7 +176,6 @@ li.hRating.selected {
 
 nav.helpfulRating {
   width: 100%;
-/*  min-width: 480px; */
   display: block;
   padding: 5px 0 5px 0;
 }
@@ -194,3 +186,16 @@ nav.helpfulRating {
 .hRating {
   float: right;
 }
+
+.QAcontainer {
+  padding-right:100px;
+  padding-left:100px;
+}
+
+@media only screen and (max-width: 480px) {
+    .QAcontainer {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+}
+
