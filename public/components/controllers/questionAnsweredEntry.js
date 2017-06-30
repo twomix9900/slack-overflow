@@ -53,7 +53,6 @@
         })
       }
       
-
       QuestionsService.getQuestion()
         .then((question) => {
           obj = question.data;
@@ -111,6 +110,19 @@
           //get this to auto update ng-repeat
         })
       }
+      
+      // vm.getSelectedRating = () => {
+      //   QuestionsService.getRatingsToAnswer(answerId)
+      //   .then((ratings) => {
+      //     let AnswerRatings = ratings.data.data;
+      //     for (var idx = 0; idx < AnswerRatings.length; idx ++) {
+      //       if (AnswerRatings[idx].userId === vm.currentUser) {
+      //         var option = AnswerRatings.rating / 5;
+      //       }
+      //     }
+      //     console.log('option selected', option);
+      //   })
+      // }
 
     }])
 })();

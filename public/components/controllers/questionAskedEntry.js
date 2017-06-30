@@ -61,8 +61,8 @@
             QuestionsService.getRatingsToAnswer(answerId)
             .then((ratings) => {
               console.log('attempting to update ratings');
-              var AnswerRatings = ratings.data.data
-              var total_rating = AnswerRatings.reduce((acc, cur) => {
+              let AnswerRatings = ratings.data.data
+              let total_rating = AnswerRatings.reduce((acc, cur) => {
                 return acc + Number(cur.rating);
               }, 0);
               console.log('total rating', total_rating, 'for answer #', answerId, 'made by', vm.currentUser);
@@ -73,7 +73,6 @@
               })
             });
           })
-
       }
 
       vm.postAnswer = function () {
@@ -89,6 +88,19 @@
           //get this to auto update ng-repeat
         })
       }
+
+      // vm.getSelectedRating = () => {
+      //   QuestionsService.getRatingsToAnswer(answerId)
+      //   .then((ratings) => {
+      //     let AnswerRatings = ratings.data.data;
+      //     for (var idx = 0; idx < AnswerRatings.length; idx ++) {
+      //       if (AnswerRatings[idx].userId === vm.currentUser) {
+      //         var option = AnswerRatings.rating / 5;
+      //       }
+      //     }
+      //     console.log('option selected', option);
+      //   })
+      // }
       
     }])
 })();
