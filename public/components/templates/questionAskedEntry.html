@@ -16,13 +16,15 @@
 
   <div class="Answers">
     <h3>{{ctrl.questionAndAnswers.answer.length}} Answer(s)</h3>
-    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'id'">
+    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'rating'">
     <hr>
+    <div>poor man's console log {{answer}}</div>
     <div class="textPadding">{{answer.text}}</div>
       <div class="floatRight">
         <div>Answered By: {{answer.name}}</div>
         <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
+
       </div>
     </div>
 

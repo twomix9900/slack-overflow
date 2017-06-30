@@ -67,9 +67,9 @@ const user_fieldDummy = [
 ];
 
 const dummyRating = [
-  { userId: 3, answerId: 6, rating: 15 },
-  { userId: 4, answerId: 6, rating: 10 },
-  { userId: 6, answerId: 6, rating: 20 }
+  { userId: 3, answerId: 12, rating: 15 },
+  { userId: 4, answerId: 13, rating: 10 },
+  { userId: 6, answerId: 13, rating: 20 }
 ];
 
 const Sequelize = require('sequelize');

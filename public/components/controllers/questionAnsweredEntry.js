@@ -20,12 +20,13 @@
           })
       }
 
-      vm.addRep = (userId, repPts) => {
+      vm.addRep = (userId, answerId, repPts) => {
         vm.repAdded = true;
         console.log('attempting to add ', repPts, ' to #', userId, ' reputation');
         QuestionsService.addRep(userId, repPts)
           .then(() => {
-            QuestionsService.addRatingToAnswer();
+            console.log('data to be passed', userId, answerId, repPts);
+            QuestionsService.addRatingToAnswer(userId, answerId, repPts);
             vm.notClicked = false;
             console.log('successfully added reputation');
             userService.getUserInfo(store.get('profile'));
@@ -58,6 +59,14 @@
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
             answer.text = obj.results[0].questions[0].answers[i].text;
             answer.id = obj.results[0].questions[0].answers[i].id;
+            QuestionsService.getRatingsToAnswer(answer.id)
+             .then((ratings) => {
+                var AnswerRatings = ratings.data.data
+                answer.rating = AnswerRatings.reduce((acc, cur) => {
+                  return acc + Number(cur.rating);
+                }, 0);
+               console.log('array', answer.rating);
+             });
             output.answer.push(answer);
           }
           vm.questionAndAnswers = output;

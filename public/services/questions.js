@@ -145,13 +145,20 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
     },
 
     addRep: function (userId, repPts) {
-      console.log('attempting put request with ', userId, repPts);
       return $http.put('/reputation', { id: userId, rep: repPts });
     },
 
-    addRatingToAnswer: function(userId, answerId, repPts) {
-      console.log('attempting to rate answer');
-      return $http.get('/rating', { userId: userId, answerId: answerId, rep: repPts });
+    getRatingsToAnswer: function(answerId) {
+      return $http.get('/ratings/' + answerId);
+    },
+
+    createRatingToAnswer: function(userId, answerId, points) {
+      return $http.post('/ratings', { userId: userId, answerId: answerId, rating: points });
+    }
+
+    updateRatingToAnswer: function(userId, answerId, points) {
+      console.log('attempting to rate answer with data packet: ', userId, answerId, points);
+      return $http.put('/ratings', { userId: userId, answerId: answerId, rating: points });
     }
     
   }

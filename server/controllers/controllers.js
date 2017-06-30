@@ -253,9 +253,7 @@ const updateUserFieldInfo = (req, res) => {
 }
 
 const addReputation = (req, res) => {
-
-  console.log('*** requested parameter data ***', req.params)
-  console.log('*** request body data ***', req.body);
+  
   let repUserId = req.body.id;
   let repAdd = req.body.rep;
   User.find({
@@ -373,9 +371,7 @@ const closeQuestion = (req, res) => {
 const getAllAnswerRating = (req, res) => {
   console.log('*** trying to get all rating ***');
   Ans_Ratings.findAll({
-    where: {
-      answerId: req.body.answerId
-    }
+    where: { answerId: req.params.id }
   })
     .then((data) => {
       res.json({
@@ -388,38 +384,54 @@ const getAllAnswerRating = (req, res) => {
 }
 
 const updateAnswerRating = (req, res) => {
-  let repAdd = req.body.rep
-  Ans_Ratings.find({
-    where: {
-      userId: req.body.userId,
-      answerId: req.body.answerId
-    }
-  }).then((answerRating) => {
-    let newRating = answerRating.datavalue.rating + repAdd;
-    Ans_Ratings.update({
-      rating: newRating
-    }, {
-        where: {
-          userId: req.body.userId,
-          answerId: req.body.answerId
-        }
-      })
-      .then(() => {
-        res.status(201).send('successfully added rating');
-      })
-      .catch((err) => {
-        console.error('error adding rating ', err);
-      })
+  // let repAdd = req.body.rep
+  // Ans_Ratings.find({
+  //   where: {
+  //     userId: req.body.userId,
+  //     answerId: req.body.answerId
+  //   }
+  // }).then((answerRating) => {
+  //   let newRating = answerRating.datavalue.rating + repAdd;
+  //   Ans_Ratings.update({
+  //     rating: newRating
+  //   }, {
+  //       where: {
+  //         userId: req.body.userId,
+  //         answerId: req.body.answerId
+  //       }
+  //     })
+  //     .then(() => {
+  //       res.status(201).send('successfully added rating');
+  //     })
+  //     .catch((err) => {
+  //       console.error('error adding rating ', err);
+  //     })
+  console.log('*** attempting to update ***', req.body);
+  Ans_Ratings.update({
+    rating: req.body.rating
+  }, { where: {
+    userId: req.body.userId,
+    answerId: req.body.answerId
+  }}).then(() => {
+    res.sendStatus(201);
+  }).catch((err) => {
+    console.error('error adding rating ', err);
   })
 }
 
+
 const postAnswerRating = (req, res) => {
-
+  Ans_Ratings.create({
+    userId: req.body.userId,
+    answerId: req.body.answerId,
+    rating: req.body.rating
+  }).then(() => {
+    res.sendStatus(201);
+  })
+  .catch((err) => {
+    console.log('error rating answer', err);
+  })
 }
-
-
-
-
 
 module.exports = {
   fetchAllQuestions: fetchAllQuestions,

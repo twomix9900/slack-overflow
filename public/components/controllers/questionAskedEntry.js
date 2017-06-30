@@ -34,6 +34,14 @@
             answer.reputation = obj.results[0].questions[0].answers[i].user.reputation;
             answer.text = obj.results[0].questions[0].answers[i].text;
             answer.id = obj.results[0].questions[0].answers[i].id;
+            QuestionsService.getRatingsToAnswer(answer.id)
+             .then((ratings) => {
+                var AnswerRatings = ratings.data.data
+                answer.rating = AnswerRatings.reduce((acc, cur) => {
+                  return acc + Number(cur.rating);
+                }, 0);
+               console.log('array', answer.rating);
+             });
             output.answer.push(answer);
           }
           vm.questionAndAnswers = output;
@@ -58,5 +66,11 @@
         })
       }
       
+      vm.addRating = (userId, answerId, repPts) => {
+
+
+      }
+
+
     }])
 })();

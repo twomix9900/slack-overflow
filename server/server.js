@@ -206,7 +206,7 @@ io.on('connection', function (socket) {
     }
   });
 
-});
+
 
 init()
   .then(() => {
