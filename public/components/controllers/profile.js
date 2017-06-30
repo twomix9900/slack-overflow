@@ -14,9 +14,11 @@
       vm.fields = vm.profile.userInfo.fields;
 
       function getFields() {
+        console.log('getFields invoked');
         vm.profile = store.get('profile');
         vm.fields = vm.profile.userInfo.fields;
         vm.phoneNumber = vm.profile.userInfo.phoneNumber;
+        console.log('vm.phoneNumber = ', vm.phoneNumber)
       };
       vm.getFields();
 
@@ -48,12 +50,13 @@
         userService.removeField();
       };
 
-      function updatePhoneNumber() {
-        // console.log('updatePhoneNumber invoked from profile ctrl');
+      function updatePhoneNumber(data) {
+        vm.profile = store.get('profile');
+        vm.profile.userInfo.phoneNumber = data;
         store.set('profile', vm.profile);
 
-        userService.updatePhoneNumber(vm.profile.phoneNumber)
-        .then((response) => {
+        userService.updatePhoneNumber(data)
+          .then((response) => {
             return console.log('updatePhoneNumber in profile.js success', response);
           })
           .catch((error) => {

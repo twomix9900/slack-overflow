@@ -10,15 +10,15 @@
           <md-button ng-click="ctrl.getFields()">Fields</md-button>
         </md-card-actions>
 
-        <input class='title-input' type='text' name='title' ng-model='ctrl.profile.phoneNumber' ng-model-options="{updateOn: 'blur'}"
+        <input class='title-input' type='text' name='title' ng-model='ctrl.phoneNumber' ng-model-options="{updateOn: 'blur'}"
           placeholder='e.g. 213-123-1234' />
-        <md-button ng-click="ctrl.updatePhoneNumber()" class="md-raised md-primary">Update</md-button>
+        <md-button ng-click="ctrl.updatePhoneNumber(ctrl.phoneNumber)" class="md-raised md-primary">Update</md-button>
 
       </md-card-title-media>
       <md-card-title-text>
         <span class="md-headline">{{ctrl.profile.nickname}}</span>
         <span class="subhead">{{ctrl.profile.email}}</span>
-        <span class="phonenumber">{{ctrl.profile.phoneNumber}}</span>
+        <span class="phonenumber">{{ctrl.phoneNumber}}</span>
         <div ng-repeat="field in ctrl.fields track by $index" field="field" ng-click="ctrl.removeField(field)">{{field}}</div>
       </md-card-title-text>
     </md-card-title>
