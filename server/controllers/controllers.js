@@ -447,5 +447,8 @@ module.exports = {
   fetchUserByName: fetchUserByName,
   updatePhoneNumber: updatePhoneNumber,
   host_index: host_index,
-  update_host: update_host
+  update_host: update_host,
+  getAllAnswerRating: getAllAnswerRating,
+  updateAnswerRating: updateAnswerRating,
+  postAnswerRating: postAnswerRating
 }

@@ -93,8 +93,8 @@ const init = () => {
     .then(() => Message.sync())
     .then(() => User_Field.sync())
     .then(() => Field.bulkCreate(fieldDummy))
-    .then(() => Ans_Ratings.sync({force: true}))
-    .then(() => Ans_Ratings.bulkCreate(dummyRating))
+    .then(() => Ans_Ratings.sync())
+//    .then(() => Ans_Ratings.bulkCreate(dummyRating))
       .then(() => {
         console.log('success creating field data');
       })

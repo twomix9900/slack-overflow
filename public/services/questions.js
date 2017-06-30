@@ -154,7 +154,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     createRatingToAnswer: function(userId, answerId, points) {
       return $http.post('/ratings', { userId: userId, answerId: answerId, rating: points });
-    }
+    },
 
     updateRatingToAnswer: function(userId, answerId, points) {
       console.log('attempting to rate answer with data packet: ', userId, answerId, points);
