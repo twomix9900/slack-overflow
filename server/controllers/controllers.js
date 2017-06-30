@@ -7,7 +7,8 @@ const {
   User_Field,
   Ans_Ratings
 } = require('../models/tableModels');
-var client = require('twilio')('AC1f8c84fd6629575bc878ec960627a716', 'bd61dfcd77fb4fb8542b044c07d37e62');
+var dotenv = require('dotenv').config();
+var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const fetchAllQuestions = (req, res) => {
   User.findAll({
@@ -122,18 +123,13 @@ const postAnswer = (req, res) => {
               }
             })
             .then((user) => {
-              // console.log('user.dataValues from controllers = ', user.dataValues)
               let formattedPhoneNumber = user.dataValues.phoneNumber;
               formattedPhoneNumber = formattedPhoneNumber.replace(/[^\d]/g, '');
-
-
-              console.log('formatted phone number after formatting = ', formattedPhoneNumber)
-              console.log('formattedPhoneNumber.length = ', formattedPhoneNumber.length)
               if (formattedPhoneNumber.length === 10) {
                 client.messages.create({
                   to: '+1' + formattedPhoneNumber,
-                  from: "+12132635333",
-                  body: 'Someone posted an answer to one of your questions!'
+                  from: "+1" + process.env.TWILIO_NUMBER,
+                  body: 'Someone posted an answer to one of your questions on Slack Betterflow!'
                 })
               };
               res.status(201).send('successfully posted an answer');
