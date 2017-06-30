@@ -4,6 +4,14 @@
       <span ng-click="toolbarCtrl.redirectHome()">Slack Overflow</span>
     </h2>
       <span flex></span>
+
+      <md-button
+        aria-label="videochat"
+        ui-sref="videochat"
+        ng-if="toolbarCtrl.auth.isAuthenticated">
+        Videochat
+      </md-button>
+
       <md-button
         aria-label="Login"
         ng-click="toolbarCtrl.login()"
