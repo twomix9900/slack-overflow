@@ -67,6 +67,11 @@
           controllerAs: 'ctrl',
           bindToController: true
         })
+        .state('actual-chat-room', {
+          url: '/actual-chat/:host_id',
+          templateUrl: './public/components/templates/actual_chat_room.html',
+          controller: 'ActualChatCtrl as actual_chat_ctrl'
+        })
         .state('questionsAskedList', { 
           url: '/questions',
           templateUrl: 'public/components/templates/questionsAskedList.html',

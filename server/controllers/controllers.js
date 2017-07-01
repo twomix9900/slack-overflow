@@ -1,3 +1,4 @@
+"use strict";
 const {
   User,
   Question,
@@ -7,18 +8,69 @@ const {
   User_Field,
   Ans_Ratings
 } = require('../models/tableModels');
+// var User = require('../models/tableModels').User;
+// var Question = require('../models/tableModels').Question;
+// var Answer = require('../models/tableModels').Answer;
+// var Field = require('../models/tableModels').Field;
+// var Message = require('../models/tableModels').Message;
+// var User_Field = require('../models/tableModels').User_Field;
+// var Ans_Ratings = require('../models/tableModels').Ans_Ratings;
+
 var dotenv = require('dotenv').config();
 var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
+
+const host_index = (req, res) => {
+  User.find({
+    where: {
+      is_hosting: true
+    }
+  })
+  .then((users) => {
+    res.json({success: true, message: 'all users hosting', users: users})
+  })
+  .catch((err) => {
+    return console.log(err, '< error')
+  })
+}
+
+const update_host = (req, res) => {
+  console.log(req.body, '<<<<<< test')
+  User.findOne({
+    where: {
+      name: req.body.name
+    }
+  })
+  .then((user) => {
+    console.log(user)
+    User.update({
+        is_hosting: req.body.is_hosting
+      }, {
+          where: {
+            name: user.name
+          }
+        })
+        .then((status) => {
+          res.json( { success: true, message: 'user hosting status updated successfully', user: user, status: status} );
+        })
+        .catch((err) => {
+          return console.log(err, '< error')
+        })
+  })
+  .catch((err) => {
+    return console.log(err, '< error')
+  })
+}
+
 const fetchAllQuestions = (req, res) => {
   User.findAll({
+    include: [{
+      model: Question,
       include: [{
-        model: Question,
-        include: [{
-          model: Field
-        }]
+        model: Field
       }]
-    })
+    }]
+  })
     .then((questions) => {
       res.json({
         results: questions
@@ -32,16 +84,16 @@ const fetchAllQuestions = (req, res) => {
 const fetchQuestionsForUser = (req, res) => {
   let userId = req.params.id;
   User.findAll({
-      where: {
-        id: userId
-      },
+    where: {
+      id: userId
+    },
+    include: [{
+      model: Question,
       include: [{
-        model: Question,
-        include: [{
-          model: Field
-        }]
+        model: Field
       }]
-    })
+    }]
+  })
     .then((questions) => {
       res.json({
         results: questions
@@ -55,19 +107,19 @@ const fetchQuestionsForUser = (req, res) => {
 const fetchQuestionAndAnswers = (req, res) => {
   let questionId = req.params.id;
   User.findAll({
+    include: [{
+      model: Question,
+      where: {
+        id: questionId
+      },
       include: [{
-        model: Question,
-        where: {
-          id: questionId
-        },
+        model: Answer,
         include: [{
-          model: Answer,
-          include: [{
-            model: User
-          }]
+          model: User
         }]
       }]
-    })
+    }]
+  })
     .then((questions) => {
       res.json({
         results: questions
@@ -86,11 +138,11 @@ const postQuestion = (req, res) => {
     fieldId
   } = req.body;
   Question.create({
-      userId: userId,
-      title: title,
-      text: text,
-      fieldId: fieldId
-    })
+    userId: userId,
+    title: title,
+    text: text,
+    fieldId: fieldId
+  })
     .then(() => {
       res.status(201).send('successfully posted question');
     })
@@ -106,22 +158,22 @@ const postAnswer = (req, res) => {
   } = req.body;
 
   Answer.create({
-      userId: userId,
-      text: text,
-      questionId: req.params.id
-    })
+    userId: userId,
+    text: text,
+    questionId: req.params.id
+  })
     .then(() => {
       Question.find({
-          where: {
-            id: req.params.id
-          }
-        })
+        where: {
+          id: req.params.id
+        }
+      })
         .then((question) => {
           User.find({
-              where: {
-                id: question.dataValues.userId
-              }
-            })
+            where: {
+              id: question.dataValues.userId
+            }
+          })
             .then((user) => {
               let formattedPhoneNumber = user.dataValues.phoneNumber;
               formattedPhoneNumber = formattedPhoneNumber.replace(/[^\d]/g, '');
@@ -147,14 +199,14 @@ const addUser = (req, res) => {
   // let fields = req.body.fields;
   let userId;
   User.findOrCreate({
-      where: {
-        name: name
-      },
-      defaults: {
-        reputation: 0,
-        image: image
-      }
-    })
+    where: {
+      name: name
+    },
+    defaults: {
+      reputation: 0,
+      image: image
+    }
+  })
     // since only useful data returned upon login is EMAIL,
     // and fields can't be added upon signup and need to be added in profile section after login,
     // this field is commented out
@@ -179,10 +231,10 @@ const updateUserFieldInfo = (req, res) => {
   let userId = req.params.id;
   let updateFields = req.body.fields;
   User_Field.destroy({
-      where: {
-        userId: userId
-      }
-    })
+    where: {
+      userId: userId
+    }
+  })
     .then(() => {
       console.log('updatefields = ', updateFields)
       for (let j = 0; j < updateFields.length; j++) {
@@ -207,19 +259,19 @@ const addReputation = (req, res) => {
   let repUserId = req.body.id;
   let repAdd = req.body.rep;
   User.find({
-      where: {
-        id: repUserId
-      }
-    })
+    where: {
+      id: repUserId
+    }
+  })
     .then((user) => {
       let newRep = user.dataValues.reputation + repAdd;
       User.update({
         reputation: newRep
       }, {
-        where: {
-          id: repUserId
-        }
-      })
+          where: {
+            id: repUserId
+          }
+        })
       console.log('user from controllers.js = ', user)
     })
     .then(() => {
@@ -240,19 +292,19 @@ const updatePhoneNumber = (req, res) => {
 
   let repUserId = req.params.id;
   User.find({
-      where: {
-        id: repUserId
-      }
-    })
+    where: {
+      id: repUserId
+    }
+  })
     .then((user) => {
       let newPhoneNumber = user.dataValues.phoneNumber;
       User.update({
         phoneNumber: req.body.phoneNumber
       }, {
-        where: {
-          id: repUserId
-        }
-      })
+          where: {
+            id: repUserId
+          }
+        })
     })
     .then(() => {
       res.status(201).send('successfully updated phone number');
@@ -265,13 +317,13 @@ const updatePhoneNumber = (req, res) => {
 
 const fetchUserInfo = (req, res) => {
   User.find({
-      where: {
-        id: req.params.id
-      },
-      include: [{
-        model: Field
-      }]
-    })
+    where: {
+      id: req.params.id
+    },
+    include: [{
+      model: Field
+    }]
+  })
     .then((user) => {
       res.json({
         results: user
@@ -284,13 +336,13 @@ const fetchUserInfo = (req, res) => {
 
 const fetchUserByName = (req, res) => {
   User.find({
-      where: {
-        name: req.params.name
-      },
-      include: [{
-        model: Field
-      }]
-    })
+    where: {
+      name: req.params.name
+    },
+    include: [{
+      model: Field
+    }]
+  })
     .then((user) => {
       res.json({
         results: user
@@ -304,8 +356,8 @@ const fetchUserByName = (req, res) => {
 
 const closeQuestion = (req, res) => {
   Question.update({
-      status: false
-    }, {
+    status: false
+  }, {
       where: {
         id: req.params.id
       }
@@ -321,10 +373,10 @@ const closeQuestion = (req, res) => {
 const getAllAnswerRating = (req, res) => {
   console.log('*** trying to get all rating ***');
   Ans_Ratings.findAll({
-      where: {
-        answerId: req.body.answerId
-      }
-    })
+    where: {
+      answerId: req.body.answerId
+    }
+  })
     .then((data) => {
       res.json({
         data: data
@@ -345,8 +397,8 @@ const updateAnswerRating = (req, res) => {
   }).then((answerRating) => {
     let newRating = answerRating.datavalue.rating + repAdd;
     Ans_Ratings.update({
-        rating: newRating
-      }, {
+      rating: newRating
+    }, {
         where: {
           userId: req.body.userId,
           answerId: req.body.answerId
@@ -381,5 +433,7 @@ module.exports = {
   fetchUserInfo: fetchUserInfo,
   closeQuestion: closeQuestion,
   fetchUserByName: fetchUserByName,
-  updatePhoneNumber: updatePhoneNumber
+  updatePhoneNumber: updatePhoneNumber,
+  host_index: host_index,
+  update_host: update_host
 }
