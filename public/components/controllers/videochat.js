@@ -37,6 +37,7 @@
 
 
       if (room !== '') {
+        console.log('I GOT HIT')
         socket.emit('create or join', room);
         console.log('Attempted to create or  join room', room);
       }
@@ -262,6 +263,7 @@
         localStream.getVideoTracks()[0].stop();
         $state.go('chatPage');
         stop();
+        // socket.emit('disconnect');
         sendMessage('bye');
       }
 
@@ -270,6 +272,7 @@
         stop();
         isInitiator = false;
         localStream.getVideoTracks()[0].stop();
+        // socket.emit('disconnect');
         $state.go('chatPage')
       }
 

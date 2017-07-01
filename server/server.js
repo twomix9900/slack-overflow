@@ -163,18 +163,23 @@ io.on('connection', function (socket) {
     // for a real app, would be room-only (not broadcast)
     socket.broadcast.emit('message', message);
   });
+  // socket.on('disconnect', function() {
+  //   console.log('got message')
+  //   socket.disconnect()
+  //   console.log('numClients after leave =', io.engine.clientsCount)
+  // });
 
   socket.on('create or join', function(room) {
     log('Received request to create or join room ' + room);
 
     // var numClients = io.sockets.sockets.length;
-    var numClients = io.engine.clientsCount / 2;
-    // console.log(io.engine.clients)
+    var numClients = io.engine.clientsCount;
+    console.log('clients after enter',io.engine.clientsCount)
+    console.log('io ==== ', io)
 
-    console.log('io ==== ', numClients)
     log('Room ' + room + ' now has ' + numClients + ' client(s)');
 
-    if (numClients === 1) {
+    if (numClients === 2) {
       socket.join(room);
       log('Client ID ' + socket.id + ' created room ' + room);
       socket.emit('created', room, socket.id);
