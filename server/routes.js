@@ -59,6 +59,7 @@ router.put('/users/:id', controller.updateUserFieldInfo);
 router.put('/reputation', controller.addReputation);
 
 router.get('/ratings/:id', controller.getAllAnswerRating);
+router.get('/ratings/:userId/:answerId', controller.getAnswerRating);
 router.put('/answerRatings', controller.postAnswerRating);
 router.put('/ratings', controller.updateAnswerTotalRating);
 

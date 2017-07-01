@@ -89,8 +89,8 @@
         })
       }
 
-      // vm.getSelectedRating = () => {
-      //   QuestionsService.getRatingsToAnswer(answerId)
+      // vm.getSelectedRating = (answerId) => {
+      //   QuestionsService.getAnswerRating(vm.currentUser, answerId)
       //   .then((ratings) => {
       //     let AnswerRatings = ratings.data.data;
       //     for (var idx = 0; idx < AnswerRatings.length; idx ++) {

@@ -24,6 +24,7 @@
         <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
         <div>
+          <div></div>
           <nav class="helpfulRating">
             <ul class="hRating">
               <li class="hRating" ng-class="o1" ng-click="o1 = 'selected'; o2 = 'normal'; o3 = 'normal'; o4 = 'normal'; o5 = 'normal'; prev = o1; ctrl.addRep(answer.userId, answer.id, 20)" 
@@ -38,8 +39,9 @@
                 ng-mouseenter="prev = o5; o5 = 'highlight'" ng-mouseleave="o5 = prev">I lost braincells</ul>
             </ul>
           </nav>
-          <div></div>
         </div>
+        <div>
+
         <!--button class="btn btn-success" 
                 ng-if="ctrl.notClicked"
                 ng-click="ctrl.addRep(answer.userId)"
