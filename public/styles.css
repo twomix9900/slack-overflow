@@ -114,13 +114,14 @@ padding-bottom:10px;
 .bg-videochat { 
   width: 100%;
   height: 1000px;
+  margin-top: 0px;
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('images/bg-videochat.jpg');
   background-size: cover;
 }
 
 #localVideo {
   margin: 50px;
-  margin-left: 150px;
+  margin-left: 240px;
 }
 
 #remoteVideo {
@@ -128,8 +129,13 @@ padding-bottom:10px;
   margin-left: 150px;
 }
 
-#hangupButton {
+.videoControls {
   margin-left: 530px;
+}
+
+.videoh1 {
+  margin-left: 530px;
+  color: white;
 }
 
 .homeText {
