@@ -1,8 +1,8 @@
 (function() {
   angular
     .module('slackOverflowApp')
-    .controller('questionAnsweredEntryCtrl', ['QuestionsService', 'store', '$stateParams', 'userService', 
-      function(QuestionsService, store, $stateParams, userService) {
+    .controller('questionAnsweredEntryCtrl', ['QuestionsService', 'store', '$stateParams', 'userService', '$scope',
+      function(QuestionsService, store, $stateParams, userService, $scope) {
       
       var vm = this;
       vm.questionId = $stateParams.id;
@@ -80,6 +80,17 @@
             answer.text = obj.results[0].questions[0].answers[i].text;
             answer.id = obj.results[0].questions[0].answers[i].id;
             answer.rating = obj.results[0].questions[0].answers[i].totalRating;
+            QuestionsService.getAnswerRating(vm.currentUser, answer.id)
+            .then((data) => {
+              vm.data = data.data.data;
+              if (vm.data == 1) { $scope.o1 = 'selected'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 2) { $scope.o2 = 'selected'; $scope.o1 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 3) { $scope.o3 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 4) { $scope.o4 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 5) { $scope.o5 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal' };
+              console.log('data to be manipulated', vm.data.data);          
+            })
+
             // QuestionsService.getRatingsToAnswer(answer.id)
             //  .then((ratings) => {
             //     var AnswerRatings = ratings.data.data
