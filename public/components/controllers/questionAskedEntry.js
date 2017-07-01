@@ -44,6 +44,11 @@
             //     }, 0);
             //    console.log('array', answer.rating);
             //  });
+            QuestionsService.getAnswerRating(vm.currentUser, answer.id)
+            .then((data) => {
+              answer.data = data.data;
+              console.log('data to be manipulated', answer.data);          
+            })
             output.answer.push(answer);
           }
           vm.questionAndAnswers = output;
