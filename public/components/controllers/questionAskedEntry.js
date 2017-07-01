@@ -46,8 +46,13 @@
             //  });
             QuestionsService.getAnswerRating(vm.currentUser, answer.id)
             .then((data) => {
-              answer.data = data.data;
-              console.log('data to be manipulated', answer.data);          
+              vm.data = data.data.data;
+              if (vm.data == 1) { $scope.o1 = 'selected'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 2) { $scope.o2 = 'selected'; $scope.o1 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 3) { $scope.o3 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o4 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 4) { $scope.o4 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o5 = 'normal' };
+              if (vm.data === 5) { $scope.o5 = 'selected'; $scope.o1 = 'normal'; $scope.o2 = 'normal'; $scope.o3 = 'normal'; $scope.o4 = 'normal' };
+              console.log('data to be manipulated', vm.data.data);          
             })
             output.answer.push(answer);
           }
