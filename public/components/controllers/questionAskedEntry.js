@@ -46,8 +46,8 @@
             //  });
             QuestionsService.getAnswerRating(vm.currentUser, answer.id)
             .then((data) => {
-              answer.data = data.data;
-              console.log('data to be manipulated', answer.data);          
+              vm.data = data.data;
+              console.log('data to be manipulated', vm.data);          
             })
             output.answer.push(answer);
           }
