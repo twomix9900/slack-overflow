@@ -69,7 +69,7 @@
       function join_lobby_res(res) {
         console.log(res, '<< join lobby res')
         userService
-          .update_host(res.data.host.id, { is_hosting: false, id: res.data.host.id })
+          .update_host(res.data.host.id, { is_hosting: true, id: res.data.host.id })
           .then(function (res) {
             console.log('res from >>>>>>>', res.data)
             $state.go('actual-chat-room', { host_id: res.data.user.id });
