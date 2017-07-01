@@ -1,12 +1,12 @@
 const userDummy = [
-  { name: "josh", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
-  { name: "jason", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 450 },
-  { name: "inseok", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
-  { name: "regina", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
-  { name: "kan", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 350 },
-  { name: "ricky", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
-  { name: "heather", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 700 },
-  { name: "kay", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 1337 },
+  { name: "josh", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "jason", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 450, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "inseok", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "regina", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "kan", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 350, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "ricky", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "heather", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 700, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "kay", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 1337, phoneNumber: '555-55-5555', is_hosting: false },
 ];
 
 const fieldDummy = [

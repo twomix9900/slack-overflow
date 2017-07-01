@@ -113,7 +113,7 @@ io.on('connection', function (socket) {
   // socket.on('disconnect', function(){
   //   console.log('user has left...');
   // })
-})
+// })
 // const users = {};
 // io.on('connection', function(socket) {
 //   console.log('CHAT SERVER CONNECTION SUCCESSFUL');
@@ -206,7 +206,7 @@ io.on('connection', function (socket) {
     }
   });
 
-
+})
 
 init()
   .then(() => {
