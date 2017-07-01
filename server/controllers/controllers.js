@@ -158,18 +158,11 @@ const postAnswer = (req, res) => {
   } = req.body;
 
   Answer.create({
-<<<<<<< 31b97c848e4f6f11ef983e9a4c076d7a3a8f3b3a
-    userId: userId,
-    text: text,
-    questionId: req.params.id
-  })
-=======
       userId: userId,
       text: text,
       questionId: req.params.id,
       totalRating: 0
     })
->>>>>>> (fixes) rating (adds) styling
     .then(() => {
       Question.find({
         where: {
@@ -405,8 +398,22 @@ const getAllAnswerRating = (req, res) => {
     })
 }
 
+const getAnswerRating = (req, res) => {
+  Ans_Ratings.findOne({ where: {
+    userId: req.params.userId,
+    answerId: req.params.answerId
+  }}).then((obj) => {
+    if (obj) {
+      console.log('object to return', obj);
+    } else {
+      console.log('return default value');
+    }
+    res.sendStatus(200);
+  })
+}
+
+
 const updateAnswerRating = (req, res) => {
-<<<<<<< 6d70255a736134abd229cfd7e9868a4629de4443
   // let repAdd = req.body.rep
   // Ans_Ratings.find({
   //   where: {
@@ -430,9 +437,6 @@ const updateAnswerRating = (req, res) => {
   //       console.error('error adding rating ', err);
   //     })
   console.log('*** attempting to update ***', req.body);
-=======
-//  console.log('*** attempting to update ***', req.body);
->>>>>>> rebase
   Ans_Ratings.update({
     rating: req.body.rating
   }, { where: {
@@ -445,8 +449,9 @@ const updateAnswerRating = (req, res) => {
   })
 }
 
+
 const postAnswerRating = (req, res) => {
-//  console.log('*** attempting to create ***')
+  console.log('*** attempting to create ***')
   // Ans_Ratings.create({
   //   userId: req.body.userId,
   //   answerId: req.body.answerId,
@@ -463,14 +468,14 @@ const postAnswerRating = (req, res) => {
     answerId: req.body.answerId
   }}).then((obj) => {
     if (obj) {
-//      console.log('*** i already exist ***');
+      console.log('*** i already exist ***')
       Ans_Ratings.update({
         rating: req.body.rating
       }, { where: {
         userId: req.body.userId,
         answerId: req.body.answerId
       }}).then(() => {
-//        console.log('*** successful updating rating ***');
+        console.log('*** successful updating rating ***')
         res.sendStatus(201);
       })
     } else {
@@ -479,28 +484,12 @@ const postAnswerRating = (req, res) => {
       answerId: req.body.answerId,
       rating: req.body.rating
       }).then(() => {
-//        console.log('*** successful creating rating ***');
+        console.log('*** successful creating rating ***')
         res.sendStatus(201);
       }).catch((err) => {
         console.log('error rating answer', err);
       })
     }  
-  })
-}
-
-const getAnswerRating = (req, res) => {
-  console.log('******* tryingt to see if i exist ******', req.params)
-  Ans_Ratings.findOne({ where: {
-    userId: req.params.userId,
-    answerId: req.params.answerId
-  }}).then((obj) => {
-    if (obj) {
-      console.log('*** what i want to manipulate and send back', obj);
-    } else {
-      console.log('*** i want to send a nothing back');
-    }
-    //CHANGE TO res.json when obj is indentified
-    res.sendStatus(200);
   })
 }
 

@@ -167,7 +167,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     getAnswerRating: function(userId, answerId) {
       console.log('attempting to make http request for answer rating by user')
-      return $http.get('/ratings/' + userId + '/' +answerId);
+      return $http.get('/ratings/' + userId + '/' + answerId);
     }
     
   }
