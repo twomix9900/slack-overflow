@@ -1,5 +1,5 @@
 <profile-page></profile-page>
-<div class="container">
+<div class="QAcontainer">
   <div class="questionEntry">
     <h3 class="titlePadding">{{ctrl.questionAndAnswers.question[0].title}}</h3>
     <hr>
@@ -16,16 +16,39 @@
 
   <div class="Answers">
     <h3>{{ctrl.questionAndAnswers.answer.length}} Answer(s)</h3>
-    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: 'id'">
+    <div class="answerEntry" ng-repeat="answer in ctrl.questionAndAnswers.answer | orderBy: '-rating'">
     <hr>
+    <!--div>poor man's console log {{answer}}</div-->
     <div class="textPadding">{{answer.text}}</div>
       <div class="floatRight">
         <div>Answered By: {{answer.name}}</div>
         <div><img class="smallPhotoSize" ng-src="{{answer.image}}"></img></div>
         <div>Reputation: {{answer.reputation}}</div>
+          
       </div>
+      <div ng-if="answer.userId !== ctrl.currentUser">
+            <nav class="helpfulRating">
+              <ul class="hRating">
+                <li class="hRating" ng-class="o1" ng-click="o1 = 'selected'; o2 = 'normal'; o3 = 'normal'; o4 = 'normal'; o5 = 'normal'; prev = o1; ctrl.addRating(answer.userId, answer.id, 20)" 
+                  ng-mouseenter="prev = o1; o1 = 'highlight'" ng-mouseleave="o1 = prev">Extremely helpful</ul>
+                <li class="hRating" ng-class="o2" ng-click="o1 = 'normal'; o2 = 'selected'; o3 = 'normal'; o4 = 'normal'; o5 = 'normal'; prev = o2; ctrl.addRating(answer.userId, answer.id, 15)" 
+                  ng-mouseenter="prev = o2; o2 = 'highlight'" ng-mouseleave="o2 = prev">Very helpful</ul>
+                <li class="hRating" ng-class="o3" ng-click="o1 = 'normal'; o2 = 'normal'; o3 = 'selected'; o4 = 'normal'; o5 = 'normal'; prev = o3; ctrl.addRating(answer.userId, answer.id, 10)" 
+                  ng-mouseenter="prev = o3; o3 = 'highlight'" ng-mouseleave="o3 = prev">Somewhat helpful</ul>
+                <li class="hRating" ng-class="o4" ng-click="o1 = 'normal'; o2 = 'normal'; o3 = 'normal'; o4 = 'selected'; o5 = 'normal'; prev = o4; ctrl.addRating(answer.userId, answer.id, 5)" 
+                  ng-mouseenter="prev = o4; o4 = 'highlight'" ng-mouseleave="o4 = prev">Slighltly helpful</ul>
+                <li class="hRating" ng-class="o5" ng-click="o1 = 'normal'; o2 = 'normal'; o3 = 'normal'; o4 = 'normal'; o5 = 'selected'; prev = o5; ctrl.addRating(answer.userId, answer.id, 0)" 
+                  ng-mouseenter="prev = o5; o5 = 'highlight'" ng-mouseleave="o5 = prev">I lost braincells</ul>
+                  <!--script>if (ctrl.questionAndAnswers.answer.data = 1) {o1 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 2) {o2 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 3) {o3 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 4) {o4 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 5) {o5 = 'selected'}</script-->  
+              </ul>
+            </nav>
+          </div>
     </div>
-
+    
 
   <div class="form-group paddingForm">
     <label for="answer"><h3>Your Answer:</h3></label>

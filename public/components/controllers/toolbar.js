@@ -4,7 +4,6 @@
     .module('slackOverflowApp')
     .controller('toolbarController', ['auth', 'store', '$location', 'authService', 'userService', 'QuestionsService', 'chatService',
        function(auth, store, $location, authService, userService, QuestionsService, chatService) {
-      console.log('hi')
 
       var vm = this;
       vm.redirectHome = redirectHome;
@@ -25,8 +24,9 @@
         auth.signin({}, function(profile, token) {
           store.set('profile', profile);
           store.set('id_token', token);
-          $location.path('/home1');
           authService.registerUser(profile);
+          $location.path('/home1');
+
           // userService.getUserInfo(profile);
           console.log('this is profile upon login', store.get('profile'));
         }, function(error) {
@@ -35,7 +35,7 @@
       };
       
       function logout() {
-        chatService.exitChatServer(store.get('profile').email);
+        // chatService.exitChatServer(store.get('profile').email);
         store.remove('profile');
         store.remove('id_token');
         auth.signout();

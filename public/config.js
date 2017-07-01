@@ -67,6 +67,11 @@
           controllerAs: 'ctrl',
           bindToController: true
         })
+        .state('actual-chat-room', {
+          url: '/actual-chat/:host_id',
+          templateUrl: './public/components/templates/actual_chat_room.html',
+          controller: 'ActualChatCtrl as actual_chat_ctrl'
+        })
         .state('questionsAskedList', { 
           url: '/questions',
           templateUrl: 'public/components/templates/questionsAskedList.html',
@@ -93,11 +98,11 @@
         })
         .state('videochat', {
           url: '/videochat',
-          templateUrl: '/public/components/templates/videochat.html',
+          templateUrl: 'public/components/templates/videochat.html',
           controller: 'videochatCtrl',
-          controllerAs: 'ctrl',
-          bindtoContreller: true
+          controllerAs: 'ctrl'
         })
+
 
     }])
 })();

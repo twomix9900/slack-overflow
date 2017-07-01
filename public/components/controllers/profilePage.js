@@ -15,6 +15,7 @@
       $scope.picture = store.get('profile').picture;
       $scope.reputation = store.get('profile').userInfo.reputation;
       $scope.fields = store.get('profile').userInfo.fields;
+      $scope.phoneNumber = store.get('profile').userInfo.phoneNumber;
     }, 1000);
 
     function buildToggler(componentId) {
@@ -32,5 +33,4 @@
       }
     });
 })();
-
 

@@ -12,7 +12,7 @@
         return $http.post('/users', user)
           .then((success) => {
             userService.getUserInfo(data);
-            chatService.joinChatServer(data.email);
+            // chatService.joinChatServer(data.email);
             return console.log('registerUser in authService success', success);
           })
           .catch((error) => {

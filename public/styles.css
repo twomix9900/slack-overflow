@@ -47,7 +47,7 @@ table.table.tableEntry td {
 }
 
 .floatRight {
-  float:right;
+  /*float:right;*/
   font-size:14px;
   text-align: right;
 }
@@ -111,6 +111,27 @@ padding-bottom:10px;
   background-size: cover;
 }
 
+.bg-videochat { 
+  width: 100%;
+  height: 1000px;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('images/bg-videochat.jpg');
+  background-size: cover;
+}
+
+#localVideo {
+  margin: 50px;
+  margin-left: 150px;
+}
+
+#remoteVideo {
+  margin: 50px;
+  margin-left: 150px;
+}
+
+#hangupButton {
+  margin-left: 530px;
+}
+
 .homeText {
   position:absolute;
   color:#f6f6f6;
@@ -126,5 +147,55 @@ padding-bottom:10px;
   width: 400px; 
   margin-left:350px; 
   padding-top:20px;
+}
+
+/* message rating styling */
+ul.hRating {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.hRating {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  width: 52px;
+  background-color: #bed8ec;
+}
+
+li.hRating.highlight {
+  background-color: #55626c; 
+  color: white;
+}
+
+li.hRating.selected {
+  background-color: green;
+  color: white;
+}
+
+nav.helpfulRating {
+  width: 100%;
+  display: block;
+  padding: 5px 0 5px 0;
+}
+
+.hRating li {
+  float: left;
+}
+.hRating {
+  float: right;
+}
+
+.QAcontainer {
+  padding-right:100px;
+  padding-left:100px;
+}
+
+@media only screen and (max-width: 480px) {
+    .QAcontainer {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
 }
 

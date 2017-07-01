@@ -110,7 +110,7 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
 
     getQuestionsForUser: function (currentUserId) {
       // var userId = store.get('profile').userInfo.id;
-      console.log('questions for user !!!! ', currentUserId);
+      console.log('questions for user id: ', currentUserId);
       return $http.get('/questions/user/' + currentUserId)
         // .then((resp) => {
         //   answersObj = resp.data;
@@ -144,8 +144,30 @@ angular.module('slackOverflowApp').service('QuestionsService', ['$http', 'store'
       return $http.put('/questions/close/' + questionId);
     },
 
-    addRep: function (userId) {
-      return $http.put('/reputation/' + userId);
+    addRep: function (userId, repPts) {
+      return $http.put('/reputation', { id: userId, rep: repPts });
+    },
+
+    getRatingsToAnswer: function(answerId) {
+      return $http.get('/ratings/' + answerId);
+    },
+
+    createRatingToAnswer: function(userId, answerId, points) {
+      return $http.put('/answerRatings', { userId: userId, answerId: answerId, rating: points });
+    },
+
+    // updateRatingToAnswer: function(userId, answerId, points) {
+    //   console.log('attempting to rate answer with data packet: ', userId, answerId, points);
+    //   return $http.put('/ratings', { userId: userId, answerId: answerId, rating: points });
+    // },
+
+    updateAnswerTotalRating: function(answerId, points) {
+      return $http.put('/ratings', { answerId: answerId, rating: points });
+    },
+
+    getAnswerRating: function(userId, answerId) {
+      console.log('attempting to make http request for answer rating by user')
+      return $http.get('/ratings/' + userId + '/' + answerId);
     }
     
   }

@@ -4,7 +4,7 @@ const config = require('../../config');
 
 const db = new Sequelize(config.dbUrl, {
     pool: {
-      max: 3,
+      max: 1,
       min: 0,
       idle: 10000
     }

@@ -1,11 +1,12 @@
 const userDummy = [
-  { name: "josh", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
-  { name: "jason", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 450 },
-  { name: "inseok", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
-  { name: "regina", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400 },
-  { name: "kan", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 350 },
-  { name: "ricky", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550 },
-  { name: "heather", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 700 }
+  { name: "josh", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "jason", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 450, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "inseok", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "regina", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 400, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "kan", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 350, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "ricky", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 550, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "heather", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 700, phoneNumber: '555-55-5555', is_hosting: false },
+  { name: "kay", image: "http://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png", reputation: 1337, phoneNumber: '555-55-5555', is_hosting: false },
 ];
 
 const fieldDummy = [
@@ -34,17 +35,17 @@ const questionDummy = [
 ];
 
 const answerDummy = [
-  { text: "answer1", questionId: 1, userId: 4 },
-  { text: "answer2", questionId: 2, userId: 7 },
-  { text: "answer3", questionId: 3, userId: 6 },
-  { text: "answer4", questionId: 4, userId: 1 },
-  { text: "answer5", questionId: 5, userId: 2 },
-  { text: "answer6", questionId: 6, userId: 3 },
-  { text: "answer7", questionId: 7, userId: 2 },
-  { text: "answer8", questionId: 8, userId: 4 },
-  { text: "answer9", questionId: 9, userId: 3 },
-  { text: "answer10", questionId: 10, userId: 6 },
-  { text: "test rep", questionId: 18, userId: 1}
+  { text: "answer1", questionId: 1, userId: 4, totalRating: 0 },
+  { text: "answer2", questionId: 2, userId: 7, totalRating: 0 },
+  { text: "answer3", questionId: 3, userId: 6, totalRating: 0 },
+  { text: "answer4", questionId: 4, userId: 1, totalRating: 0 },
+  { text: "answer5", questionId: 5, userId: 2, totalRating: 0 },
+  { text: "answer6", questionId: 6, userId: 3, totalRating: 0 },
+  { text: "answer7", questionId: 7, userId: 2, totalRating: 0 },
+  { text: "answer8", questionId: 8, userId: 4, totalRating: 0 },
+  { text: "answer9", questionId: 9, userId: 3, totalRating: 0 },
+  { text: "answer10", questionId: 10, userId: 6, totalRating: 0 },
+  { text: "test rep", questionId: 18, userId: 1, totalRating: 0 }
 ];
 
 const user_fieldDummy = [
@@ -65,13 +66,24 @@ const user_fieldDummy = [
   { userId: 5, fieldId: 1 }
 ];
 
+const dummyRating = [
+  { userId: 3, answerId: 13, rating: 15 },
+  { userId: 4, answerId: 13, rating: 10 },
+  { userId: 6, answerId: 12, rating: 20 }
+];
+
 const Sequelize = require('sequelize');
 const db = require('../db');
 
 const User = db.define('user', {
   name: Sequelize.STRING(40),
   reputation: Sequelize.INTEGER,
-  image: Sequelize.STRING
+  image: Sequelize.STRING,
+  phoneNumber: Sequelize.STRING,
+  is_hosting: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });
 
 const Question = db.define('question', {
@@ -85,7 +97,8 @@ const Question = db.define('question', {
 });
 
 const Answer = db.define('answer', {
-  text: Sequelize.TEXT
+  text: Sequelize.TEXT,
+  totalRating: Sequelize.INTEGER
 });
 
 const Field = db.define('field', {
@@ -104,6 +117,10 @@ const User_Field = db.define('user_field', {
   } 
 });
 
+const Ans_Ratings = db.define('answer_ratings', {
+  rating: Sequelize.INTEGER
+});
+
 User.hasMany(Question);
 Question.belongsTo(User);
 
@@ -119,16 +136,25 @@ Field.hasMany(Question);
 
 User.belongsToMany(Field, {
   through: User_Field,
-});
+}); 
+
 Field.belongsToMany(User, {
   through: User_Field,
 });
 
+User.belongsToMany(Answer, {
+  through: Ans_Ratings,
+});
+
+Answer.belongsToMany(User, {
+  through: Ans_Ratings,
+});
 
 module.exports = {
   User: User,
   Question: Question,
   Answer: Answer,
+  Ans_Ratings: Ans_Ratings,
   Field: Field,
   Message: Message,
   User_Field: User_Field,
@@ -136,5 +162,6 @@ module.exports = {
   questionDummy: questionDummy,
   answerDummy: answerDummy,
   fieldDummy: fieldDummy,
-  user_fieldDummy: user_fieldDummy
+  user_fieldDummy: user_fieldDummy,
+  dummyRating: dummyRating
 }

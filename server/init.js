@@ -10,7 +10,9 @@ const {
   questionDummy,
   answerDummy,
   user_fieldDummy,
-  fieldDummy
+  fieldDummy,
+  Ans_Ratings,
+  dummyRating
 } = require('./models/tableModels');
 
 
@@ -33,6 +35,7 @@ the init function that you DON'T want to use depending on the situation!!!
 //     .then(() => Answer.sync({force: true}))
 //     .then(() => Message.sync({force: true}))
 //     .then(() => User_Field.sync({force: true}))
+//     .then(() => Ans_Ratings.sync({force: true}))
 //     .then(() => {
 //       User.bulkCreate(userDummy)
 //       .then(() => {
@@ -78,7 +81,7 @@ the init function that you DON'T want to use depending on the situation!!!
 //           console.error('error creating answer data ', err);
 //         }); 
 //     })
-// };
+// }; 
 
 const testAnswerDummy = {text: "test rep", questionId: 18, userId: 1};
 
@@ -91,6 +94,8 @@ const init = () => {
     .then(() => Message.sync())
     .then(() => User_Field.sync())
     .then(() => Field.bulkCreate(fieldDummy))
+    .then(() => Ans_Ratings.sync())
+//    .then(() => Ans_Ratings.bulkCreate(dummyRating))
       .then(() => {
         console.log('success creating field data');
       })

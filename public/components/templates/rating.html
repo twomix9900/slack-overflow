@@ -1,0 +1,12 @@
+<div>
+  <nav class="helpfulRating">
+    <ul class="hRating">
+      <li class="hRating" ng-class="eh" ng-click="eh = 'selected'; prev = eh; ctrl.addRep(answer.userId, 20)" 
+        ng-mouseenter="prev = eh; eh = 'highlight'" ng-mouseleave="eh = prev">Extremely helpful</ul>
+      <li class="hRating" ng-class="vh" ng-click="vh = 'selected'; ctrl.addRep(answer.userId, 15)" ng-mouseenter="vh = 'highlight'" ng-mouseleave="vh = 'normal'">Very helpful</ul>
+      <li class="hRating" ng-class="sh" ng-click="sh = 'selected'; ctrl.addRep(answer.userId, 10)" ng-mouseenter="sh = 'highlight'" ng-mouseleave="sh = 'normal'">Somewhat helpful</ul>
+      <li class="hRating" ng-class="sl" ng-click="sl = 'selected'; ctrl.addRep(answer.userId, 5)" ng-mouseenter="sl = 'highlight'" ng-mouseleave="sl = 'normal'">Slighltly helpful</ul>
+      <li class="hRating" ng-class="nh" ng-click="nh = 'selected'; ctrl.addRep(answer.userId, 0)" ng-mouseenter="nh = 'highlight'" ng-mouseleave="nh = 'normal'">I lost braincells</ul>
+    </ul>
+  </nav>
+</div>
