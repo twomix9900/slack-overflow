@@ -79,7 +79,11 @@ const User = db.define('user', {
   name: Sequelize.STRING(40),
   reputation: Sequelize.INTEGER,
   image: Sequelize.STRING,
-  phoneNumber: Sequelize.STRING
+  phoneNumber: Sequelize.STRING,
+  is_hosting: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });
 
 const Question = db.define('question', {

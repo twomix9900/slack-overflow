@@ -35,7 +35,7 @@
       };
       
       function logout() {
-        chatService.exitChatServer(store.get('profile').email);
+        // chatService.exitChatServer(store.get('profile').email);
         store.remove('profile');
         store.remove('id_token');
         auth.signout();

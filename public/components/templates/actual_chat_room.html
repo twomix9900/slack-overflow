@@ -66,7 +66,7 @@
   }
 
   form button {
-    width: 94%;
+    width: 14%;
     background: rgb(52, 152, 219);
     border: 2px solid rgb(52, 152, 219);
     padding: 10px;
@@ -276,16 +276,12 @@
 
   <div class='chat-box'>
     <div class='chat-header'>
-      <h3>Main Lobby</h3>
+      <h3>Chat</h3>
     </div>
-    <ul id='messages'>
-      <li class="animated fadeIn" ng-repeat='user in ctrl.all_users' ng-click='ctrl.join_lobby($event, user)'>
-        <div class="li-avatar"></div>
-        <div class="li-message">{{ user.name }}</div>
-      </li>
-    </ul>
-    <form ng-submit='ctrl.host_lobby()'>
-      <button type='submit'>Host Lobby</button>
+    <ul id='messages'></ul>
+    <form ng-submit='actual_chat_ctrl.sendMessage()'>
+      <input placeholder='Type your message here...' ng-model='actual_chat_ctrl.msg' type="text" id='m' autocomplete='off' />
+      <button type='submit'>Send</button>
     </form>
   </div>
 

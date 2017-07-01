@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('./controllers/controllers');
+const controller = require('./controllers/controllers.js');
 const jwt = require('express-jwt');
 const config = require('../config');
 
@@ -13,6 +13,10 @@ router.get('/api/public', function(req, res) {
 router.get('/api/private', authCheck, function(req, res) {
   res.json({message: 'hello from private endpoint, you are authenticated'})
 });
+
+
+router.get('/all-users-hosting',authCheck, controller.host_index);
+router.post('/host-updating/:email', authCheck, controller.update_host);
 
 router.get('/questions', authCheck, controller.fetchAllQuestions);
 

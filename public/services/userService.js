@@ -19,6 +19,18 @@
         noSQL: 9
       };
 
+      this.host_index = () => {
+        return $http.get('/all-users-hosting/');
+      }
+
+      this.connect_to_socket = (email) => {
+        return $http.post('/host-connect/' + email)
+      }
+
+      this.update_host = (email, data) => {
+        return $http.post('/host-updating/' + email, data)
+      }
+
       this.getUserInfo = (data) => {
         console.log('data transferred', data)
         let userName = data.email;
