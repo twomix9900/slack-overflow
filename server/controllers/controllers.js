@@ -21,12 +21,13 @@ var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILI
 
 
 const host_index = (req, res) => {
-  User.find({
+  User.findAll({
     where: {
       is_hosting: true
     }
   })
   .then((users) => {
+    // console.log('should be users array >', users)
     res.json({success: true, message: 'all users hosting', users: users})
   })
   .catch((err) => {
@@ -38,16 +39,16 @@ const update_host = (req, res) => {
   console.log(req.body, '<<<<<< test')
   User.findOne({
     where: {
-      name: req.body.name
+      id: req.body.id
     }
   })
   .then((user) => {
-    console.log(user)
+    console.log(user, '<<<<<<< test user')
     User.update({
         is_hosting: req.body.is_hosting
       }, {
           where: {
-            name: user.name
+            id: user.dataValues.id
           }
         })
         .then((status) => {

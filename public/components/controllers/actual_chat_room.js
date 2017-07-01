@@ -8,9 +8,9 @@
     var vm = this;
     vm.host_id = $stateParams.host_id;
     var socket = io("/" + vm.host_id);
-    console.log(socket, '<< socket')
+    console.log(socket, '<< socket');
     vm.email = store.get('profile').email;
-
+    vm.use_this_id = store.get('profile').userInfo.id;
 
     var err_callback = function (err) {
       console.log(err, '<< error');

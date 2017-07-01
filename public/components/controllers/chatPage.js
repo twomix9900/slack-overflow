@@ -11,7 +11,10 @@
       // vm.users = chatService.users;
       vm.newMessage = undefined;
       vm.newMessageBody = undefined;
-      vm.email = store.get('profile').email;
+      vm.email = store.get('profile').id;
+      console.log(store.get('profile').userInfo.id, '<< testing email id')
+      vm.use_this_id = store.get('profile').userInfo.id;
+
       // vm.messages = chatService.messages[vm.email];
 
       var err_callback = function (err) {
@@ -33,40 +36,43 @@
       function host_index_res(res) {
         console.log(res);
         vm.all_users = res.data.users;
+        console.log(vm.all_users, '<< all users')
       }
 
       //hosting lobby
       vm.host_lobby = function () {
-        console.log(vm.email, '<<< email in local storage')
+        console.log(vm.use_this_id, '<<< email in local storage')
         userService
-          .update_host(vm.email, { is_hosting: true, name: vm.email }) // something here
+          .update_host(vm.use_this_id, { is_hosting: true, id: vm.use_this_id}) // something here
           .then(host_lobby_res, err_callback)
       }
 
       function host_lobby_res(res) {
         console.log(res);
         userService
-          .connect_to_socket(res.data.user.name)
+          .connect_to_socket(res.data.user.id)
           .then(connection_to_socket_res, err_callback)
       }
 
       function connection_to_socket_res(res) {
         console.log(res, '< con to soc')
-        $state.go('actual-chat-room', { host_id: res.data.host.name });
+        $state.go('actual-chat-room', { host_id: res.data.host.id });
       }
 
       // joining lobby
       vm.join_lobby = function (evt, user) {
         userService
-          .connect_to_socket(user.name)
+          .connect_to_socket(user.id)
           .then(join_lobby_res, err_callback)
       }
 
       function join_lobby_res(res) {
+        console.log(res, '<< join lobby res')
         userService
-          .update_host(user.name, { is_hosting: false })
+          .update_host(res.data.host.id, { is_hosting: false, id: res.data.host.id })
           .then(function (res) {
-            $state.go('actual-chat-room', { host_id: user.name });
+            console.log('res from >>>>>>>', res.data)
+            $state.go('actual-chat-room', { host_id: res.data.user.id });
           }, err_callback)
       }
 

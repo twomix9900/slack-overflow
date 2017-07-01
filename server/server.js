@@ -76,17 +76,18 @@ app.post('/host-connect/:email', (req, res) => {
   User
     .findOne({
       where: {
-        name: req.params.email
+        id: req.params.email
       }
     })
     .then((user) => {
-      var lobby = io.of('/' + user.name)
+      console.log('user ==========', user.dataValues)
+      var lobby = io.of('/' + user.dataValues.id)
       lobby.on('connection', (socket) => {
         lobby.clients((err, clients) => {
           if (err) return console.log(err)
-          console.log(clients, '< all clients connected to lobby: ', user.name)
+          console.log(clients, '< all clients connected to lobby: ', user.dataValues.id)
         })
-        lobby.emit('user has connected to the following lobby: ', user.name)
+        lobby.emit('user has connected to the following lobby: ', user.dataValues.id)
 
         socket.on('msg', function (data) {
           // console.log('message: ' + data.message);
@@ -103,7 +104,8 @@ app.post('/host-connect/:email', (req, res) => {
 
 // socket io server side
 io.on('connection', function (socket) {
-  // console.log('a user connected...');
+
+  console.log('a user connected...');
 
   // socket.on('msg', function (data) {
   //   // console.log('message: ' + data.message);
