@@ -405,11 +405,23 @@ const getAnswerRating = (req, res) => {
     answerId: req.params.answerId
   }}).then((obj) => {
     if (obj) {
-      console.log('object to return', obj);
+      console.log('*** *** *** object to return', obj.dataValues.rating);
+      var temp = -(obj.dataValues.rating - 20) / 5 + 1;
+      console.log('*** *** *** object to return', temp);
+
+      var value = {
+        data: temp
+      }
+      res.status(200);
+      res.json(value);
     } else {
-      console.log('return default value');
+      console.log('*** *** *** return default value');
+      var value = {
+        data: 0
+      };
+      res.status(200);
+      res.json(value);
     }
-    res.sendStatus(200);
   })
 }
 

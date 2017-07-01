@@ -39,6 +39,11 @@
                   ng-mouseenter="prev = o4; o4 = 'highlight'" ng-mouseleave="o4 = prev">Slighltly helpful</ul>
                 <li class="hRating" ng-class="o5" ng-click="o1 = 'normal'; o2 = 'normal'; o3 = 'normal'; o4 = 'normal'; o5 = 'selected'; prev = o5; ctrl.addRating(answer.userId, answer.id, 0)" 
                   ng-mouseenter="prev = o5; o5 = 'highlight'" ng-mouseleave="o5 = prev">I lost braincells</ul>
+                  <!--script>if (ctrl.questionAndAnswers.answer.data = 1) {o1 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 2) {o2 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 3) {o3 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 4) {o4 = 'selected'}
+                          if (ctrl.questionAndAnswers.answer.data = 5) {o5 = 'selected'}</script-->  
               </ul>
             </nav>
           </div>
