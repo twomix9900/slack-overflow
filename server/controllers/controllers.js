@@ -158,10 +158,11 @@ const postAnswer = (req, res) => {
   } = req.body;
 
   Answer.create({
-    userId: userId,
-    text: text,
-    questionId: req.params.id
-  })
+      userId: userId,
+      text: text,
+      questionId: req.params.id,
+      totalRating: 0
+    })
     .then(() => {
       Question.find({
         where: {
@@ -190,6 +191,20 @@ const postAnswer = (req, res) => {
     })
     .catch((err) => {
       console.error('error posting an answer ', err);
+    })
+}
+
+const updateAnswerTotalRating = (req, res) => {
+  console.log('*** req.body info ', req.body);
+  Answer.update({ totalRating: req.body.rating },
+    { where: {
+      id: req.body.answerId     
+    }})
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      console.error('error updating ratings', err)
     })
 }
 
@@ -253,9 +268,7 @@ const updateUserFieldInfo = (req, res) => {
 }
 
 const addReputation = (req, res) => {
-
-  console.log('*** requested parameter data ***', req.params)
-  console.log('*** request body data ***', req.body);
+  
   let repUserId = req.body.id;
   let repAdd = req.body.rep;
   User.find({
@@ -373,9 +386,7 @@ const closeQuestion = (req, res) => {
 const getAllAnswerRating = (req, res) => {
   console.log('*** trying to get all rating ***');
   Ans_Ratings.findAll({
-    where: {
-      answerId: req.body.answerId
-    }
+    where: { answerId: req.params.id }
   })
     .then((data) => {
       res.json({
@@ -387,39 +398,100 @@ const getAllAnswerRating = (req, res) => {
     })
 }
 
-const updateAnswerRating = (req, res) => {
-  let repAdd = req.body.rep
-  Ans_Ratings.find({
-    where: {
-      userId: req.body.userId,
-      answerId: req.body.answerId
+const getAnswerRating = (req, res) => {
+  Ans_Ratings.findOne({ where: {
+    userId: req.params.userId,
+    answerId: req.params.answerId
+  }}).then((obj) => {
+    if (obj) {
+      console.log('object to return', obj);
+    } else {
+      console.log('return default value');
     }
-  }).then((answerRating) => {
-    let newRating = answerRating.datavalue.rating + repAdd;
-    Ans_Ratings.update({
-      rating: newRating
-    }, {
-        where: {
-          userId: req.body.userId,
-          answerId: req.body.answerId
-        }
-      })
-      .then(() => {
-        res.status(201).send('successfully added rating');
-      })
-      .catch((err) => {
-        console.error('error adding rating ', err);
-      })
+    res.sendStatus(200);
   })
 }
 
-const postAnswerRating = (req, res) => {
 
+const updateAnswerRating = (req, res) => {
+  // let repAdd = req.body.rep
+  // Ans_Ratings.find({
+  //   where: {
+  //     userId: req.body.userId,
+  //     answerId: req.body.answerId
+  //   }
+  // }).then((answerRating) => {
+  //   let newRating = answerRating.datavalue.rating + repAdd;
+  //   Ans_Ratings.update({
+  //     rating: newRating
+  //   }, {
+  //       where: {
+  //         userId: req.body.userId,
+  //         answerId: req.body.answerId
+  //       }
+  //     })
+  //     .then(() => {
+  //       res.status(201).send('successfully added rating');
+  //     })
+  //     .catch((err) => {
+  //       console.error('error adding rating ', err);
+  //     })
+  console.log('*** attempting to update ***', req.body);
+  Ans_Ratings.update({
+    rating: req.body.rating
+  }, { where: {
+    userId: req.body.userId,
+    answerId: req.body.answerId
+  }}).then(() => {
+    res.sendStatus(201);
+  }).catch((err) => {
+    console.error('error adding rating ', err);
+  })
 }
 
 
-
-
+const postAnswerRating = (req, res) => {
+  console.log('*** attempting to create ***')
+  // Ans_Ratings.create({
+  //   userId: req.body.userId,
+  //   answerId: req.body.answerId,
+  //   rating: req.body.rating
+  // }).then(() => {
+  //   console.log('*** successful creating rating ***')
+  //   res.sendStatus(201);
+  // })
+  // .catch((err) => {
+  //   console.log('error rating answer', err);
+  // })
+  Ans_Ratings.findOne({ where: {
+    userId: req.body.userId,
+    answerId: req.body.answerId
+  }}).then((obj) => {
+    if (obj) {
+      console.log('*** i already exist ***')
+      Ans_Ratings.update({
+        rating: req.body.rating
+      }, { where: {
+        userId: req.body.userId,
+        answerId: req.body.answerId
+      }}).then(() => {
+        console.log('*** successful updating rating ***')
+        res.sendStatus(201);
+      })
+    } else {
+      Ans_Ratings.create({
+      userId: req.body.userId,
+      answerId: req.body.answerId,
+      rating: req.body.rating
+      }).then(() => {
+        console.log('*** successful creating rating ***')
+        res.sendStatus(201);
+      }).catch((err) => {
+        console.log('error rating answer', err);
+      })
+    }  
+  })
+}
 
 module.exports = {
   fetchAllQuestions: fetchAllQuestions,
@@ -435,5 +507,10 @@ module.exports = {
   fetchUserByName: fetchUserByName,
   updatePhoneNumber: updatePhoneNumber,
   host_index: host_index,
-  update_host: update_host
+  update_host: update_host,
+  getAllAnswerRating: getAllAnswerRating,
+  updateAnswerRating: updateAnswerRating,
+  postAnswerRating: postAnswerRating,
+  updateAnswerTotalRating: updateAnswerTotalRating,
+  getAnswerRating: getAnswerRating
 }

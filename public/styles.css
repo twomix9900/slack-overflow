@@ -47,7 +47,7 @@ table.table.tableEntry td {
 }
 
 .floatRight {
-  float:right;
+  /*float:right;*/
   font-size:14px;
   text-align: right;
 }
@@ -157,7 +157,6 @@ ul.hRating {
 }
 
 li.hRating {
-  float: left;
   display: block;
   text-align: center;
   font-size: 11px;
@@ -174,3 +173,29 @@ li.hRating.selected {
   background-color: green;
   color: white;
 }
+
+nav.helpfulRating {
+  width: 100%;
+  display: block;
+  padding: 5px 0 5px 0;
+}
+
+.hRating li {
+  float: left;
+}
+.hRating {
+  float: right;
+}
+
+.QAcontainer {
+  padding-right:100px;
+  padding-left:100px;
+}
+
+@media only screen and (max-width: 480px) {
+    .QAcontainer {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+}
+

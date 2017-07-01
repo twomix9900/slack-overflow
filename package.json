@@ -41,10 +41,7 @@
     "pg": "^6.2.4",
     "sequelize": "^4.1.0",
     "socket.io": "^2.0.3",
-<<<<<<< d7c503c213e8dea88006f9f4a64d0b2a8394f8d8
-    "twilio": "^3.4.0"
-=======
+    "twilio": "^3.4.0",
     "webrtc-adapter": "^4.0.2"
->>>>>>> created new branch
   }
 }
