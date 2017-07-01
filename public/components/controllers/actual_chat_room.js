@@ -7,7 +7,7 @@
   function ActualChatCtrl(store, $stateParams) {
     var vm = this;
     vm.host_id = $stateParams.host_id;
-    var socket = io("/" + vm.host_id, { forceNew: false });
+    var socket = io("https://slackbetterflow.herokuapp.com/" + vm.host_id, { forceNew: false });
     console.log(socket, '<< socket');
     vm.email = store.get('profile').email;
     vm.use_this_id = store.get('profile').userInfo.id;
