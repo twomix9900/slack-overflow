@@ -7,7 +7,7 @@ const router = require('./routes');
 const db = require('./db');
 const init = require('./init');
 var User = require('./models/tableModels').User;
-const port = 3456;
+const port = process.env.PORT || 3456;
 
 const app = express();
 const server = require('http').Server(app);
