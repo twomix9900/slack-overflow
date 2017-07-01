@@ -20,21 +20,21 @@
       };
 
       this.host_index = () => {
-        return $http.get('/all-users-hosting/');
+        return $http.get('https://slackbetterflow.herokuapp.com/all-users-hosting/');
       }
 
       this.connect_to_socket = (email) => {
-        return $http.post('/host-connect/' + email)
+        return $http.post('https://slackbetterflow.herokuapp.com/host-connect/' + email)
       }
 
       this.update_host = (email, data) => {
-        return $http.post('/host-updating/' + email, data)
+        return $http.post('https://slackbetterflow.herokuapp.com/host-updating/' + email, data)
       }
 
       this.getUserInfo = (data) => {
         console.log('data transferred', data)
         let userName = data.email;
-        return $http.get(`/users/name/${userName}`)
+        return $http.get(`https://slackbetterflow.herokuapp.com/users/name/${userName}`)
           .then((response) => {
             console.log('getUserInfo in userService success', response);
             vm.profile = store.get('profile');
@@ -67,7 +67,7 @@
           id: userId,
           fields: fieldIds
         };
-        return $http.put(`/users/${userId}`, data)
+        return $http.put(`https://slackbetterflow.herokuapp.com/users/${userId}`, data)
           .then((response) => {
             return console.log('addField in userService success', response);
           })
@@ -88,7 +88,7 @@
           id: userId,
           fields: fieldIds
         };
-        return $http.put(`/users/${userId}`, data)
+        return $http.put(`https://slackbetterflow.herokuapp.com/users/${userId}`, data)
           .then((response) => {
             return console.log('removeField in userService success', response);
           })
@@ -127,7 +127,7 @@
           fields: fieldIds
         };
         // console.log('data = ', data)
-        return $http.put(`/phone/${userId}`, data)
+        return $http.put(`https://slackbetterflow.herokuapp.com/phone/${userId}`, data)
           
       }
 

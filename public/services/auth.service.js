@@ -9,7 +9,7 @@
           image: data.picture
         };
         console.log('this is email from registerUser', user);
-        return $http.post('/users', user)
+        return $http.post('https://slackbetterflow.herokuapp.com/users', user)
           .then((success) => {
             userService.getUserInfo(data);
             // chatService.joinChatServer(data.email);
