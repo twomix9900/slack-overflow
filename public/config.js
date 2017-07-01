@@ -91,7 +91,12 @@
           controller: 'questionAnsweredEntryCtrl',
           controllerAs: 'ctrl'
         })
-
+        .state('videochat', {
+          url: '/videochat',
+          templateUrl: '/public/components/templates/videochat.html',
+          controller: 'videochatCtrl',
+          controllerAs: 'ctrl'
+        })
 
     }])
 })();
