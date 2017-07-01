@@ -82,7 +82,7 @@ app.post('/host-connect/:email', (req, res) => {
     .then((user) => {
       console.log('user ==========', user.dataValues)
       var lobby = io.of('/' + user.dataValues.id)
-      lobby.on('connection', (socket) => {
+      lobby.once('connection', (socket) => {
         lobby.clients((err, clients) => {
           if (err) return console.log(err)
           console.log(clients, '< all clients connected to lobby: ', user.dataValues.id)
@@ -91,7 +91,7 @@ app.post('/host-connect/:email', (req, res) => {
 
         socket.on('msg', function (data) {
           // console.log('message: ' + data.message);
-          lobby.emit('newMsg', { message: data.message });
+          lobby.emit('newMsg', { message: data.message, user_who_sent: data.user_who_sent });
         })
 
       })

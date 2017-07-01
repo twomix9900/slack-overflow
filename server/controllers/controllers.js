@@ -36,14 +36,14 @@ const host_index = (req, res) => {
 }
 
 const update_host = (req, res) => {
-  console.log(req.body, '<<<<<< test')
+  // console.log(req.body, '<<<<<< test')
   User.findOne({
     where: {
       id: req.body.id
     }
   })
   .then((user) => {
-    console.log(user, '<<<<<<< test user')
+    // console.log(user, '<<<<<<< test user')
     User.update({
         is_hosting: req.body.is_hosting
       }, {
