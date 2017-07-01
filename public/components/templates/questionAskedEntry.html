@@ -26,7 +26,7 @@
         <div>Reputation: {{answer.reputation}}</div>
           
       </div>
-      <div>
+      <div ng-if="answer.userId !== ctrl.currentUser">
             <nav class="helpfulRating">
               <ul class="hRating">
                 <li class="hRating" ng-class="o1" ng-click="o1 = 'selected'; o2 = 'normal'; o3 = 'normal'; o4 = 'normal'; o5 = 'normal'; prev = o1; ctrl.addRating(answer.userId, answer.id, 20)" 
