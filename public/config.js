@@ -95,7 +95,8 @@
           url: '/videochat',
           templateUrl: '/public/components/templates/videochat.html',
           controller: 'videochatCtrl',
-          controllerAs: 'ctrl'
+          controllerAs: 'ctrl',
+          bindtoContreller: true
         })
 
     }])
