@@ -4,8 +4,8 @@
     .module('slackOverflowApp')
     .config(['authProvider', function(authProvider) {
       authProvider.init({
-        domain: 'bananafish2828.auth0.com',
-        clientID: 'sI5ktAqaNr9Fo4Mr9NWKPDCQGNE9cGLT'
+        domain: 'twomix9900.auth0.com',
+        clientID: 'sMPrpLV62uo43g5t3riJh3a3cprfPWYF'
       });
     }])
 
