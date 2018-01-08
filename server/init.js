@@ -15,7 +15,6 @@ const {
   dummyRating
 } = require('./models/tableModels');
 
-
 /* 
 READ THIS !!!!!!!!!!!!!!!
 
